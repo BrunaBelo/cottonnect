@@ -20,5 +20,9 @@ export const GlobalStyles = createGlobalStyle`
 
   :root {
     --primary: #6A81D1;
+    --status-bar-complete: #5969F5;
+    --status-bar-incomplete: #D6DAFB;
+    --font-color: #505873;
+    --white: #FFFFFF;
   }
 `
