@@ -7,7 +7,14 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html, body, #root{
+    height: 100%;
+  }
+
   *, input, button {
+    border: 0;
+    outline: 0;
+
     font-family: 'Roboto', sans-serif;
   }
 `
