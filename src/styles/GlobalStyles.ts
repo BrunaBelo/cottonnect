@@ -17,4 +17,8 @@ export const GlobalStyles = createGlobalStyle`
 
     font-family: 'Roboto', sans-serif;
   }
+
+  :root {
+    --primary: #6A81D1;
+  }
 `
