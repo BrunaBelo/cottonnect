@@ -1,18 +1,15 @@
 import React from 'react';
 
-import { FormControl, IconButton, Input, InputLabel, TextField } from '@material-ui/core';
-import ArrowForward from '@material-ui/icons/ArrowForward';
-import { Header, Container, InputsCreateUser, RowInput, ImageCreateAccount, Main, AdditionalInf } from './styles';
+import { FormControl, Input, InputLabel, TextField } from '@material-ui/core';
+import { Container, InputsCreateUser, RowInput, ImageCreateAccount, Main, AdditionalInf } from './styles';
+import HeaderModel from '../HeaderModel';
 
 const FormPersonalInformation: React.FC = () => {
   return (
     <Container>
-      <Header>
-        <h1>Crie sua Conta!</h1>
-        <IconButton aria-label="nex-page" className="next-page">
-          <ArrowForward/>
-        </IconButton>
-      </Header>
+      <HeaderModel
+       title = "Crie sua Conta!"
+      />
 
       <Main>
         <ImageCreateAccount>
