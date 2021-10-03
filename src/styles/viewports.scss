@@ -1,0 +1,53 @@
+// This mixin's purpose is to simplify our stylesheets. It is based on
+// Bootstrap's breakpoint, since we use bootstrap.
+//
+// Breakpoints:
+//   phone             min 375px - max 767px
+//   tablet            min 768px - max 992px
+//   sm_desktop        min 993px - max 1199px
+//   desktop           min 1200px
+
+@mixin viewport($medias) {
+  @include _respond-to($medias) {
+    @content;
+  }
+}
+
+@mixin _respond-to($media) {
+  // Normal phones and above(Iphone 4)
+  @if $media == phone {
+    @media (min-width: 375px) {
+      @content;
+    }
+  }
+  // Portrait tablets
+  @else if $media == tablet {
+    @media (min-width: 768px) and (max-width: 992px) {
+      @content;
+    }
+  }
+  // Small desktops and landscape tablets
+  @else if $media == sm_desktop {
+    @media (min-width: 993px) and (max-width: 1199px) {
+      @content;
+    }
+  }
+  // Small desktops, landscape tablets and above
+  @else if $media == sm_desktop_above {
+    @media (min-width: 993px) {
+      @content;
+    }
+  }
+  // Desktops
+  @else if $media == desktop {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+  // Specific max width
+  @else {
+    @media only screen and (max-width: #{$media}px) {
+      @content;
+    }
+  }
+}

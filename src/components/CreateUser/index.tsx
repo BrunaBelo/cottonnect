@@ -1,11 +1,14 @@
 import React from 'react';
+import FormStep1 from './FormStep1';
 import StatusProgressBar from './StatusProgressBar';
+import { Container } from './styles';
 
 const CreateUser: React.FC = () => {
   return (
-    <div className="create-user">
+    <Container>
       <StatusProgressBar/>
-    </div>
+      <FormStep1/>
+    </Container>
   );
 };
 
