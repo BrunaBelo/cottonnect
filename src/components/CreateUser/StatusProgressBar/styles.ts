@@ -4,17 +4,16 @@ export const ProgressCircle = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 3em 0;
-  flex: 1;
+  padding: 2em 0;
 `;
 
 export const Circle = styled.li`
   display: inline-block;
   position: relative;
-  margin: 0 5em;
+  margin: 0 2em;
 
   width: 2em;
-  height: 2em;
+	height: 2em;
   border-radius: 1em;
   
   background: var(--status-bar-complete);
@@ -29,8 +28,8 @@ export const Circle = styled.li`
     content: '';
     position: absolute;
     top: .9em;
-    left: -10em;
-    width: 10em;
+    left: -4em;
+    width: 4em;
     height: .2em;
     background: var(--status-bar-complete);
   }
@@ -50,5 +49,11 @@ export const Circle = styled.li`
 
   .active ~ &::before {
     background: lightblue;
+  }
+
+  @media (max-width: 800px) {
+    img{
+      display: none;
+    }
   }
 `;
