@@ -24,5 +24,6 @@ export const GlobalStyles = createGlobalStyle`
     --status-bar-incomplete: #D6DAFB;
     --font-color: #505873;
     --white: #FFFFFF;
+    --input-label: #263238;
   }
 `
