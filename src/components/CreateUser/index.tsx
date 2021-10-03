@@ -1,5 +1,5 @@
 import React from 'react';
-import FormStep1 from './FormStep1';
+import FormPersonalInformation from './FormPersonalInformation';
 import StatusProgressBar from './StatusProgressBar';
 import { Container } from './styles';
 
@@ -7,7 +7,7 @@ const CreateUser: React.FC = () => {
   return (
     <Container>
       <StatusProgressBar/>
-      <FormStep1/>
+      <FormPersonalInformation/>
     </Container>
   );
 };

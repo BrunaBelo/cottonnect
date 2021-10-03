@@ -4,7 +4,7 @@ import { FormControl, IconButton, Input, InputLabel, TextField } from '@material
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import { Header, Container, InputsCreateUser, RowInput, ImageCreateAccount, Main, AdditionalInf } from './styles';
 
-const FormStep1: React.FC = () => {
+const FormPersonalInformation: React.FC = () => {
   return (
     <Container>
       <Header>
@@ -76,4 +76,4 @@ const FormStep1: React.FC = () => {
   );
 };
 
-export default FormStep1;
+export default FormPersonalInformation;
