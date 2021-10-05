@@ -25,5 +25,6 @@ export const GlobalStyles = createGlobalStyle`
     --font-color: #505873;
     --white: #FFFFFF;
     --input-label: #263238;
+    --title-text-color: #252B42;
   }
 `

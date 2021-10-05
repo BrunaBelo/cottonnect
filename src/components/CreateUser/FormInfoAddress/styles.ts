@@ -9,7 +9,7 @@ export const Container = styled.div`
   min-width: 350px;
   border-radius: 15px;
 
-  background-color: var(--primary);
+  background-color: var(--white);
 `;
 
 export const Main = styled.div`

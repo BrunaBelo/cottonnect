@@ -9,8 +9,7 @@ export const Header = styled.div`
   justify-content: space-between;
   width: 100%;
   margin: 1em 0 0 0;
-  color: var(--white);
-  
+
   h1{
     margin: 0 0 0 1em;
     font-size: 25px;
@@ -18,6 +17,5 @@ export const Header = styled.div`
 
   .next-page{
     margin: 0 1.3em 0 0;
-    color: white;
   }
 `;

@@ -8,7 +8,7 @@ export const Container = styled.div`
   width: 65%;
   border-radius: 15px;
 
-  background-color: var(--primary);
+  background-color: var(--white);
 `;
 
 export const Main = styled.div`
