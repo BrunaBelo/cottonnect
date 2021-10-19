@@ -47,7 +47,7 @@ const FormInfoAddress: React.FC = () => {
             </FormControl>
           </FormInputs>
           <ImageAddress>
-            <img src="images/address.png" alt="Mapa endereço" />
+            <img src="/images/address.png" alt="Mapa endereço" />
           </ImageAddress>
         </Main>
       </SubContainer>

@@ -16,14 +16,14 @@ const FormSuccess: React.FC = () => {
         <MessageHeader>
           <h1>Prontinho!</h1>
           <IconSmile>
-            <img src="images/smile.png" alt="Conta Criada" />
+            <img src="/images/smile.png" alt="Conta Criada" />
           </IconSmile>
         </MessageHeader>
         
         <h2>Sua conta foi registrada, agora você já pode começar doar!</h2>
 
         <ImageDone>
-          <img src="images/done.png" alt="Conta Criada" />
+          <img src="/images/done.png" alt="Conta Criada" />
         </ImageDone>
       
         <FinishButtons>

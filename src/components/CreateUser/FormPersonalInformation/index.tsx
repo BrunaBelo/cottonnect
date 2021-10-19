@@ -19,7 +19,7 @@ const FormPersonalInformation: React.FC = () => {
 
         <Main>
           <ImageCreateAccount>
-            <img src="images/jumping.png" alt="Criar Conta" />
+            <img src="/images/jumping.png" alt="Criar Conta" />
           </ImageCreateAccount>
 
           <InputsCreateUser>
