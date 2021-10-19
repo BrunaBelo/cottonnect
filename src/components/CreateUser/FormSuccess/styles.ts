@@ -1,20 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin: 0px auto;
-  width: 65%;
-  border-radius: 15px;
-
-  background-color: var(--white);
-
-  h2 {
-    font-size: 18px;
-  }
-`;
-
 export const MessageHeader = styled.div`
   margin: 1em 0 2em 0;
   display: flex;

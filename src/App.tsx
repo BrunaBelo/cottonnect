@@ -6,10 +6,6 @@ import { GlobalStyles } from './styles/GlobalStyles';
 function App() {
   return (
     <>
-      <Navbar />
-      <CreateUser />
-      
-      <GlobalStyles />
     </>
   );
 }

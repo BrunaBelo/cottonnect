@@ -1,17 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin: 0px auto;
-  width: 65%;
-  min-width: 350px;
-  border-radius: 15px;
-
-  background-color: var(--white);
-`;
-
 export const Main = styled.div`
   display: flex;
   flex-direction: row;
