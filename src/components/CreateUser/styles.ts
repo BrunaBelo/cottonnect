@@ -15,3 +15,21 @@ export const SubContainer = styled.div`
 
   background-color: var(--white);
 `;
+
+export const ButtonNavigation = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1em;
+  margin: 1em 0;
+
+  .button-navigation{
+    background-color: #5969F5;
+    color: white;
+
+    &:hover { 
+      background-color: #ABB2EB;
+      color: grey;
+    }
+  }
+`;

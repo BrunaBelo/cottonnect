@@ -1,8 +1,17 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  .additional-infs {
+    flex-grow: 1;
+    margin: 1em 0 0 0;
+    padding: 0 4.5em 0 0;
+  }
+`;
+
 export const Main = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const ImageCreateAccount = styled.div`
@@ -20,30 +29,7 @@ export const ImageCreateAccount = styled.div`
 export const InputsCreateUser = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 3em 0 0;
+  margin: 3em 0 0 0;
+  column-gap: 5em;
 `;
 
-export const RowInput = styled.div`
-  flex: 50%;
-
-  @media (max-width: 860px) {
-    & {
-      flex: 100%;
-      margin: 0 0 1em 0;
-    }
-  }
-`;
-
-export const AdditionalInf = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 3;
-
-  margin: 1.3em 3.5em 0 3.5em;
-
-  @media (max-width: 860px) {
-    & {
-      align-items: center;
-    }
-  }
-`;

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+`;
+
 export const InfoPhone = styled.h2`
   font-size: 17px;
   margin: 2em 0 0;
