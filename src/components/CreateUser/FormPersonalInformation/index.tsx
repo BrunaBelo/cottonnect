@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TextField } from '@material-ui/core';
+import { TextField } from 'formik-material-ui';
 import { Field } from 'formik';
 
 import { InputsCreateUser, ImageCreateAccount, Main, Container } from './styles';

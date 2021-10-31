@@ -25,10 +25,6 @@ export const FormHeader = styled.h1`
   font-size: 28px;
 `;
 
-export const StepperStyle = styled.div`
-  background-color: red;
-`;
-
 export const ButtonNavigation = styled.div`
   display: flex;
   flex-direction: row;

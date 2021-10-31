@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { Container, Main, ImageAddress, FormInputs } from './styles';
 import { FormHeader } from '../styles';
 import { Field } from 'formik';
+import { Select } from 'formik-material-ui';
+import { FormControl, InputLabel, MenuItem } from '@material-ui/core';
 
 const FormInfoAddress: React.FC = () => {
   return (

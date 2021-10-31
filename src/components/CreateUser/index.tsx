@@ -23,7 +23,7 @@ export default function CreateUser () {
             additionalInfs: '',
             state: '',
             city: '',
-          }} 
+          }}
           onSubmit={async (values) => {
             console.log('values', values);
           }}
