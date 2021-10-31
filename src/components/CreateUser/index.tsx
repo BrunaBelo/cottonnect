@@ -15,15 +15,16 @@ export default function CreateUser () {
       <SubContainer>
         <FormikStepper 
           initialValues = {{
-            name: "",
-            email: "",
-            phone: "",
-            cpf: "",
-            password: "",
-            additionalInfs: "",
-            state: "",
-            city: "",
-          }} onSubmit={async (values) => {
+            name: '',
+            email: '',
+            phone: '',
+            cpf: '',
+            password: '',
+            additionalInfs: '',
+            state: '',
+            city: '',
+          }} 
+          onSubmit={async (values) => {
             console.log('values', values);
           }}
         >
@@ -60,22 +61,19 @@ export function FormikStep({ children }: FormikStepProps) {
 export function FormikStepper({ children, ...props } : FormikConfig<FormikValues>) {
   const childrenArray = React.Children.toArray(children) as React.ReactElement<FormikStepProps>[];
   const [step, setStep] = useState(0);
-  const currentChild = childrenArray[step]
-
-  function isLastStep() {
-    return step === childrenArray.length - 1;
-  }
+  const currentChild = childrenArray[step];
   
   return (
-    <Formik {...props} onSubmit = {async (values, helpers) => {
-      if (step === 1) {
-        await props.onSubmit(values, helpers);
+    <Formik 
+      {...props}
+      validationSchema={currentChild.props.validationSchema}
+      onSubmit = { async (values, helpers) => {
+        if (step === 1) {
+          await props.onSubmit(values, helpers);
+        }
         setStep(s => s + 1);
-      } else {  
-        setStep(s => s + 1);
-      }
     }} >
-      
+
       <Form autoComplete="off">
         <Stepper alternativeLabel activeStep={step} className="stepper-style">
           {childrenArray.map((child, index) => (
