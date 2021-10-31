@@ -2,17 +2,12 @@ import React from 'react';
 
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { Container, Main, ImageAddress, FormInputs } from './styles';
-
-import HeaderModel from '../HeaderModel';
+import { FormHeader } from '../styles';
 
 const FormInfoAddress: React.FC = () => {
   return (
     <Container>
-      <HeaderModel
-        title= "Informe sua localização!"
-        linkComponent = "/criar-conta/contato"
-      />
-
+      <FormHeader>Informe sua localização!</FormHeader>
       <Main>
         <FormInputs>
           <FormControl fullWidth>

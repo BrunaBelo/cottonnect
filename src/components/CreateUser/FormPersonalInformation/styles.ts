@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   .additional-infs {
     flex-grow: 1;
-    margin: 1em 0 0 0;
     padding: 0 4.5em 0 0;
   }
 `;

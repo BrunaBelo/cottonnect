@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FormInfoAddress from './FormInfoAddress';
 import FormInfoPhone from './FormInfoPhone';
 import FormPersonalInformation from './FormPersonalInformation';
-import FormSuccess from './FormSuccess';
+import FormSuccess from './Success';
 import { Container, ButtonNavigation, SubContainer } from './styles';
 
 import { Form, Formik, FormikConfig, FormikValues } from 'formik';
@@ -99,7 +99,7 @@ export function FormikStepper({ children, ...props } : FormikConfig<FormikValues
         
         <ButtonNavigation>
           {step > 0 && !isLastStep() ? <IconButton className="button-navigation" onClick={() => setStep(s => s-1)}><NavigateBefore/></IconButton> : null }
-          <IconButton type="submit" className="button-navigation"> <NavigateNext/></IconButton>
+          {!isLastStep() ? <IconButton type="submit" className="button-navigation"> <NavigateNext/></IconButton> : null }
         </ButtonNavigation>
       </Form>
     </Formik>

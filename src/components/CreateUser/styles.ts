@@ -5,6 +5,11 @@ export const Container = styled.div`
   height: 100%;
 `;
 
+export const FormHeader = styled.h1`
+  margin: 1em 0 0 1em;
+  font-size: 28px;
+`;
+
 export const SubContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,7 +26,7 @@ export const ButtonNavigation = styled.div`
   flex-direction: row;
   justify-content: center;
   column-gap: 1em;
-  margin: 1em 0;
+  margin: 1em 2em 1em;
 
   .button-navigation{
     background-color: #5969F5;

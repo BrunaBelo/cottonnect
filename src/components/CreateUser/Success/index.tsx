@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { IconButton } from '@material-ui/core';
-import { Container, ImageDone, IconSmile, MessageHeader } from './styles';
-
-import NavigateNext from '@material-ui/icons/NavigateNext';
+import { Button } from '@material-ui/core';
+import { Container, ImageDone, IconSmile, MessageHeader, LetsGoButtons } from './styles';
 
 const FormSuccess: React.FC = () => {
   return (
@@ -19,7 +17,12 @@ const FormSuccess: React.FC = () => {
 
       <ImageDone>
         <img src="/images/done.png" alt="Conta Criada" />
-      </ImageDone> 
+      </ImageDone>
+
+      <LetsGoButtons>
+          <Button color="primary" className="lets-go">Let's Goooo</Button>
+      </LetsGoButtons>
+
     </Container>
   );
 };

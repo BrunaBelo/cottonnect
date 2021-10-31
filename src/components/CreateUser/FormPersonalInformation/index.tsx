@@ -1,17 +1,15 @@
 import React from 'react';
 
 import { TextField } from '@material-ui/core';
-import { InputsCreateUser, ImageCreateAccount, Main, Container } from './styles';
-import HeaderModel from '../HeaderModel';
 import { Field } from 'formik';
+
+import { InputsCreateUser, ImageCreateAccount, Main, Container } from './styles';
+import { FormHeader } from '../styles';
 
 const FormPersonalInformation: React.FC = () => {
   return (
     <Container>
-      <HeaderModel
-      title = "Crie sua Conta!"
-      linkComponent = "/criar-conta/endereco"
-      />
+      <FormHeader>Crie sua Conta!</FormHeader>
 
       <Main>
         <ImageCreateAccount>
