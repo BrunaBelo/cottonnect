@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FormInfoAddress from './FormInfoAddress';
-import FormInfoPhone from './FormInfoPhone';
+import FormInfoAddress from './FormAddress';
+import FormInfoPhone from './FormPhone';
 import FormPersonalInformation from './FormPersonalInformation';
 import FormSuccess from './Success';
 import { Container, ButtonNavigation, SubContainer } from './styles';
