@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FormInfoAddress from './FormAddress';
-import FormInfoPhone from './FormPhone';
+import FormAddress from './FormAddress';
+import FormPhone from './FormPhone';
 import FormPersonalInformation from './FormPersonalInformation';
 import FormSuccess from './Success';
 import { Container, ButtonNavigation, SubContainer } from './styles';
@@ -44,7 +44,7 @@ export default function CreateUser () {
                 city: Yup.string().required('Cidade deve ser informada'),
               })
             }>
-            <FormInfoAddress />
+            <FormAddress />
           </FormikStep>
 
           <FormikStep label="3"
@@ -53,7 +53,7 @@ export default function CreateUser () {
                 code: Yup.number(),
               })
             }>
-            <FormInfoPhone />
+            <FormPhone />
           </FormikStep>
 
           <FormikStep label="4">
