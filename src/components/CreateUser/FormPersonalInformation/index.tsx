@@ -17,13 +17,13 @@ const FormPersonalInformation: React.FC = () => {
         </ImageCreateAccount>
 
         <InputsCreateUser>
-          <Field name="name" component={TextField} label="Nome*" />
-          <Field name="email" component={TextField} label="Email*" />
-          <Field name="phone" component={TextField} label="Telefone*" />
-          <Field name="cpf" component={TextField} label="Cpf*" />
-          <Field name="password" component={TextField} label="Senha" />
-          <Field name="confirm-password" component={TextField} label="Confirmar Senha" />
-          <Field name="additional-infs" className="additional-infs" component={TextField} label="Informações Adicionais" multiline rows={3} />
+          <Field required type="text" name="name" component={TextField} label="Nome" />
+          {/* <Field required type="email" name="email" component={TextField} label="Email" />
+          <Field required type="number" name="phone" component={TextField} label="Telefone" />
+          <Field required type="number" name="cpf" component={TextField} label="Cpf" />
+          <Field required type="password" name="password" component={TextField} label="Senha" />
+          <Field required type="password" name="confirm-password" component={TextField} label="Confirmar Senha" />
+          <Field name="additionalInfs" className="additional-infs" component={TextField} label="Informações Adicionais" multiline rows={3} /> */}
         </InputsCreateUser>
       </Main>
     </Container>

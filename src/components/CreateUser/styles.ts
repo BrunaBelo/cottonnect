@@ -3,11 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background-color: var(--primary);
   height: 100%;
-`;
 
-export const FormHeader = styled.h1`
-  margin: 1em 0 0 1em;
-  font-size: 28px;
+  .stepper-style{
+    background-color: var(--primary);
+  }
 `;
 
 export const SubContainer = styled.div`
@@ -21,6 +20,15 @@ export const SubContainer = styled.div`
   background-color: var(--white);
 `;
 
+export const FormHeader = styled.h1`
+  margin: 1em 0 0 1em;
+  font-size: 28px;
+`;
+
+export const StepperStyle = styled.div`
+  background-color: red;
+`;
+
 export const ButtonNavigation = styled.div`
   display: flex;
   flex-direction: row;
@@ -28,12 +36,12 @@ export const ButtonNavigation = styled.div`
   column-gap: 1em;
   margin: 1em 2em 1em;
 
-  .button-navigation{
-    background-color: #5969F5;
+  .button-navigation {
+    background-color: var(--button-navigation);
     color: white;
 
     &:hover { 
-      background-color: #ABB2EB;
+      background-color: var(--button-navigation2);
       color: grey;
     }
   }

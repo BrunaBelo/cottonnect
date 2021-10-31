@@ -20,8 +20,8 @@ export const GlobalStyles = createGlobalStyle`
 
   :root {
     --primary: #6A81D1;
-    --status-bar-complete: #5969F5;
-    --status-bar-incomplete: #D6DAFB;
+    --button-navigation: #5969F5;
+    --button-navigation2: #ABB2EB;
     --font-color: #505873;
     --white: #FFFFFF;
     --input-label: #263238;

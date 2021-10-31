@@ -6,8 +6,7 @@ import FormSuccess from './Success';
 import { Container, ButtonNavigation, SubContainer } from './styles';
 
 import { Form, Formik, FormikConfig, FormikValues } from 'formik';
-import * as Yup from "yup";
-import { IconButton } from '@material-ui/core';
+import { IconButton, Step, StepLabel, Stepper } from '@material-ui/core';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons';
 
 export default function CreateUser () {
@@ -19,44 +18,28 @@ export default function CreateUser () {
             name: "",
             email: "",
             phone: "",
-            personalNumber: "",
+            cpf: "",
             password: "",
-            additionalInf: "",
-          }} onSubmit={() => {}}
+            additionalInfs: "",
+            state: "",
+            city: "",
+          }} onSubmit={async (values) => {
+            console.log('values', values);
+          }}
         >
-          <FormikStep label="1"
-            validationSchema = {
-              Yup.object().shape({
-                name: Yup.string().required('Nome deve ser informado'),
-                email: Yup.string().required('Email deve ser informado'),
-                phone: Yup.string().required('Telefone deve ser informado'),
-                personalNumber: Yup.string().required('CPF deve ser informado'),
-                password: Yup.string().required('Senha deve ser informada'),
-              })
-            }>
+          <FormikStep label="Cadastro">
             <FormPersonalInformation />
           </FormikStep>
 
-          <FormikStep label="2"
-            validationSchema = {
-              Yup.object({
-                state: Yup.string().required('Estado deve ser informado'),
-                city: Yup.string().required('Cidade deve ser informada'),
-              })
-            }>
+          <FormikStep label="Endereço">
             <FormAddress />
           </FormikStep>
 
-          <FormikStep label="3"
-            validationSchema = {
-              Yup.object({
-                code: Yup.number(),
-              })
-            }>
+          <FormikStep label="Contato">
             <FormPhone />
           </FormikStep>
 
-          <FormikStep label="4">
+          <FormikStep label="Concluído">
             <FormSuccess />
           </FormikStep>
 
@@ -75,10 +58,9 @@ export function FormikStep({ children }: FormikStepProps) {
 }
 
 export function FormikStepper({ children, ...props } : FormikConfig<FormikValues>) {
-  const childrenArray = React.Children.toArray(children)
+  const childrenArray = React.Children.toArray(children) as React.ReactElement<FormikStepProps>[];
   const [step, setStep] = useState(0);
-  const currentChild = childrenArray[step] as React.ReactElement<FormikStepProps>[];
-  // const [completed, setCompleted] = useState(false);
+  const currentChild = childrenArray[step]
 
   function isLastStep() {
     return step === childrenArray.length - 1;
@@ -86,20 +68,28 @@ export function FormikStepper({ children, ...props } : FormikConfig<FormikValues
   
   return (
     <Formik {...props} onSubmit = {async (values, helpers) => {
-      if (isLastStep()) {
+      if (step === 1) {
         await props.onSubmit(values, helpers);
-        // setCompleted(true);
+        setStep(s => s + 1);
       } else {  
         setStep(s => s + 1);
       }
     }} >
       
       <Form autoComplete="off">
+        <Stepper alternativeLabel activeStep={step} className="stepper-style">
+          {childrenArray.map((child, index) => (
+            <Step key={child.props.label} completed={step > index - 1}>
+              <StepLabel>{child.props.label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+
         {currentChild}
         
         <ButtonNavigation>
-          {step > 0 && !isLastStep() ? <IconButton className="button-navigation" onClick={() => setStep(s => s-1)}><NavigateBefore/></IconButton> : null }
-          {!isLastStep() ? <IconButton type="submit" className="button-navigation"> <NavigateNext/></IconButton> : null }
+          {step > 0 && step < 2 ? <IconButton className="button-navigation" onClick={() => setStep(s => s-1)}><NavigateBefore/></IconButton> : null }
+          {step <= 1 ? <IconButton type="submit" className="button-navigation"> <NavigateNext/></IconButton> : null }
         </ButtonNavigation>
       </Form>
     </Formik>

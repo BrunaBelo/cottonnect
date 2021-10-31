@@ -20,7 +20,7 @@ const FormInfoPhone: React.FC = () => {
       </CodeVerification>
 
       <Buttons>
-        <IconButton aria-label="skipNext">
+        <IconButton aria-label="skipNext" type="submit">
           <Cancel fontSize="small"/> <TitleButton>Pular</TitleButton>
         </IconButton>
 

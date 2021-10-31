@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { Container, Main, ImageAddress, FormInputs } from './styles';
 import { FormHeader } from '../styles';
+import { Field } from 'formik';
 
 const FormInfoAddress: React.FC = () => {
   return (
@@ -10,32 +11,25 @@ const FormInfoAddress: React.FC = () => {
       <FormHeader>Informe sua localização!</FormHeader>
       <Main>
         <FormInputs>
-          <FormControl fullWidth>
-            <InputLabel id="states">Estado</InputLabel>
-            <Select
-              labelId="states"
-              id="select-states"
-              label="Estado"
-            >
+          <FormControl fullWidth required>
+            <InputLabel shrink htmlFor="state">Estado</InputLabel>
+            <Field name="state" component={Select} >
               <MenuItem value={1}>Paraná</MenuItem>
               <MenuItem value={2}>Rio de Janeiro</MenuItem>
               <MenuItem value={3}>São Paulo</MenuItem>
-            </Select>
+            </Field>
           </FormControl>
-        
-          <FormControl fullWidth>
-            <InputLabel id="cities">Cidade</InputLabel>
-            <Select
-              labelId="cities"
-              id="select-cities"
-              label="Cidade"
-            >
+
+          <FormControl fullWidth required>
+            <InputLabel shrink htmlFor="city">Cidade</InputLabel>
+            <Field name="city" component={Select} >
               <MenuItem value={1}>Prudentopolis</MenuItem>
               <MenuItem value={2}>Curitiba</MenuItem>
               <MenuItem value={3}>Colombo</MenuItem>
-            </Select>
+            </Field>
           </FormControl>
         </FormInputs>
+
         <ImageAddress>
           <img src="/images/address.png" alt="Mapa endereço" />
         </ImageAddress>
