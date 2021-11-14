@@ -8,6 +8,7 @@ import { Container, ButtonNavigation, SubContainer } from './styles';
 import { Form, Formik, FormikConfig, FormikValues } from 'formik';
 import { IconButton, Step, StepLabel, Stepper } from '@material-ui/core';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons';
+import UserService from '../../service/user';
 
 export default function CreateUser () {
   return (
@@ -26,6 +27,8 @@ export default function CreateUser () {
           }}
           onSubmit={async (values) => {
             console.log('values', values);
+            const service = new UserService()
+            await service.create(JSON.parse(JSON.stringify(values)))
           }}
         >
           <FormikStep label="Cadastro">
@@ -68,10 +71,11 @@ export function FormikStepper({ children, ...props } : FormikConfig<FormikValues
       {...props}
       validationSchema={currentChild.props.validationSchema}
       onSubmit = { async (values, helpers) => {
-        if (step === 1) {
+        if (step === 3) {
           await props.onSubmit(values, helpers);
+        } else {
+          setStep(s => s + 1);
         }
-        setStep(s => s + 1);
     }} >
 
       <Form autoComplete="off">

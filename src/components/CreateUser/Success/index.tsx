@@ -20,7 +20,7 @@ const FormSuccess: React.FC = () => {
       </ImageDone>
 
       <LetsGoButtons>
-          <Button color="primary" className="lets-go">Let's Goooo</Button>
+        <Button color="primary" className="lets-go" type="submit">Let's Goooo</Button>
       </LetsGoButtons>
 
     </Container>
