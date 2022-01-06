@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { TextField } from 'formik-material-ui';
-import { Field } from 'formik';
-
 import { InputsCreateUser, ImageCreateAccount, Main, Container } from './styles';
 import { FormHeader } from '../styles';
 
@@ -17,13 +14,13 @@ const FormPersonalInformation: React.FC = () => {
         </ImageCreateAccount>
 
         <InputsCreateUser>
-          <Field required type="text" name="name" component={TextField} label="Nome" />
-          <Field required type="email" name="email" component={TextField} label="Email" />
-          <Field required type="number" name="phone" component={TextField} label="Telefone" />
-          <Field required type="number" name="cpf" component={TextField} label="Cpf" />
-          <Field required type="password" name="password" component={TextField} label="Senha" />
-          <Field required type="password" name="confirm-password" component={TextField} label="Confirmar Senha" />
-          <Field name="additionalInfs" className="additional-infs" component={TextField} label="Informações Adicionais" multiline rows={3} />
+          <input required type="text" name="name" />
+          <input required type="email" name="email"  />
+          <input required type="number" name="phone" />
+          <input required type="number" name="cpf" />
+          <input required type="password" name="password"  />
+          <input required type="password" name="confirm-password" />
+          <input name="additionalInfs" className="additional-infs" />
         </InputsCreateUser>
       </Main>
     </Container>

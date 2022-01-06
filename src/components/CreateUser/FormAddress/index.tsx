@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Container, Main, ImageAddress, FormInputs } from './styles';
 import { FormHeader } from '../styles';
-import { Field } from 'formik';
-import { Select } from 'formik-material-ui';
 import { FormControl, InputLabel, MenuItem } from '@material-ui/core';
 
 const FormInfoAddress: React.FC = () => {
@@ -14,20 +12,20 @@ const FormInfoAddress: React.FC = () => {
         <FormInputs>
           <FormControl fullWidth required>
             <InputLabel shrink htmlFor="state">Estado</InputLabel>
-            <Field name="state" component={Select} >
+            <input name="state">
               <MenuItem value={1}>Paraná</MenuItem>
               <MenuItem value={2}>Rio de Janeiro</MenuItem>
               <MenuItem value={3}>São Paulo</MenuItem>
-            </Field>
+            </input>
           </FormControl>
 
           <FormControl fullWidth required>
             <InputLabel shrink htmlFor="city">Cidade</InputLabel>
-            <Field name="city" component={Select} >
+            <input name="city">
               <MenuItem value={1}>Prudentopolis</MenuItem>
               <MenuItem value={2}>Curitiba</MenuItem>
               <MenuItem value={3}>Colombo</MenuItem>
-            </Field>
+            </input>
           </FormControl>
         </FormInputs>
 
