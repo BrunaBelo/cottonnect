@@ -1,13 +1,12 @@
 import React from 'react';
 
 import { Container, Main, ImageAddress, FormInputs } from './styles';
-import { FormHeader } from '../styles';
 import { FormControl, InputLabel, MenuItem } from '@material-ui/core';
 
 const FormInfoAddress: React.FC = () => {
   return (
     <Container>
-      <FormHeader>Informe sua localização!</FormHeader>
+      <h1>Informe sua localização!</h1>
       <Main>
         <FormInputs>
           <FormControl fullWidth required>

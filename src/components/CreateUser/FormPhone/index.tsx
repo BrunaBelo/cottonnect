@@ -3,13 +3,12 @@ import React from 'react';
 import { Cancel, Replay } from '@material-ui/icons/';
 import { IconButton } from '@material-ui/core';
 import { Container, InfoPhone, CodeVerification, Buttons, TitleButton } from './styles';
-import { FormHeader } from '../styles';
 import ReactInputVerificationCode from 'react-input-verification-code';
 
 const FormInfoPhone: React.FC = () => {
   return (
     <Container>
-      <FormHeader>Confirme seu número!</FormHeader>
+      <h1>Confirme seu número!</h1>
 
       <InfoPhone>
         Insira o código de validação que foi enviado para o seu Whatsapp

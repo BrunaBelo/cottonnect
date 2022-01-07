@@ -1,12 +1,22 @@
+import { BttSpace, InfoAboutUser, NextBtt, NextIcon, Title, TopDiv, UserInput, UserInputMoreInfo } from "./styles"
 import React from 'react';
 
 import { InputsCreateUser, ImageCreateAccount, Main, Container } from './styles';
-import { FormHeader } from '../styles';
 
 const FormPersonalInformation: React.FC = () => {
   return (
     <Container>
-      <FormHeader>Crie sua Conta!</FormHeader>
+      <TopDiv>
+        <BttSpace></BttSpace>
+        <Title>
+          <h1>Crie sua Conta!</h1>
+        </Title>
+        <BttSpace>
+          <NextBtt type="submit">
+            <NextIcon/>
+          </NextBtt>
+        </BttSpace>
+      </TopDiv>
 
       <Main>
         <ImageCreateAccount>
@@ -14,14 +24,17 @@ const FormPersonalInformation: React.FC = () => {
         </ImageCreateAccount>
 
         <InputsCreateUser>
-          <input required type="text" name="name" />
-          <input required type="email" name="email"  />
-          <input required type="number" name="phone" />
-          <input required type="number" name="cpf" />
-          <input required type="password" name="password"  />
-          <input required type="password" name="confirm-password" />
-          <input name="additionalInfs" className="additional-infs" />
+          <InfoAboutUser>
+            <UserInput required label="Nome" />
+            <UserInput required label="Email"  />
+            <UserInput required type="number" label="Telefone" />
+            <UserInput required type="number" label="CPF" />
+            <UserInput required type="password" label="Senha"  />
+            <UserInput required type="password" label="Confirmar Senha" />
+          </InfoAboutUser>
+          <UserInputMoreInfo multiline minRows="3" maxRows="6" label="Informações Adicionais" />
         </InputsCreateUser>
+
       </Main>
     </Container>
   );
