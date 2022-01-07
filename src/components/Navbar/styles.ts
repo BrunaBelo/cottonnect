@@ -35,9 +35,4 @@ export const LoginButton = styled.button`
   font-weight: 500;
   font-size: 14px;
   transition: .3s;
-  
-  :hover{
-    cursor: pointer;
-    opacity: .7;
-  }
 `
