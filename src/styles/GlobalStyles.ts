@@ -17,6 +17,12 @@ export const GlobalStyles = createGlobalStyle`
   *, input, button {
     border: 0;
     outline: 0;
+    transition: .5s;
+  }
+
+  button:hover {
+    cursor: pointer;
+    opacity: .75;
   }
 
   :root {
