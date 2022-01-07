@@ -11,7 +11,13 @@ export const Container = styled.form`
   width: 70%;
   background-color: white;
   border-radius: 20px;
-  padding: 20px 50px 20px 50px;
+  padding: 20px 50px;
+  
+  @media (max-width: 500px) {
+    width: 100%;
+    border-radius: 0;
+    padding: 20px 10px;
+  }
 `;
 
 export const TopDiv = styled.div`
@@ -43,6 +49,11 @@ export const NextBtt = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 850px) {
+    width: 35px;
+    height: 35px;
+  }
 `
 
 export const NextIcon = styled(ArrowForwardIos)`
@@ -56,6 +67,11 @@ export const Title = styled.div`
   color: black;
   font-weight: 700;
   width: 80%;
+
+  @media (max-width: 850px) {
+    font-size: 12px;
+    width: 60%;
+  }
 `
 
 export const Main = styled.div`
@@ -81,6 +97,10 @@ export const ImageCreateAccount = styled.div`
 
 export const UserInput = styled(TextField)`
   width: 45%;
+
+  @media (max-width: 450px) {
+    width: 100%;
+  }
 `
 
 export const UserInputMoreInfo = styled(UserInput)`
@@ -95,6 +115,11 @@ export const InfoAboutUser = styled.div`
   justify-content: space-between;
   background-color: transparent;
   row-gap: 1rem;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    flex-wrap: none;
+  }
 `
 
 export const InputsCreateUser = styled.div`

@@ -31,9 +31,6 @@ export default function CreateUser () {
             olaolaola
           </div>
         </CurrentScreen>
-        {/* <Form1/>
-        <Form2/>
-        <Form3/> */}
       </FormsDiv>
     </Container>
   );

@@ -25,6 +25,8 @@ export const GlobalStyles = createGlobalStyle`
     opacity: .75;
   }
 
+  $base_width: 855px;
+
   :root {
     --primary: #6A81D1;
     --button-navigation: #5969F5;
@@ -35,3 +37,4 @@ export const GlobalStyles = createGlobalStyle`
     --title-text-color: #252B42;
   }
 `
+
