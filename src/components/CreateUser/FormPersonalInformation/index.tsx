@@ -3,7 +3,12 @@ import React from 'react';
 
 import { InputsCreateUser, ImageCreateAccount, Main, Container } from './styles';
 
-const FormPersonalInformation: React.FC = () => {
+interface Props {
+  nextDivFunc: (currentDiv: number) => void,
+  index: number
+}
+
+function FormPersonalInformation({nextDivFunc, index}: Props){
   return (
     <Container>
       <TopDiv>
@@ -12,7 +17,7 @@ const FormPersonalInformation: React.FC = () => {
           <h1>Crie sua Conta!</h1>
         </Title>
         <BttSpace>
-          <NextBtt type="submit">
+          <NextBtt type="button" onClick={() => nextDivFunc(index)}>
             <NextIcon/>
           </NextBtt>
         </BttSpace>
@@ -25,12 +30,12 @@ const FormPersonalInformation: React.FC = () => {
 
         <InputsCreateUser>
           <InfoAboutUser>
-            <UserInput required label="Nome" />
-            <UserInput required label="Email"  />
-            <UserInput required type="number" label="Telefone" />
-            <UserInput required type="number" label="CPF" />
-            <UserInput required type="password" label="Senha"  />
-            <UserInput required type="password" label="Confirmar Senha" />
+            <UserInput label="Nome" />
+            <UserInput label="Email"  />
+            <UserInput type="number" label="Telefone" />
+            <UserInput type="number" label="CPF" />
+            <UserInput type="password" label="Senha"  />
+            <UserInput type="password" label="Confirmar Senha" />
           </InfoAboutUser>
           <UserInputMoreInfo multiline minRows="3" maxRows="6" label="Informações Adicionais" />
         </InputsCreateUser>
