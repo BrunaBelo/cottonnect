@@ -7,6 +7,7 @@ export const Container = styled.div`
   height: 4em;
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 `;
 
 export const UserInfo = styled.div`
@@ -15,14 +16,10 @@ export const UserInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
 
-export const Content = styled.div`
-  background-color: transparent;
-  width: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @media (max-width: 855px) {
+    width: 35%;
+  }
 `
 
 export const LoginButton = styled.button`
