@@ -7,6 +7,8 @@ interface ScreenProps {
 export const Container = styled.div`
   background-color: var(--primary);
   height: 100%;
+  position: relative;
+  overflow-x: hidden;
 `;
 
 export const FormsDiv = styled.div`
@@ -28,5 +30,5 @@ export const CurrentScreen = styled.div<ScreenProps>`
   justify-content: center;
   position: absolute;
   transition: .5s;
-  transform: ${p => p.show ? "translateX(0%)" : "translateX(100%)"}
+  transform: ${p => p.show ? "translateX(0%)" : "translateX(100%)"};
 `
