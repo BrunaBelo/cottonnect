@@ -1,17 +1,26 @@
-import { BttSpace, InfoAboutUser, NextBtt, NextIcon, Title, TopDiv, UserInput, UserInputMoreInfo } from "./styles"
 import React, {useState} from 'react';
+import { 
+  InputsCreateUser, 
+  ImageCreateAccount, 
+  Main, 
+  Container, 
+  BttSpace, 
+  InfoAboutUser, 
+  NextBtt, 
+  NextIcon, 
+  Title, 
+  TopDiv, 
+  UserInput, 
+  UserInputMoreInfo } from "./styles"
 
-import { InputsCreateUser, ImageCreateAccount, Main, Container } from './styles';
 import ReactInputMask from "react-input-mask";
-import * as yup from "yup";
-
+import {schemaUserInfos} from './yupSchemas'
 interface Props {
   nextDivFunc: (currentDiv: number) => void,
   index: number
 }
 
 function FormPersonalInformation({nextDivFunc, index}: Props){
-
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -20,18 +29,6 @@ function FormPersonalInformation({nextDivFunc, index}: Props){
   const [confirmPassword, setConfirmPassword] = useState("")
   const [moreInfo, setMoreInfo] = useState("")
   const [errors, setErrors] = useState(inputErrors())
-
-  
-
-  const schema = yup.object().shape({
-    name: yup.string().required().min(3),
-    email: yup.string().email().required(),
-    phone: yup.string().required().min(11).max(11, "Telefone inválido"),
-    cpf: yup.string().required().min(11).max(11, "CPF inválido"),
-    password: yup.string().required().min(8).max(30),
-    confirmPassword: yup.string().required().oneOf([yup.ref('password'), null]),
-    moreInfo: yup.string().max(280)
-  })
 
   function sanitazeDataStep1() {
     return {
@@ -80,7 +77,7 @@ function FormPersonalInformation({nextDivFunc, index}: Props){
     let result = true
     let errorMessage = ""
 
-    await schema.validate((data), { abortEarly: false })
+    await schemaUserInfos.validate((data), { abortEarly: false })
       .then(() => {
         setErrors(inputErrors())
         console.log('proxima div')
