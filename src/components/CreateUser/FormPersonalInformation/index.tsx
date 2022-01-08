@@ -4,7 +4,6 @@ import React, {useState} from 'react';
 import { InputsCreateUser, ImageCreateAccount, Main, Container } from './styles';
 import ReactInputMask from "react-input-mask";
 import * as yup from "yup";
-import { setLocale } from 'yup';
 
 interface Props {
   nextDivFunc: (currentDiv: number) => void,
@@ -22,17 +21,7 @@ function FormPersonalInformation({nextDivFunc, index}: Props){
   const [moreInfo, setMoreInfo] = useState("")
   const [errors, setErrors] = useState(inputErrors())
 
-  setLocale({
-    string: {
-      min: ({ min, path }) => ({ path,  message: `Deve ter no mínimo ${min} caracteres`}),
-      max: ({ max, path }) => ({ path,  message: `Deve ter no máximo ${max} caracteres`}),
-      email: ({ path }) => ({ path,  message: `Email inválido`})
-    },
-    mixed: {
-      required: ({ path }) => ({ path, message: 'Campo obrigatório' }),
-      oneOf: ({ path }) => ({ path, message: 'Senhas devem ser iguais' })
-    }
-  });
+  
 
   const schema = yup.object().shape({
     name: yup.string().required().min(3),
