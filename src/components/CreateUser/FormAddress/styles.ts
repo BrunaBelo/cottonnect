@@ -1,7 +1,5 @@
+import { FormHelperText } from '@material-ui/core';
 import styled from 'styled-components';
-
-export const Container = styled.div`
-`;
 
 export const Main = styled.div`
   display: flex;
@@ -41,3 +39,9 @@ export const ImageAddress = styled.div`
     }
   }
 `;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 12px;
+  margin-top: 3px;
+`

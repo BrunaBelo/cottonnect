@@ -6,6 +6,7 @@ import FormSuccess from './Success';
 import { Container, CurrentScreen, FormsDiv } from './styles';
 
 import Navbar from '../Navbar';
+import FormInfoAddress from './FormAddress';
 
 export default function CreateUser () {
 
@@ -17,19 +18,16 @@ export default function CreateUser () {
       document.getElementById(`${currentDiv}`)!.style.display = "none"
     }, 250);
   }
-  
 
   return (
     <Container>
       <Navbar/>
       <FormsDiv>
         <CurrentScreen id="0" show={true}>
-          <FormPersonalInformation index={0} nextDivFunc={nextDiv}/>
+          <FormInfoAddress index={1} nextDivFunc={nextDiv}/>
         </CurrentScreen>
-        <CurrentScreen id="1">
-          <div style={{width: "50%", backgroundColor: "red"}}>
-            olaolaola
-          </div>
+        <CurrentScreen id="0">
+          <FormPersonalInformation index={0} nextDivFunc={nextDiv}/>
         </CurrentScreen>
       </FormsDiv>
     </Container>
