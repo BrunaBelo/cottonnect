@@ -15,8 +15,9 @@ import ErrorObj from '../../../interfaces/errorObj';
 import PopUpProps from '../../../interfaces/popUp';
 import { defaultErrorsStep1, handleDataStep1 } from './handleData';
 import PopUpContainer from '../Container';
+import { nextStep } from '../Container/moveStep';
 
-function FormPersonalInformation({nextDivFunc, index}: PopUpProps){
+function FormPersonalInformation({index}: PopUpProps){
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -31,7 +32,7 @@ function FormPersonalInformation({nextDivFunc, index}: PopUpProps){
     setErrors(defaultErrorsStep1())
     const resultForm = await validateForm(data, schema)
     if(resultForm === true){
-      nextDivFunc(index)
+      nextStep(index)
     }else{
       const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsStep1())
       setErrors(newErrorObj)
