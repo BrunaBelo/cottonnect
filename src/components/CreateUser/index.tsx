@@ -9,25 +9,15 @@ import Navbar from '../Navbar';
 import FormInfoAddress from './FormAddress';
 
 export default function CreateUser () {
-
-  function nextDiv(currentDiv: number): void {
-    document.getElementById(`${currentDiv}`)!.style.transform = "translateX(-100%)"
-    document.getElementById(`${currentDiv+1}`)!.style.display = "flex"  
-    setTimeout(function() {
-      document.getElementById(`${currentDiv+1}`)!.style.transform = "translateX(0%)"
-      document.getElementById(`${currentDiv}`)!.style.display = "none"
-    }, 250);
-  }
-
   return (
     <Container>
       <Navbar/>
       <FormsDiv>
         <CurrentScreen id="0" show={true}>
-          <FormPersonalInformation index={0} nextDivFunc={nextDiv}/>
+          <FormPersonalInformation index={0}/>
         </CurrentScreen>
         <CurrentScreen id="1">
-          <FormInfoAddress index={1} nextDivFunc={nextDiv}/>
+          <FormInfoAddress index={1}/>
         </CurrentScreen>
       </FormsDiv>
     </Container>
