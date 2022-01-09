@@ -3,13 +3,7 @@ import {
   InputsCreateUser, 
   ImageCreateAccount, 
   Main, 
-  Container, 
-  BttSpace, 
   InfoAboutUser, 
-  NextBtt, 
-  NextIcon, 
-  Title, 
-  TopDiv, 
   UserInput, 
   UserInputMoreInfo } from "./styles"
 
@@ -18,13 +12,11 @@ import {schemaUserInfos} from './yupSchemas';
 import { showErrors, validateForm } from '../../../shared/formConfigs/validate';
 
 import ErrorObj from '../../../interfaces/errorObj';
+import PopUpProps from '../../../interfaces/popUp';
 import { defaultErrorsStep1, handleDataStep1 } from './handleData';
-interface Props {
-  nextDivFunc: (currentDiv: number) => void,
-  index: number
-}
+import PopUpContainer from '../Container';
 
-function FormPersonalInformation({nextDivFunc, index}: Props){
+function FormPersonalInformation({nextDivFunc, index}: PopUpProps){
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -35,7 +27,7 @@ function FormPersonalInformation({nextDivFunc, index}: Props){
   const [errors, setErrors] = useState(defaultErrorsStep1())
 
   // Metodo para lidar com informacoes do usuario
-  async function handleFormInfo(data: object, schema: any) {
+  async function handleFormInfo(data: object, schema: any): Promise<void> {
     setErrors(defaultErrorsStep1())
     const resultForm = await validateForm(data, schema)
     if(resultForm === true){
@@ -46,28 +38,8 @@ function FormPersonalInformation({nextDivFunc, index}: Props){
     }
   }
 
-  return (
-    <Container>
-      
-      <TopDiv>
-        <BttSpace></BttSpace>
-        <Title>
-          <h1>Crie sua Conta!</h1>
-        </Title>
-        <BttSpace>
-          <NextBtt 
-            type="button" 
-            onClick=
-              {
-                () => handleFormInfo(
-                  handleDataStep1(name, email, phone, cpf, password, confirmPassword, moreInfo), schemaUserInfos)
-              }
-          >
-            <NextIcon/>
-          </NextBtt>
-        </BttSpace>
-      </TopDiv>
-
+  function renderMain(): JSX.Element {
+    return(
       <Main>
         <ImageCreateAccount>
           <img src="/images/jumping.png" alt="Criar Conta" />
@@ -158,7 +130,17 @@ function FormPersonalInformation({nextDivFunc, index}: Props){
         </InputsCreateUser>
         
       </Main>
-    </Container>
+    )
+  }
+
+  return (
+    <PopUpContainer 
+      title="Crie sua conta!"
+      main={renderMain}
+      handleFormValidation={handleFormInfo}
+      formData={handleDataStep1(name, email, phone, cpf, password, confirmPassword, moreInfo)}
+      schema = {schemaUserInfos}
+    />
   );
 };
 
