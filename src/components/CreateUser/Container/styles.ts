@@ -37,7 +37,7 @@ export const BttSpace = styled.div`
   background-color: transparent;
 `
 
-export const NextBtt = styled.button`
+export const ChangeStepBtt = styled.button`
   padding: 0;
   margin: 0;
   border-width: 0;
@@ -59,6 +59,10 @@ export const NextIcon = styled(ArrowForwardIos)`
   color: white;
   transform: scale(.8);
 `
+
+export const BackIcon = styled(NextIcon)`
+  transform: scale(.8) rotate(180deg);
+` 
 
 export const Title = styled.div`
   background-color: transparent;

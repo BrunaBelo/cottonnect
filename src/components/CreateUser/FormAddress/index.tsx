@@ -84,6 +84,7 @@ function FormInfoAddress({nextDivFunc, index}: PopUpProps) {
 
   return (
     <PopUpContainer
+      index={index}
       title="Informe sua localização!"
       main={renderMain}
       handleFormValidation={handleFormInfo}

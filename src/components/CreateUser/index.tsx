@@ -10,7 +10,7 @@ import FormInfoAddress from './FormAddress';
 
 export default function CreateUser () {
 
-  function nextDiv(currentDiv: number): void{
+  function nextDiv(currentDiv: number): void {
     document.getElementById(`${currentDiv}`)!.style.transform = "translateX(-100%)"
     document.getElementById(`${currentDiv+1}`)!.style.display = "flex"  
     setTimeout(function() {
@@ -24,10 +24,10 @@ export default function CreateUser () {
       <Navbar/>
       <FormsDiv>
         <CurrentScreen id="0" show={true}>
-          <FormInfoAddress index={1} nextDivFunc={nextDiv}/>
-        </CurrentScreen>
-        <CurrentScreen id="0">
           <FormPersonalInformation index={0} nextDivFunc={nextDiv}/>
+        </CurrentScreen>
+        <CurrentScreen id="1">
+          <FormInfoAddress index={1} nextDivFunc={nextDiv}/>
         </CurrentScreen>
       </FormsDiv>
     </Container>

@@ -1,36 +1,50 @@
 import React from 'react';
+import { backStep } from './moveStep';
 import { 
   Container, 
   BttSpace, 
-  NextBtt, 
+  ChangeStepBtt, 
   NextIcon, 
   Title, 
-  TopDiv } from './styles'
+  TopDiv, 
+  BackIcon} from './styles'
 
 interface Container {
   title: string,
   main: () => JSX.Element,
   handleFormValidation: (data: object, schema: any) => Promise<void>,
   formData: object,
-  schema: any
+  schema: any,
+  index: number
 }
 
-function PopUpContainer({title, handleFormValidation, formData, schema, main}: Container){
+function PopUpContainer({title, handleFormValidation, formData, schema, main, index}: Container){
 
   return (
     <Container>
       
       <TopDiv>
-        <BttSpace></BttSpace>
+        {
+        index > 0 ?
+        <BttSpace>
+          <ChangeStepBtt
+            type="button"
+            onClick={() => backStep(index)}>
+            <BackIcon/>
+          </ChangeStepBtt>
+        </BttSpace>
+        :
+        <></>
+        }
         <Title>
           <h1>{title}</h1>
         </Title>
         <BttSpace>
-          <NextBtt 
+          <ChangeStepBtt 
             type="button" 
             onClick={() => handleFormValidation(formData, schema)}>
             <NextIcon/>
-          </NextBtt>
+          </ChangeStepBtt>
         </BttSpace>
       </TopDiv>
 

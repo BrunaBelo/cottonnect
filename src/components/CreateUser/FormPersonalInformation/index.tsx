@@ -135,6 +135,7 @@ function FormPersonalInformation({nextDivFunc, index}: PopUpProps){
 
   return (
     <PopUpContainer 
+      index={index}
       title="Crie sua conta!"
       main={renderMain}
       handleFormValidation={handleFormInfo}
