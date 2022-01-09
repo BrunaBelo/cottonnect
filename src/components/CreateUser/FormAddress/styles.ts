@@ -4,41 +4,45 @@ import styled from 'styled-components';
 export const Main = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
 `;
 
 export const FormInputs = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 50%;
+  width: 50%;
   margin: 3em;
   row-gap: 3em;
 
   @media (max-width: 855px) {
-    & {
-      margin: 2em 0 5em 3.5em;
-      flex: 100%;
-      align-items: center;
-      justify-content: center;
-    }
+    width: 100%;
   }
-`;
-
-export const SelectState = styled.div`
-  margin: 0 0 3em 0;
-`;  
+`; 
 
 export const ImageAddress = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: transparent;
+  justify-content: flex-end;
   width: 50%;
-  padding: 0 1em 0 0;
+  //padding: 0 1em 0 0;
 
   @media (max-width: 855px) {
     img{
       display: none;
     }
+    display: none;
+  }
+
+  @media (max-width: 1000px) {
+    width: 40%;
   }
 `;
+
+export const MapImage = styled.img`
+  //width: 50px;
+  transform: scale(.8);
+`
 
 export const ErrorMessage = styled.p`
   color: red;

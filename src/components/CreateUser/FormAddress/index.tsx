@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Main, ImageAddress, FormInputs, ErrorMessage } from './styles';
+import { Main, ImageAddress, FormInputs, ErrorMessage, MapImage } from './styles';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 import PopUpProps from '../../../interfaces/popUp';
@@ -12,8 +12,9 @@ import { schemaUserAddress } from './yupSchemas';
 import { defaultErrorsStep2, handleDataAddress } from './handleData';
 
 import { removeInputError, showErrors, validateForm } from '../../../shared/formConfigs/validate';
+import { nextStep } from '../Container/moveStep';
 
-function FormInfoAddress({nextDivFunc, index}: PopUpProps) {
+function FormInfoAddress({index}: PopUpProps) {
 
   const [statesList, setStatesList] = useState(["RJ, PR"])
   const [citiesList, setCitiesList] = useState(["Rio de Janeiro", "São Paulo"])
@@ -31,42 +32,42 @@ function FormInfoAddress({nextDivFunc, index}: PopUpProps) {
   function renderMain(): JSX.Element {
     return(
       <Main>
-      <FormInputs>
-        <FormControl fullWidth required>
-          <InputLabel shrink htmlFor="state">Estado</InputLabel>
-          <Select 
-            error={errors.state.status} 
-            name="state" 
-            onChange={(e) => changeInputValue(e, setState)}
-            value={state}
-          >
-            <MenuItem value={1}>Paraná</MenuItem>
-            <MenuItem value={2}>Rio de Janeiro</MenuItem>
-            <MenuItem value={3}>São Paulo</MenuItem>
-          </Select>
-          <ErrorMessage>{errors.state.message}</ErrorMessage>
-        </FormControl>
+        <FormInputs>
+          <FormControl required>
+            <InputLabel shrink htmlFor="state">Estado</InputLabel>
+            <Select 
+              error={errors.state.status} 
+              name="state" 
+              onChange={(e) => changeInputValue(e, setState)}
+              value={state}
+            >
+              <MenuItem value={1}>Paraná</MenuItem>
+              <MenuItem value={2}>Rio de Janeiro</MenuItem>
+              <MenuItem value={3}>São Paulo</MenuItem>
+            </Select>
+            <ErrorMessage>{errors.state.message}</ErrorMessage>
+          </FormControl>
 
-        <FormControl fullWidth required>
-          <InputLabel shrink htmlFor="city">Cidade</InputLabel>
-          <Select 
-            error={errors.city.status} 
-            name="city"
-            onChange={(e) => changeInputValue(e, setCity)}
-            value={city}
-          >
-            <MenuItem value={1}>Prudentopolis</MenuItem>
-            <MenuItem value={2}>Curitiba</MenuItem>
-            <MenuItem value={3}>Colombo</MenuItem>
-          </Select>
-          <ErrorMessage>{errors.city.message}</ErrorMessage>
-        </FormControl>
-      </FormInputs>
+          <FormControl required>
+            <InputLabel shrink htmlFor="city">Cidade</InputLabel>
+            <Select 
+              error={errors.city.status} 
+              name="city"
+              onChange={(e) => changeInputValue(e, setCity)}
+              value={city}
+            >
+              <MenuItem value={1}>Prudentopolis</MenuItem>
+              <MenuItem value={2}>Curitiba</MenuItem>
+              <MenuItem value={3}>Colombo</MenuItem>
+            </Select>
+            <ErrorMessage>{errors.city.message}</ErrorMessage>
+          </FormControl>
+        </FormInputs>
 
-      <ImageAddress>
-        <img src="/images/address.png" alt="Mapa endereço" />
-      </ImageAddress>
-    </Main>
+        <ImageAddress>
+          <MapImage src="/images/address.png" alt="Mapa endereço" />
+        </ImageAddress>
+      </Main>
     )
   }
 
@@ -75,7 +76,7 @@ function FormInfoAddress({nextDivFunc, index}: PopUpProps) {
     setErrors(defaultErrorsStep2())
     const resultForm = await validateForm(data, schema)
     if(resultForm === true){
-      nextDivFunc(index)
+      nextStep(index)
     }else{
       const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsStep2())
       setErrors(newErrorObj)
