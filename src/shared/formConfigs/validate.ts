@@ -23,3 +23,9 @@ export async function validateForm(data: object, schema: any): Promise<boolean |
 
     return result
 }
+
+export function removeInputError(fieldsErrorsStatus: any, element: string) {
+  fieldsErrorsStatus[element as keyof typeof fieldsErrorsStatus] = {status: false, message: ""}
+
+  return fieldsErrorsStatus
+}
