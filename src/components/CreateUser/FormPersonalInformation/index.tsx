@@ -14,7 +14,11 @@ import {
   UserInputMoreInfo } from "./styles"
 
 import ReactInputMask from "react-input-mask";
-import {schemaUserInfos} from './yupSchemas'
+import {schemaUserInfos} from './yupSchemas';
+import { showErrors, validateForm } from '../../../shared/formConfigs/validate';
+
+import ErrorObj from '../../../interfaces/errorObj';
+import { defaultErrorsStep1, handleDataStep1 } from './handleData';
 interface Props {
   nextDivFunc: (currentDiv: number) => void,
   index: number
@@ -28,68 +32,19 @@ function FormPersonalInformation({nextDivFunc, index}: Props){
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [moreInfo, setMoreInfo] = useState("")
-  const [errors, setErrors] = useState(inputErrors())
+  const [errors, setErrors] = useState(defaultErrorsStep1())
 
-  function sanitazeDataStep1() {
-    return {
-      name,
-      email,
-      phone: phone.replace("(", "").replace(")", "").replaceAll("_", "").replace("-", ""),
-      cpf: cpf.replaceAll(".", "").replace("-", "").replaceAll("_", ""),
-      password,
-      confirmPassword,
-      moreInfo
+  // Metodo para lidar com informacoes do usuario
+  async function handleFormInfo(data: object, schema: any) {
+    setErrors(defaultErrorsStep1())
+    const resultForm = await validateForm(data, schema)
+    if(resultForm === true){
+      nextDivFunc(index)
+    }else{
+      const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsStep1())
+      setErrors(newErrorObj)
     }
   }
-
-  function inputErrors() {
-    return {
-      name: {status: false, message: ""},
-      email: {status: false, message: ""},
-      phone: {status: false, message: ""},
-      cpf: {status: false, message: ""},
-      password: {status: false, message: ""},
-      confirmPassword: {status: false, message: ""}
-    }
-  }
-
-  function showErrors(err: any) {
-    interface ErrorObj {
-      path: string,
-      message: string
-    }
-    let newErrorObj = inputErrors()
-
-    err.errors.forEach(
-      (e: ErrorObj) => {
-        console.log('oioioioioi', newErrorObj[e.path as keyof typeof errors])
-        if(!newErrorObj[e.path as keyof typeof errors].status){
-          newErrorObj[e.path as keyof typeof errors] = {status: true, message: e.message}
-        }
-      }
-    )
-
-    setErrors(newErrorObj)
-  }
-
-  const validateForm = async() => {
-    const data = sanitazeDataStep1()
-    let result = true
-    let errorMessage = ""
-
-    await schemaUserInfos.validate((data), { abortEarly: false })
-      .then(() => {
-        setErrors(inputErrors())
-        console.log('proxima div')
-        //nextDivFunc(index)
-      })
-      .catch((err) => {
-        setErrors(inputErrors())
-        showErrors(err)
-      })
-  }
-
-  console.log(errors)
 
   return (
     <Container>
@@ -100,7 +55,14 @@ function FormPersonalInformation({nextDivFunc, index}: Props){
           <h1>Crie sua Conta!</h1>
         </Title>
         <BttSpace>
-          <NextBtt type="button" onClick={() => validateForm()}>
+          <NextBtt 
+            type="button" 
+            onClick=
+              {
+                () => handleFormInfo(
+                  handleDataStep1(name, email, phone, cpf, password, confirmPassword, moreInfo), schemaUserInfos)
+              }
+          >
             <NextIcon/>
           </NextBtt>
         </BttSpace>
