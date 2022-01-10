@@ -11,7 +11,7 @@ import PopUpContainer from '../Container';
 import { schemaUserAddress } from './yupSchemas';
 import { defaultErrorsStep2, handleDataAddress } from './handleData';
 
-import { removeInputError, showErrors, validateForm } from '../../../shared/formConfigs/validate';
+import { changeInputValue, showErrors, validateForm } from '../../../shared/formConfigs/validate';
 import { nextStep } from '../Container/moveStep';
 
 function FormInfoAddress({index}: PopUpProps) {
@@ -22,12 +22,7 @@ function FormInfoAddress({index}: PopUpProps) {
   const [city, setCity] = useState("")
   const [errors, setErrors] = useState(defaultErrorsStep2())
 
-  function changeInputValue(e: any, changeElement: React.Dispatch<React.SetStateAction<string>>) {
-    if(e.target.value !== ""){
-      changeElement(e.target.value)
-      removeInputError(errors, e.target.name)
-    }
-  }
+  
 
   function renderMain(): JSX.Element {
     return(
@@ -38,7 +33,7 @@ function FormInfoAddress({index}: PopUpProps) {
             <Select 
               error={errors.state.status} 
               name="state" 
-              onChange={(e) => changeInputValue(e, setState)}
+              onChange={(e) => changeInputValue(errors, e, setState)}
               value={state}
             >
               <MenuItem value={1}>Paraná</MenuItem>
@@ -53,7 +48,7 @@ function FormInfoAddress({index}: PopUpProps) {
             <Select 
               error={errors.city.status} 
               name="city"
-              onChange={(e) => changeInputValue(e, setCity)}
+              onChange={(e) => changeInputValue(errors, e, setCity)}
               value={city}
             >
               <MenuItem value={1}>Prudentopolis</MenuItem>

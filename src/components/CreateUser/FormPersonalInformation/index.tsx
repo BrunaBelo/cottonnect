@@ -9,7 +9,7 @@ import {
 
 import ReactInputMask from "react-input-mask";
 import {schemaUserInfos} from './yupSchemas';
-import { showErrors, validateForm } from '../../../shared/formConfigs/validate';
+import { changeInputValue, showErrors, validateForm } from '../../../shared/formConfigs/validate';
 
 import ErrorObj from '../../../interfaces/errorObj';
 import PopUpProps from '../../../interfaces/popUp';
@@ -49,27 +49,30 @@ function FormPersonalInformation({index}: PopUpProps){
           <InfoAboutUser>
             
             <UserInput 
+              name="name"
               error={errors.name.status} 
               helperText={errors.name.message} 
               required 
               value={name} 
-              onChange={(e)=>setName(e.target.value)} 
+              onChange={(e)=>changeInputValue(errors, e, setName)} 
               label="Nome" 
             />
             
             <UserInput 
+              name="email"
               error={errors.email.status} 
               helperText={errors.email.message} 
               required 
               value={email} 
-              onChange={(e)=>setEmail(e.target.value)} 
+              onChange={(e)=>changeInputValue(errors, e, setEmail)} 
               label="Email" 
             />
             
             <ReactInputMask 
+              name="phone"
               mask="(99)99999-9999" 
               value={phone} 
-              onChange={(e)=>setPhone(e.target.value)}
+              onChange={(e)=>changeInputValue(errors, e, setPhone)}
             >
               {() => 
                 <UserInput 
@@ -82,10 +85,11 @@ function FormPersonalInformation({index}: PopUpProps){
               } 
             </ReactInputMask>
             
-            <ReactInputMask 
+            <ReactInputMask
+              name="cpf"
               mask="999.999.999-99" 
               value={cpf} 
-              onChange={(e)=>setCpf(e.target.value)}
+              onChange={(e)=>changeInputValue(errors, e, setCpf)}
             >
               {() => 
                 <UserInput 
@@ -99,21 +103,23 @@ function FormPersonalInformation({index}: PopUpProps){
             </ReactInputMask>
             
             <UserInput 
+              name="password"
               error={errors.password.status} 
               helperText={errors.password.message} 
               required 
               value={password} 
-              onChange={(e)=>setPassword(e.target.value)} 
+              onChange={(e)=>changeInputValue(errors, e, setPassword)} 
               type="password" 
               label="Senha"  
             />
             
             <UserInput 
+              name="confirmPassword"
               error={errors.confirmPassword.status} 
               helperText={errors.confirmPassword.message} 
               required 
               value={confirmPassword} 
-              onChange={(e)=>setConfirmPassword(e.target.value)} 
+              onChange={(e)=>changeInputValue(errors, e, setConfirmPassword)} 
               type="password" 
               label="Confirmar Senha" 
             />
@@ -121,6 +127,7 @@ function FormPersonalInformation({index}: PopUpProps){
           </InfoAboutUser>
 
           <UserInputMoreInfo 
+            name="moreInfo"
             value={moreInfo} 
             onChange={(e)=>setMoreInfo(e.target.value)} 
             multiline 

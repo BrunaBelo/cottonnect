@@ -29,3 +29,10 @@ export function removeInputError(fieldsErrorsStatus: any, element: string) {
 
   return fieldsErrorsStatus
 }
+
+export function changeInputValue(errors: object, e: any, changeElement: React.Dispatch<React.SetStateAction<string>>) {
+  changeElement(e.target.value)
+  if(e.target.value !== ""){
+    removeInputError(errors, e.target.name)
+  }
+}
