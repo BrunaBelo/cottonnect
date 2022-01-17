@@ -14,16 +14,17 @@ import { defaultErrorsStep2, handleDataAddress } from './handleData';
 import { changeInputValue, showErrors, validateForm } from '../../../shared/formConfigs/validate';
 import { nextStep } from '../Container/moveStep';
 import { getStates } from '../../../service/state';
+import { getCities } from '../../../service/cities';
 
-interface State {
-  ibge: number,
+interface selectLocation {
+  id: string,
   name: string
 }
 
 function FormInfoAddress({index}: PopUpProps) {
 
-  const [statesList, setStatesList] = useState([] as State[])
-  const [citiesList, setCitiesList] = useState(["Rio de Janeiro", "São Paulo"])
+  const [statesList, setStatesList] = useState([] as selectLocation[])
+  const [citiesList, setCitiesList] = useState([] as selectLocation[])
   const [state, setState] = useState("")
   const [city, setCity] = useState("")
   const [errors, setErrors] = useState(defaultErrorsStep2())
@@ -32,13 +33,7 @@ function FormInfoAddress({index}: PopUpProps) {
     async function getStatesFromApi(){
       try{
         const { data } = await getStates()
-        let statesFromApi: State[] = []
-
-        data.forEach((state: State) => {
-          statesFromApi.push({name: state.name, ibge: state.ibge})
-        });
-
-        setStatesList(statesFromApi)
+        await populateSelectLocation(data, setStatesList)
       }catch{
         console.log('ERRO AO BUSCAR ESTADOS')
       }
@@ -46,6 +41,23 @@ function FormInfoAddress({index}: PopUpProps) {
 
     getStatesFromApi()
   })
+
+  async function onChangeState(e: any) {
+    changeInputValue(errors, e, setState)
+
+    const { data } = await getCities(e.target.value)
+    await populateSelectLocation(data, setCitiesList)
+  }
+
+  async function populateSelectLocation(data: any, setList: any): Promise<void>{
+    let locations: selectLocation[] = []
+
+    data.forEach((location: selectLocation) => {
+      locations.push({name: location.name, id: location.id})
+    });
+
+    setList(locations)
+  }
 
   function renderMain(): JSX.Element {
     return(
@@ -56,13 +68,13 @@ function FormInfoAddress({index}: PopUpProps) {
             <Options 
               error={errors.state.status} 
               name="state" 
-              onChange={(e) => changeInputValue(errors, e, setState)}
+              onChange={(e) => onChangeState(e)}
               value={state}
             >
               {
                 statesList.map((state) => {
                   return(
-                    <MenuItem value={state.ibge}>{state.name.toLowerCase()}</MenuItem>
+                    <MenuItem value={state.id}>{state.name.toLowerCase()}</MenuItem>
                   )
                 })
               }
@@ -78,9 +90,13 @@ function FormInfoAddress({index}: PopUpProps) {
               onChange={(e) => changeInputValue(errors, e, setCity)}
               value={city}
             >
-              <MenuItem value={1}>Prudentopolis</MenuItem>
-              <MenuItem value={2}>Curitiba</MenuItem>
-              <MenuItem value={3}>Colombo</MenuItem>
+              {
+                citiesList.map((city) => {
+                  return(
+                    <MenuItem value={city.id}>{city.name.toLowerCase()}</MenuItem>
+                  )
+                })
+              }
             </Select>
             <ErrorMessage>{errors.city.message}</ErrorMessage>
           </FormControl>
