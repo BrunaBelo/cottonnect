@@ -16,7 +16,7 @@ export const FormsDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   background-color: transparent;
   height: calc(100% - 4em);

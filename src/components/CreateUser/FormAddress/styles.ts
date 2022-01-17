@@ -1,4 +1,4 @@
-import { FormHelperText } from '@material-ui/core';
+import { Select } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const Main = styled.div`
@@ -6,6 +6,10 @@ export const Main = styled.div`
   flex-direction: row;
   width: 100%;
 `;
+
+export const Options = styled(Select)`
+  text-transform: capitalize;
+`
 
 export const FormInputs = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { Main, ImageAddress, FormInputs, ErrorMessage, MapImage } from './styles';
+import { Main, ImageAddress, FormInputs, ErrorMessage, MapImage, Options } from './styles';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 import PopUpProps from '../../../interfaces/popUp';
@@ -13,16 +13,39 @@ import { defaultErrorsStep2, handleDataAddress } from './handleData';
 
 import { changeInputValue, showErrors, validateForm } from '../../../shared/formConfigs/validate';
 import { nextStep } from '../Container/moveStep';
+import { getStates } from '../../../service/state';
+
+interface State {
+  ibge: number,
+  name: string
+}
 
 function FormInfoAddress({index}: PopUpProps) {
 
-  const [statesList, setStatesList] = useState(["RJ, PR"])
+  const [statesList, setStatesList] = useState([] as State[])
   const [citiesList, setCitiesList] = useState(["Rio de Janeiro", "São Paulo"])
   const [state, setState] = useState("")
   const [city, setCity] = useState("")
   const [errors, setErrors] = useState(defaultErrorsStep2())
 
-  
+  useEffect(() => {
+    async function getStatesFromApi(){
+      try{
+        const { data } = await getStates()
+        let statesFromApi: State[] = []
+
+        data.forEach((state: State) => {
+          statesFromApi.push({name: state.name, ibge: state.ibge})
+        });
+
+        setStatesList(statesFromApi)
+      }catch{
+        console.log('ERRO AO BUSCAR ESTADOS')
+      }
+    }
+
+    getStatesFromApi()
+  })
 
   function renderMain(): JSX.Element {
     return(
@@ -30,16 +53,20 @@ function FormInfoAddress({index}: PopUpProps) {
         <FormInputs>
           <FormControl required>
             <InputLabel shrink htmlFor="state">Estado</InputLabel>
-            <Select 
+            <Options 
               error={errors.state.status} 
               name="state" 
               onChange={(e) => changeInputValue(errors, e, setState)}
               value={state}
             >
-              <MenuItem value={1}>Paraná</MenuItem>
-              <MenuItem value={2}>Rio de Janeiro</MenuItem>
-              <MenuItem value={3}>São Paulo</MenuItem>
-            </Select>
+              {
+                statesList.map((state) => {
+                  return(
+                    <MenuItem value={state.ibge}>{state.name.toLowerCase()}</MenuItem>
+                  )
+                })
+              }
+            </Options>
             <ErrorMessage>{errors.state.message}</ErrorMessage>
           </FormControl>
 
