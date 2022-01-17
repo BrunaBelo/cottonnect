@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { Main, ImageAddress, FormInputs, ErrorMessage, MapImage, Options } from './styles';
-import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Main, ImageAddress, FormInputs, ErrorMessage, MapImage, Options, Item } from './styles';
+import { FormControl, InputLabel } from '@material-ui/core';
 
 import PopUpProps from '../../../interfaces/popUp';
 import ErrorObj from '../../../interfaces/errorObj';
@@ -74,7 +74,7 @@ function FormInfoAddress({index}: PopUpProps) {
               {
                 statesList.map((state) => {
                   return(
-                    <MenuItem value={state.id}>{state.name.toLowerCase()}</MenuItem>
+                    <Item value={state.id}>{state.name.toLowerCase()}</Item>
                   )
                 })
               }
@@ -84,7 +84,7 @@ function FormInfoAddress({index}: PopUpProps) {
 
           <FormControl required>
             <InputLabel shrink htmlFor="city">Cidade</InputLabel>
-            <Select 
+            <Options 
               error={errors.city.status} 
               name="city"
               onChange={(e) => changeInputValue(errors, e, setCity)}
@@ -93,11 +93,11 @@ function FormInfoAddress({index}: PopUpProps) {
               {
                 citiesList.map((city) => {
                   return(
-                    <MenuItem value={city.id}>{city.name.toLowerCase()}</MenuItem>
+                    <Item value={city.id}>{city.name.toLowerCase()}</Item>
                   )
                 })
               }
-            </Select>
+            </Options>
             <ErrorMessage>{errors.city.message}</ErrorMessage>
           </FormControl>
         </FormInputs>

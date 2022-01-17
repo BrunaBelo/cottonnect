@@ -1,4 +1,4 @@
-import { Select } from '@material-ui/core';
+import { Select, MenuItem } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const Main = styled.div`
@@ -8,6 +8,10 @@ export const Main = styled.div`
 `;
 
 export const Options = styled(Select)`
+  text-transform: capitalize;
+`
+
+export const Item = styled(MenuItem)`
   text-transform: capitalize;
 `
 
