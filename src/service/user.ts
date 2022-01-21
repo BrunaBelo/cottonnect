@@ -1,14 +1,11 @@
 import api from "./api";
+import { AxiosResponse } from "axios";
+import { UserData } from "../interfaces/userData";
 
-export default class UserService {
-  constructor() {}
+export const createUser = async(userData: UserData): Promise<AxiosResponse> => {
+  console.log(userData)
+  const response = await api.post("/users", userData)
 
-  async create(formUser: JSON) {
-    try {
-      const response = await api.post('users/', formUser);
-      return response.status;
-    } catch (error) {
-      throw error;
-    }
-  }
+  console.log(response.data)
+  return response
 }

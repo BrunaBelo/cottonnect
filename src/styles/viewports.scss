@@ -2,7 +2,7 @@
 // Bootstrap's breakpoint, since we use bootstrap.
 //
 // Breakpoints:
-//   phone             min 375px - max 767px
+//   phoneNumber             min 375px - max 767px
 //   tablet            min 768px - max 992px
 //   sm_desktop        min 993px - max 1199px
 //   desktop           min 1200px
@@ -14,8 +14,8 @@
 }
 
 @mixin _respond-to($media) {
-  // Normal phones and above(Iphone 4)
-  @if $media == phone {
+  // Normal phoneNumbers and above(IphoneNumber 4)
+  @if $media == phoneNumber {
     @media (min-width: 375px) {
       @content;
     }

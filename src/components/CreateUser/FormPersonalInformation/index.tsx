@@ -5,7 +5,7 @@ import {
   Main, 
   InfoAboutUser, 
   UserInput, 
-  UserInputMoreInfo } from "./styles"
+  UserInputMoreInfo,} from "./styles"
 
 import ReactInputMask from "react-input-mask";
 import {schemaUserInfos} from './yupSchemas';
@@ -16,11 +16,12 @@ import PopUpProps from '../../../interfaces/popUp';
 import { defaultErrorsStep1, handleDataStep1 } from './handleData';
 import PopUpContainer from '../Container';
 import { nextStep } from '../Container/moveStep';
+import { UserData } from '../../../interfaces/userData';
 
-function FormPersonalInformation({index}: PopUpProps){
+function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]}: PopUpProps){
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
+  const [phoneNumber, setphoneNumber] = useState("")
   const [cpf, setCpf] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -28,10 +29,15 @@ function FormPersonalInformation({index}: PopUpProps){
   const [errors, setErrors] = useState(defaultErrorsStep1())
 
   // Metodo para lidar com informacoes do usuario
-  async function handleFormInfo(data: object, schema: any): Promise<void> {
+  async function handleFormInfo(data: UserData, schema: any): Promise<void> {
     setErrors(defaultErrorsStep1())
     const resultForm = await validateForm(data, schema)
+
     if(resultForm === true){
+      setUserInfo({
+        name, email, cpf, phoneNumber, password, moreInfo
+      })
+      
       nextStep(index)
     }else{
       const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsStep1())
@@ -69,15 +75,15 @@ function FormPersonalInformation({index}: PopUpProps){
             />
             
             <ReactInputMask 
-              name="phone"
+              name="phoneNumber"
               mask="(99)99999-9999" 
-              value={phone} 
-              onChange={(e)=>changeInputValue(errors, e, setPhone)}
+              value={phoneNumber} 
+              onChange={(e)=>changeInputValue(errors, e, setphoneNumber)}
             >
               {() => 
                 <UserInput 
-                  error={errors.phone.status} 
-                  helperText={errors.phone.message} 
+                  error={errors.phoneNumber.status} 
+                  helperText={errors.phoneNumber.message} 
                   required 
                   type="text" 
                   label="Telefone" 
@@ -147,7 +153,7 @@ function FormPersonalInformation({index}: PopUpProps){
       title="Crie sua conta!"
       main={renderMain}
       handleFormValidation={handleFormInfo}
-      formData={handleDataStep1(name, email, phone, cpf, password, confirmPassword, moreInfo)}
+      formData={handleDataStep1(name, email, phoneNumber, cpf, password, confirmPassword, moreInfo)}
       schema = {schemaUserInfos}
     />
   );
