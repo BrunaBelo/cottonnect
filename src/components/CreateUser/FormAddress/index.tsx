@@ -15,7 +15,6 @@ import { changeInputValue, showErrors, validateForm } from '../../../shared/form
 import { nextStep } from '../Container/moveStep';
 import { getStates } from '../../../service/state';
 import { getCities } from '../../../service/cities';
-import { Alert } from '@mui/material';
 
 interface selectLocation {
   id: string,

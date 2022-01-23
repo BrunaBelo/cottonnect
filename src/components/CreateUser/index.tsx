@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import FormPersonalInformation from './FormPersonalInformation';
-import { Container, CurrentScreen, FormsDiv } from './styles';
+import { CollapseError, Container, CurrentScreen, ErrorAlert, FormsDiv } from './styles';
 
 import { UserData } from '../../interfaces/userData'
 import Navbar from '../Navbar';
 import FormInfoAddress from './FormAddress';
 import { createUser } from '../../service/user';
+import { IconButton } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 
 export default function CreateUser () {
-
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
     email: '',
@@ -23,18 +24,53 @@ export default function CreateUser () {
     cityId: ''
   } as UserData)
 
-  async function saveUser(){
+  const [alertError, setAlertError] = useState({
+    show: false,
+    message: ''
+  })
+
+  async function saveUser(){  
     const newUser = {
       ...personalInfo,
       ...address
     } as UserData
 
-    await createUser(newUser)
+    try {
+      await createUser(newUser);
+    } catch (error) {
+      console.log(error)
+      setAlertError({ show: true, message: 'Erro ao criar conta!' })
+      setTimeout(() => {
+        setAlertError({ show: false, message: '' })
+      }, 5000)
+    }
   }
 
   return (
     <Container>
       <Navbar/>
+      {
+        alertError.show ?
+        <CollapseError in={alertError.show}>
+          <ErrorAlert 
+            severity="error"
+            action = {
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setAlertError({ show: false, message: '' })
+                }}
+              >
+                <Close fontSize="inherit" />
+              </IconButton>
+            }
+            >{alertError.message}</ErrorAlert>
+        </CollapseError>
+        :
+        <></>
+      }
       <FormsDiv>
         <CurrentScreen id="0" show={true}>
           <FormPersonalInformation componentState={[personalInfo, setPersonalInfo]} index={0}/>
