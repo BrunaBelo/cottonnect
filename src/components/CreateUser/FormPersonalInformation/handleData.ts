@@ -10,8 +10,8 @@ export function handleDataStep1(
   return {
     name,
     email,
-    phoneNumber: phoneNumber.replace("(", "").replace(")", "").replaceAll("_", "").replace("-", ""),
-    cpf: cpf.replaceAll(".", "").replace("-", "").replaceAll("_", ""),
+    phoneNumber: formatData.phoneNumber(phoneNumber),
+    cpf: formatData.cpf(cpf),
     password,
     confirmPassword,
     moreInfo
@@ -30,3 +30,12 @@ export function defaultErrorsStep1() {
   }
 }
 
+export const formatData = {
+  cpf: (cpf: string): string => {
+    return cpf.replaceAll(".", "").replace("-", "").replaceAll("_", "")
+  },
+
+  phoneNumber: (phoneNumber: string): string => {
+    return phoneNumber.replace("(", "").replace(")", "").replaceAll("_", "").replace("-", "")
+  }
+}

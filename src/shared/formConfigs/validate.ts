@@ -2,7 +2,7 @@ import ErrorObj from "../../interfaces/errorObj"
 
 export function showErrors(err: ErrorObj[], newErrorObj: any) {
   err.forEach(
-    (e: ErrorObj) => {
+    (e: ErrorObj) => { 
       if(!newErrorObj[e.path as keyof typeof newErrorObj].status){
         newErrorObj[e.path as keyof typeof newErrorObj] = {status: true, message: e.message}
       }

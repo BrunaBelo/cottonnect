@@ -13,7 +13,7 @@ import { changeInputValue, showErrors, validateForm } from '../../../shared/form
 
 import ErrorObj from '../../../interfaces/errorObj';
 import PopUpProps from '../../../interfaces/popUp';
-import { defaultErrorsStep1, handleDataStep1 } from './handleData';
+import { defaultErrorsStep1, formatData, handleDataStep1 } from './handleData';
 import PopUpContainer from '../Container';
 import { nextStep } from '../Container/moveStep';
 import { UserData } from '../../../interfaces/userData';
@@ -35,7 +35,12 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
 
     if(resultForm === true){
       setUserInfo({
-        name, email, cpf, phoneNumber, password, moreInfo
+        name, 
+        email, 
+        password, 
+        moreInfo,
+        phoneNumber: formatData.phoneNumber(phoneNumber),
+        cpf: formatData.cpf(cpf)
       })
       
       nextStep(index)
