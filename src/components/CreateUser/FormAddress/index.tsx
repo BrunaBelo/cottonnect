@@ -125,9 +125,8 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
     const resultForm = await validateForm(data, schema)
     if(resultForm === true){
       if(saveUser){
-        saveUser()
+        await saveUser() ? nextStep(index) : console.log('falha ao salvar user')
       }
-      //nextStep(index)
     }else{
       const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsStep2())
       setErrors(newErrorObj)

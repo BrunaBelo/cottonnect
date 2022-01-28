@@ -1,6 +1,12 @@
+import { Cancel, Replay } from '@material-ui/icons';
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const InfophoneNumber = styled.h2`
@@ -31,5 +37,16 @@ export const Buttons = styled.div`
 export const TitleButton = styled.div`
   margin: 0 0 0 6px;
   color: var(--title-text-color);
+  color: ${props => props.color ? props.color : 'var(--primary)'};
+  font-weight: 500;
   font-size: 16px;
 `;
+
+export const CancelIcon = styled(Cancel)`
+  color: #E92E2E;
+`
+
+export const ReplayIcon = styled(Replay)`
+  color: var(--primary);
+  transform: scale(1.1)
+`

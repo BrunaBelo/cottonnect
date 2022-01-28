@@ -12,9 +12,9 @@ import {
 interface Container {
   title: string,
   main: () => JSX.Element,
-  handleFormValidation: (data: object, schema: any) => Promise<void>,
-  formData: object,
-  schema: any,
+  handleFormValidation?: (data: object, schema: any) => Promise<void>,
+  formData?: object,
+  schema?: any,
   index: number
 }
 
@@ -25,7 +25,7 @@ function PopUpContainer({title, handleFormValidation, formData, schema, main, in
       
       <TopDiv>
         {
-        index > 0 ?
+        index == 1?
         <BttSpace>
           <ChangeStepBtt
             type="button"
@@ -39,13 +39,18 @@ function PopUpContainer({title, handleFormValidation, formData, schema, main, in
         <Title>
           <h1>{title}</h1>
         </Title>
-        <BttSpace>
-          <ChangeStepBtt 
-            type="button" 
-            onClick={() => handleFormValidation(formData, schema)}>
-            <NextIcon/>
-          </ChangeStepBtt>
-        </BttSpace>
+        {
+          index < 2 ?
+          <BttSpace>
+            <ChangeStepBtt 
+              type="button" 
+              onClick={() => handleFormValidation ? handleFormValidation(formData as object, schema) : false}>
+              <NextIcon/>
+            </ChangeStepBtt>
+          </BttSpace>
+          :
+          <></>
+        }
       </TopDiv>
 
       {main()}

@@ -8,6 +8,7 @@ import FormInfoAddress from './FormAddress';
 import { createUser } from '../../service/user';
 import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
+import FormInfoPhone from './FormPhone';
 
 export default function CreateUser () {
   const [personalInfo, setPersonalInfo] = useState({
@@ -29,7 +30,7 @@ export default function CreateUser () {
     message: ''
   })
 
-  async function saveUser(){  
+  async function saveUser(): Promise<boolean>{  
     const newUser = {
       ...personalInfo,
       ...address
@@ -37,12 +38,15 @@ export default function CreateUser () {
 
     try {
       await createUser(newUser);
+      return true
     } catch (error) {
       console.log(error)
       setAlertError({ show: true, message: 'Erro ao criar conta!' })
       setTimeout(() => {
         setAlertError({ show: false, message: '' })
       }, 5000)
+
+      return false
     }
   }
 
@@ -77,6 +81,9 @@ export default function CreateUser () {
         </CurrentScreen>
         <CurrentScreen id="1">
           <FormInfoAddress componentState={[address, setAddress]} saveUser={saveUser} index={1}/>
+        </CurrentScreen>
+        <CurrentScreen id="2">
+          <FormInfoPhone index={2}/>
         </CurrentScreen>
       </FormsDiv>
     </Container>
