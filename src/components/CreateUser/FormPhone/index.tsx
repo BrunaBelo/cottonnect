@@ -1,25 +1,27 @@
 import React from 'react';
 
-import { Cancel, Replay } from '@material-ui/icons/';
 import { IconButton } from '@material-ui/core';
 import { Main, InfophoneNumber, CodeVerification, Buttons, TitleButton, CancelIcon, ReplayIcon } from './styles';
 import ReactInputVerificationCode from 'react-input-verification-code';
 import PopUpContainer from '../Container';
+import { nextStep } from '../Container/moveStep';
 
 interface FormInfoPhoneInterface {
   index: number
 }
 
-function validateUserPhoneCode(code: string){
+function validateUserPhoneCode(code: string, index: number){
   console.log(`the users code is ${code}`)
+  nextStep(index)
 }
 
 function resendCode(){
   console.log('the user wanna receive the code again')
 }
 
-function skipPhoneVerification(){
+function skipPhoneVerification(index: number){
   console.log('the user wanna skip the phone verification')
+  nextStep(index)
 }
 
 function renderMain() {
@@ -31,14 +33,14 @@ function renderMain() {
 
       <CodeVerification>
         <ReactInputVerificationCode
-          onCompleted={(e) => validateUserPhoneCode(e)}
+          onCompleted={(e) => validateUserPhoneCode(e, 2)}
         />
       </CodeVerification>
 
       <Buttons>
         <IconButton 
           aria-label="skipNext" 
-          onClick={() => skipPhoneVerification()}
+          onClick={() => skipPhoneVerification(2)}
         >
           <CancelIcon fontSize="small"/> <TitleButton color='#E92E2E'>Pular</TitleButton>
         </IconButton>

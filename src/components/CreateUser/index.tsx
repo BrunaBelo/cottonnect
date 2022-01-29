@@ -9,6 +9,7 @@ import { createUser } from '../../service/user';
 import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import FormInfoPhone from './FormPhone';
+import FormSuccess from './Success';
 
 export default function CreateUser () {
   const [personalInfo, setPersonalInfo] = useState({
@@ -84,6 +85,9 @@ export default function CreateUser () {
         </CurrentScreen>
         <CurrentScreen id="2">
           <FormInfoPhone index={2}/>
+        </CurrentScreen>
+        <CurrentScreen id="3">
+          <FormSuccess index={3}/>
         </CurrentScreen>
       </FormsDiv>
     </Container>

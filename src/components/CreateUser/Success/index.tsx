@@ -1,30 +1,37 @@
 import React from 'react';
 
 import { Button } from '@material-ui/core';
-import { Container, ImageDone, IconSmile, MessageHeader, LetsGoButtons } from './styles';
+import { Main, ImageDone, IconSmile, MessageHeader, LetsGoButtons, DoneIcon, SubTitle } from './styles';
+import PopUpContainer from '../Container';
 
-const FormSuccess: React.FC = () => {
-  return (
-    <Container>
-      <MessageHeader>
-        <h1>Prontinho!</h1>
-        <IconSmile>
-          <img src="/images/smile.png" alt="Conta Criada" />
-        </IconSmile>
-      </MessageHeader>
+interface SuccessFormInterface {
+  index: number
+}
+
+function renderMain(){
+  return(
+    <Main>
       
-      <h2>Sua conta foi registrada, agora você já pode começar doar!</h2>
+      <SubTitle>Sua conta foi registrada, agora você já pode começar doar!</SubTitle>
 
       <ImageDone>
-        <img src="/images/done.png" alt="Conta Criada" />
+        <DoneIcon src="/images/done.png" alt="Conta Criada" />
       </ImageDone>
 
       <LetsGoButtons>
-        <Button color="primary" className="lets-go" type="submit">Let's Goooo</Button>
+        <Button color="primary" className="lets-go">Let's Goooo</Button>
       </LetsGoButtons>
 
-    </Container>
+    </Main>
+  )
+}
+
+export default function FormSuccess({index}: SuccessFormInterface) {
+  return (
+    <PopUpContainer
+      index={index}
+      title="Prontinho!"
+      main={renderMain}
+    />
   );
 };
-
-export default FormSuccess;
