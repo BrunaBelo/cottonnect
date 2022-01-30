@@ -53,7 +53,7 @@ export default function CreateUser () {
 
   return (
     <Container>
-      <Navbar/>
+      <Navbar dark={true}/>
       {
         alertError.show ?
         <CollapseError in={alertError.show}>

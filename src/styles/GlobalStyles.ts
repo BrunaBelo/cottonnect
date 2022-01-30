@@ -35,6 +35,8 @@ export const GlobalStyles = createGlobalStyle`
     --white: #FFFFFF;
     --input-label: #263238;
     --title-text-color: #252B42;
+    --text-blue-color: #686F86;
+    --text-blue-color-hover: #5F54C1;
   }
 `
 
