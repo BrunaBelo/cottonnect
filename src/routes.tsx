@@ -8,8 +8,9 @@ export default function AppRoutes(){
   return(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CreateUser/>}/>
+        <Route path="/"/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/create-account" element={<CreateUser/>}/>
       </Routes>
     </BrowserRouter>
   )

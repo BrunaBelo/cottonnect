@@ -4,6 +4,7 @@ import { IconButton, Input, InputAdornment, InputLabel, TextField } from "@mater
 import { CurveVetor, Main, FormLogin, Password, FormBox, Email, LoginBtt, UserInput, CredentialActions, ButtonCredentialActions } from "./styles";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Navbar from "../Navbar";
+import { Link } from "react-router-dom";
 
 interface State {
   email: string;
@@ -74,7 +75,9 @@ export default function Login() {
 
           <CredentialActions>
             <ButtonCredentialActions>Esqueceu a senha?</ButtonCredentialActions>
-            <ButtonCredentialActions>Não possui conta? Cadastre-se!</ButtonCredentialActions>
+            <Link to="/create-account">
+              <ButtonCredentialActions>Não possui conta? Cadastre-se!</ButtonCredentialActions>
+            </Link>
           </CredentialActions>
         </FormBox>
       </FormLogin>

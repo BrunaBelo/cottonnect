@@ -23,7 +23,7 @@ export default function Navbar({dark = false, actionButton = false}: ScreenStyle
         <Login>
           {
             actionButton ?
-            <Link to="/sign-in">
+            <Link to="/create-account">
               <LoginButton dark={dark}>Cadastre-se</LoginButton>
             </Link>
             :
