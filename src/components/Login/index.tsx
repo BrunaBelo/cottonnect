@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { IconButton, Input, InputAdornment, InputLabel, TextField } from "@material-ui/core";
-import { CurveVetor, Main, FormLogin, Password, FormBox, Email, LoginBtt, UserInput, CredentialActions, ButtonCredentialActions } from "./styles";
+import { CurveVetor, Main, FormLogin, Password, FormBox, Email, LoginBtt, UserInput, CredentialActions, ButtonCredentialActions, LoginErrorMessage } from "./styles";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ interface State {
   email: string;
   password: string;
   showPassword: boolean;
+  showErrorMessage: boolean;
 }
 
 export default function Login() {
@@ -17,6 +18,7 @@ export default function Login() {
     email: '',
     password: '',
     showPassword: false,
+    showErrorMessage: false
   });
 
   const handleChange =
@@ -35,6 +37,23 @@ export default function Login() {
     event.preventDefault();
   };
 
+  const login = async () => {
+    setValues({...values, showErrorMessage: false})
+
+    if(validLogin()){
+    }else{
+      setValues({...values, showErrorMessage: true})
+    }
+  }
+
+  const validLogin = (): boolean => {
+    if(values.email === '' || values.password === '') {
+      return false
+    }
+
+    return true
+  }
+
   return (
     <Main>
       <Navbar dark={false} actionButton={true} />
@@ -45,6 +64,7 @@ export default function Login() {
             <InputLabel htmlFor="field-email">E-mail</InputLabel>
             <UserInput id="field-email"
                    type="email"
+                   error={values.showErrorMessage}
                    value={values.email}
                    onChange={(e) => setValues({ ...values, email: e.target.value })} 
             />
@@ -53,6 +73,7 @@ export default function Login() {
           <Password variant="standard">
             <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
             <UserInput
+              error={values.showErrorMessage}
               id="standard-adornment-password"
               type={values.showPassword ? 'text' : 'password'}
               value={values.password}
@@ -70,8 +91,15 @@ export default function Login() {
               }
             />
           </Password>
+            
+          {
+            values.showErrorMessage ?
+              <LoginErrorMessage>E-mail ou senha incorretos</LoginErrorMessage>
+              :
+              <></>
+          }
 
-          <LoginBtt>Login</LoginBtt>
+          <LoginBtt type="button" onClick={() => { login() }}>Login</LoginBtt>
 
           <CredentialActions>
             <ButtonCredentialActions>Esqueceu a senha?</ButtonCredentialActions>

@@ -23,6 +23,7 @@ export const FormLogin = styled.form`
   padding: 50px;
   z-index: 10;
   margin: 2em 0 0;
+  box-shadow: rgba(0,0,0,.2) 10px 10px 30px;
 `
 
 export const FormBox = styled(Box)`
@@ -52,6 +53,12 @@ export const Password = styled(FormControl)`
 `
 export const UserInput = styled(Input)`
   width: 100%;
+`
+
+export const LoginErrorMessage = styled.p`
+  font-size: 12px;
+  color: #F44336;
+  font-weight: 500;
 `
 
 export const LoginBtt = styled.button`
