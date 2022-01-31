@@ -13,7 +13,7 @@ export default function Navbar({dark = false, actionButton = false}: ScreenStyle
     <Main>
       <UserInfo>
         <Options>
-          <Link to="/index">
+          <Link to="/">
             <PageOption dark={dark}>Início</PageOption>
           </Link>
           <Link to="/about">
