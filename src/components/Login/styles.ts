@@ -14,7 +14,7 @@ export const Main = styled.div`
 
 export const FormLogin = styled.form`
   width: 50%;
-  background-color: rgba(106, 129, 209, .5);
+  background-color: rgba(106, 129, 209, .4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,7 +82,7 @@ export const ButtonCredentialActions = styled.button`
 `
 
 export const CurveVetor = styled.div`
-  bottom: -45px;
+  bottom: -100px;
   position: fixed;
   width: 100%;
   z-index: 1;

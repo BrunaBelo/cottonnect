@@ -80,8 +80,15 @@ export default function Login() {
       </FormLogin>
 
       <CurveVetor>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-          <path fill="#6A81D1" fill-opacity="1" d="M0,96L80,112C160,128,320,160,480,186.7C640,213,800,235,960,224C1120,213,1280,171,1360,149.3L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+        <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg" className="transition duration-300 ease-in-out delay-150">
+          <defs>
+            <linearGradient id="gradient" x1="19%" y1="89%" x2="81%" y2="11%">
+              <stop offset="5%" stop-color="#002bdcff"></stop><stop offset="95%" stop-color="#32ded4ff"></stop>
+            </linearGradient>
+          </defs>
+          <path d="M 0,400 C 0,400 0,200 0,200 C 128.75,190.96428571428572 257.5,181.92857142857142 378,201 C 498.5,220.07142857142858 610.75,267.25 729,262 C 847.25,256.75 971.5,199.07142857142858 1091,180 C 1210.5,160.92857142857142 1325.25,180.46428571428572 1440,200 C 1440,200 1440,400 1440,400 Z"
+           stroke="none" stroke-width="0" fill="url(#gradient)" className="transition-all duration-300 ease-in-out delay-150 path-0">
+          </path>
         </svg>
       </CurveVetor>
     </Main>
