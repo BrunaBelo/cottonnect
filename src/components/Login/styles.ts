@@ -10,11 +10,13 @@ export const Main = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  background-color: #D9AFD9;
+  background-image: linear-gradient(300deg, #D9AFD9 0%, #97D9E1 100%);
 `
 
 export const FormLogin = styled.form`
   width: 50%;
-  background-color: rgba(106, 129, 209, .4);
+  background-color: rgba(255,255,255,.3);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +26,12 @@ export const FormLogin = styled.form`
   z-index: 10;
   margin: 2em 0 0;
   box-shadow: rgba(0,0,0,.2) 10px 10px 30px;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+  }
 `
 
 export const FormBox = styled(Box)`
