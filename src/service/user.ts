@@ -13,3 +13,13 @@ export const validateUser = async (type: string, value: any): Promise<boolean>  
 
   return response.data.result
 }
+
+export const login = async (email: string, password: string): Promise<boolean>  => {
+  try {
+    const response = await api.post('/users/login', {"email": email, "password": password})
+    localStorage.setItem("user-token", response.data.token);
+    return response.data
+  } catch (error) {
+    return false
+  }
+}

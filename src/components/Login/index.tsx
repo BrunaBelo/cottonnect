@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-import { IconButton, Input, InputAdornment, InputLabel, TextField } from "@material-ui/core";
+import { IconButton, InputAdornment, InputLabel, TextField } from "@material-ui/core";
 import { CurveVetor, Main, FormLogin, Password, FormBox, Email, LoginBtt, UserInput, CredentialActions, ButtonCredentialActions, LoginErrorMessage } from "./styles";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
+import { login } from "../../service/user";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar";
 
 interface State {
   email: string;
@@ -20,6 +22,8 @@ export default function Login() {
     showPassword: false,
     showErrorMessage: false
   });
+
+  const navigate = useNavigate()
 
   const handleChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,21 +41,25 @@ export default function Login() {
     event.preventDefault();
   };
 
-  const login = async () => {
-    setValues({...values, showErrorMessage: false})
-
-    if(validLogin()){
-    }else{
-      setValues({...values, showErrorMessage: true})
+  const validLogin = async (): Promise<boolean> => {
+    if(values.email !== '' && values.password !== '') {
+      const credentialsValid = await login(values.email, values.password)
+      if (credentialsValid){
+        return true
+      }
     }
+    return false
   }
 
-  const validLogin = (): boolean => {
-    if(values.email === '' || values.password === '') {
-      return false
-    }
+  const checkLogin = async () => {
+    setValues({...values, showErrorMessage: false})
+    const valid = await validLogin()
 
-    return true
+    if(valid){
+      navigate("/")
+    } else{
+      setValues({...values, showErrorMessage: true})
+    }
   }
 
   return (
@@ -99,7 +107,7 @@ export default function Login() {
               <></>
           }
 
-          <LoginBtt type="button" onClick={() => { login() }}>Login</LoginBtt>
+          <LoginBtt type="button" onClick={() => { checkLogin() }}>Login</LoginBtt>
 
           <CredentialActions>
             <ButtonCredentialActions>Esqueceu a senha?</ButtonCredentialActions>
