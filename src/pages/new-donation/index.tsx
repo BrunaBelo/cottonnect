@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import LeftNavBar from "../../components/LeftNavBar";
 import { changeInputValue } from "../../shared/formConfigs/validate";
@@ -23,6 +23,7 @@ import {
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import { LocalizationProvider } from "@mui/lab";
+import { getCategories } from "../../service/donation-categories";
 
 interface selectCategory {
   value: string,
@@ -38,8 +39,24 @@ export default function NewDonation() {
   const [photos, setPhotos] = useState(null as File[] | null)
   const [description, setDescription] = useState("")
   const [errors, setErrors] = useState(defaultErrorsDonation())
-  const [categoryList, setCategoryList] = useState([{ value: '1', label: 'Chocolate' },
-                                                    { value: '2', label: 'Strawberry' }] as selectCategory[])
+  const [categoryList, setCategoryList] = useState([] as selectCategory[])
+
+  useEffect(() => {
+    async function getCategoriesFromApi(){
+      try{
+        const { data } = await getCategories()
+        const dataAux = data.map((category: any): selectCategory => (
+          { "value": category.id, "label": category.name }
+        ))
+
+        setCategoryList(dataAux)
+      }catch{
+        console.log('ERRO AO BUSCAR CATEGORIAS')
+      }
+    }
+
+    getCategoriesFromApi()
+  })
 
   const handleChange = (newValue: Date) => {
     setClosingData(newValue);
