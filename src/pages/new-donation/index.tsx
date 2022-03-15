@@ -23,14 +23,21 @@ import {
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import { LocalizationProvider } from "@mui/lab";
-import { getCategories } from "../../service/donation-categories";
+import { createDonation, getCategories } from "../../service/donation-categories";
+import { DonationData } from "../../interfaces/donationData";
+import selectCategory from "../../interfaces/select-category";
+import { AlertErrorComponent } from "../../components/AlertError";
 
-interface selectCategory {
-  value: string,
-  label: string
+interface AlertInterface {
+  show: boolean,
+  message: string
 }
 
 export default function NewDonation() {
+  const [alertError, setAlertError] = useState({
+    show: false,
+    message: ''
+  } as AlertInterface)
   const [title, setTitle] = useState("")
   const [closingData, setClosingData] = React.useState<Date | null>(
     null,
@@ -54,8 +61,9 @@ export default function NewDonation() {
         console.log('ERRO AO BUSCAR CATEGORIAS')
       }
     }
-
-    getCategoriesFromApi()
+    if(categoryList.length == 0){
+      getCategoriesFromApi()
+    }
   })
 
   const handleChange = (newValue: Date) => {
@@ -87,6 +95,28 @@ export default function NewDonation() {
     }
   }
 
+  async function saveDonation(): Promise<boolean>{
+    const newDonarion = {
+      title,
+      description,
+      closingData,
+      photos,
+      categories
+    } as DonationData
+
+    try {
+      await createDonation(newDonarion);
+      return true
+    } catch (error) {
+      setAlertError({ show: true, message: 'Erro ao criar Doação!' })
+      setTimeout(() => {
+        setAlertError({ show: false, message: '' })
+      }, 5000)
+
+      return false
+    }
+  }
+
   return(
     <Container>
       <LeftNavBar />
@@ -94,7 +124,12 @@ export default function NewDonation() {
       <Main>
         <h1>Vamos doar? 🥰</h1>
         <FormDonation>
-
+          {
+            alertError.show ?
+              <AlertErrorComponent show={alertError.show} message={alertError.message}/>
+            :
+              <></>
+          }
           <DonationInput
               name="title"
               error={errors.title.status}
@@ -188,10 +223,9 @@ export default function NewDonation() {
             </ListPictures>
           </FilesDiv>
 
-          <SubmitDonationBtt>Doar <DonateIcon/></SubmitDonationBtt>
+          <SubmitDonationBtt onClick={() => saveDonation()}>Doar <DonateIcon/></SubmitDonationBtt>
 
         </FormDonation>
-
       </Main>
     </Container>
   )

@@ -16,6 +16,7 @@ export default function AppRoutes(){
         <Route path="/about"/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/create-account" element={<CreateUser/>}/>
+        <Route path="/explorer" element={<Explorer/>}/>
         <Route path="/new-donation" element={<NewDonation/>}/>
       </Routes>
     </BrowserRouter>

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import FormPersonalInformation from './FormPersonalInformation';
-import { CollapseError, Container, CurrentScreen, ErrorAlert, FormsDiv } from './styles';
+import { Container, CurrentScreen, FormsDiv } from './styles';
 
 import { UserData } from '../../interfaces/userData'
 import Navbar from '../Navbar';
 import FormInfoAddress from './FormAddress';
 import { createUser } from '../../service/user';
-import { IconButton } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
 import FormInfoPhone from './FormPhone';
 import FormSuccess from './Success';
+import { AlertErrorComponent } from '../AlertError';
 
 export default function CreateUser () {
   const [personalInfo, setPersonalInfo] = useState({
@@ -31,7 +30,7 @@ export default function CreateUser () {
     message: ''
   })
 
-  async function saveUser(): Promise<boolean>{  
+  async function saveUser(): Promise<boolean>{
     const newUser = {
       ...personalInfo,
       ...address
@@ -54,28 +53,12 @@ export default function CreateUser () {
   return (
     <Container>
       <Navbar dark={true}/>
-      {
-        alertError.show ?
-        <CollapseError in={alertError.show}>
-          <ErrorAlert 
-            severity="error"
-            action = {
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setAlertError({ show: false, message: '' })
-                }}
-              >
-                <Close fontSize="inherit" />
-              </IconButton>
-            }
-            >{alertError.message}</ErrorAlert>
-        </CollapseError>
-        :
-        <></>
-      }
+        {
+          alertError.show ?
+            <AlertErrorComponent show={alertError.show} message={alertError.message} width={70}/>
+          :
+            <></>
+          }
       <FormsDiv>
         <CurrentScreen id="0" show={true}>
           <FormPersonalInformation componentState={[personalInfo, setPersonalInfo]} index={0}/>

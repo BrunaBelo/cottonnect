@@ -1,5 +1,3 @@
-import { Collapse } from '@material-ui/core';
-import { Alert } from '@mui/material';
 import styled from 'styled-components';
 
 interface ScreenProps {
@@ -15,14 +13,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-export const CollapseError = styled(Collapse)`
-  width: 70%;
-`
-
-export const ErrorAlert = styled(Alert)`
-  width: 100%;
-`
 
 export const FormsDiv = styled.div`
   width: 100%;

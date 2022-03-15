@@ -50,7 +50,7 @@ export const PageOption = styled.button<ScreenStyle>`
   padding: 5px 0;
   border-bottom: 2px solid transparent;
   color: ${(props) => props.dark ? 'white' : 'var(--text-blue-color)'};
-  
+
 
   &:hover {
     border-bottom: 2px solid ${(props) => props.dark ? 'rgba(255,255,255,.75)' : 'var(--text-blue-color-hover)'};

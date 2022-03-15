@@ -8,6 +8,7 @@ export const Container = styled.div`
   background-color: var(--primary);
   height: 100%;
   color: #424552;
+  color: white;
 
   h1 {
     padding: 30px 10px;
@@ -16,7 +17,7 @@ export const Container = styled.div`
 export const TextItem = styled(ListItemText)`
   span {
     font-family: 'Inter', sans-serif;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 15px;
 
     transition: .5s;
