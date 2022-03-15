@@ -36,42 +36,42 @@ export default function LeftNavBar(props: Props) {
       <List>
         <ListItem button key="Explorar">
           <ListItemIcon>
-            <DashboardOutlined />
+            <DashboardOutlined htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Explorar" />
         </ListItem>
 
-        <ListItem button component="a" href="/about">
+        <ListItem button component="a" href="/new-donation">
           <ListItemIcon>
-            <AddRounded />
+            <AddRounded htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Doar" />
         </ListItem>
 
         <ListItem button component="a" href="/about">
           <ListItemIcon>
-            <FavoriteBorderRounded />
+            <FavoriteBorderRounded htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Minhas Doações" />
         </ListItem>
 
         <ListItem button component="a" href="/about">
           <ListItemIcon>
-            <StarBorderRounded />
+            <StarBorderRounded htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Doações Ganhas" />
         </ListItem>
 
         <ListItem button component="a" href="/about">
           <ListItemIcon>
-            <AccountCircleOutlined />
+            <AccountCircleOutlined htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Minha Conta" />
         </ListItem>
 
         <ListItem button component="a" href="/logout">
           <ListItemIcon>
-            <ExitToAppRounded />
+            <ExitToAppRounded htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Sair" />
         </ListItem>
