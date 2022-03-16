@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import LeftNavBar from "../../components/LeftNavBar";
-import { changeInputValue } from "../../shared/formConfigs/validate";
+import { changeInputValue, showErrors, validateForm } from "../../shared/formConfigs/validate";
 import { defaultErrorsDonation } from "./handleData";
 import {
   Container,
@@ -27,6 +27,8 @@ import { createDonation, getCategories } from "../../service/donation-categories
 import { DonationData } from "../../interfaces/donationData";
 import selectCategory from "../../interfaces/select-category";
 import { AlertErrorComponent } from "../../components/AlertError";
+import { schemaDonation } from './yup-schema'
+import ErrorObj from "../../interfaces/errorObj";
 
 interface AlertInterface {
   show: boolean,
@@ -39,8 +41,8 @@ export default function NewDonation() {
     message: ''
   } as AlertInterface)
   const [title, setTitle] = useState("")
-  const [closingData, setClosingData] = React.useState<Date | null>(
-    null,
+  const [closingDate, setClosingDate] = React.useState<Date | null>(
+    new Date,
   );
   const [categories, setCategories] = useState([] as selectCategory[])
   const [photos, setPhotos] = useState(null as File[] | null)
@@ -67,7 +69,7 @@ export default function NewDonation() {
   })
 
   const handleChange = (newValue: Date) => {
-    setClosingData(newValue);
+    setClosingDate(newValue);
   }
 
   const addPhotos = (files: File[] | null) => {
@@ -96,25 +98,36 @@ export default function NewDonation() {
   }
 
   async function saveDonation(): Promise<boolean>{
-    const newDonarion = {
+    setErrors(defaultErrorsDonation())
+    const newDonation = {
       title,
       description,
-      closingData,
+      closingDate: closingDate?.toString(),
       photos,
       categories
     } as DonationData
 
-    try {
-      await createDonation(newDonarion);
-      return true
-    } catch (error) {
-      setAlertError({ show: true, message: 'Erro ao criar Doação!' })
-      setTimeout(() => {
-        setAlertError({ show: false, message: '' })
-      }, 5000)
+    const resultForm = await validateForm(newDonation, schemaDonation)
 
-      return false
+    if(resultForm == true) {
+      try {
+        await createDonation(newDonation);
+        return true
+      } catch (error) {
+        setAlertError({ show: true, message: 'Erro ao criar Doação!' })
+        setTimeout(() => {
+          setAlertError({ show: false, message: '' })
+        }, 5000)
+
+        return false
+      }
+    }else{
+      console.log(resultForm)
+      const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsDonation())
+      setErrors(newErrorObj)
     }
+
+    return false
   }
 
   return(
@@ -144,9 +157,15 @@ export default function NewDonation() {
             <DesktopDatePicker
               label="Fechamento do leilão"
               inputFormat="dd/MM/yyyy"
-              value={closingData}
-              onChange={(e) => handleChange(e as Date)}
-              renderInput={(params) => <DonationInput {...params} />}
+              minDate={new Date()}
+              value={closingDate}
+              onChange={(e) => changeInputValue(errors, {target: {value: e, name: 'closingDate'}}, setClosingDate)}
+              renderInput={(params) => <DonationInput
+                {...params}
+                name='closingDate'
+                error={errors.closingDate.status}
+                helperText={errors.closingDate.message}
+                />}
             />
           </LocalizationProvider>
 

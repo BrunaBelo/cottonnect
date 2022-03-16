@@ -2,7 +2,7 @@ import ErrorObj from "../../interfaces/errorObj"
 
 export function showErrors(err: ErrorObj[], newErrorObj: any) {
   err.forEach(
-    (e: ErrorObj) => { 
+    (e: ErrorObj) => {
       if(!newErrorObj[e.path as keyof typeof newErrorObj].status){
         newErrorObj[e.path as keyof typeof newErrorObj] = {status: true, message: e.message}
       }
@@ -30,7 +30,7 @@ export function removeInputError(fieldsErrorsStatus: any, element: string) {
   return fieldsErrorsStatus
 }
 
-export function changeInputValue(errors: object, e: any, changeElement: React.Dispatch<React.SetStateAction<string>>) {
+export function changeInputValue(errors: object, e: any, changeElement: React.Dispatch<React.SetStateAction<any>>) {
   changeElement(e.target.value)
   if(e.target.value !== ""){
     removeInputError(errors, e.target.name)
