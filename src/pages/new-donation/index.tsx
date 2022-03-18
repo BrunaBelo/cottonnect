@@ -104,7 +104,7 @@ export default function NewDonation() {
       description,
       closingDate: closingDate?.toString(),
       photos,
-      categories
+      categories: categories.map(item => item.value)
     } as DonationData
 
     const resultForm = await validateForm(newDonation, schemaDonation)

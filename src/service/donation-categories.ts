@@ -3,7 +3,7 @@ import { DonationData } from "../interfaces/donationData";
 import api from "./api";
 
 export const getCategories = async () => {
-  const result = await api.get('/donation-categories', {
+  const result = await api.get('/categories', {
     params: {
       token: localStorage.getItem('user-token')
     }
