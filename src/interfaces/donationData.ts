@@ -5,5 +5,5 @@ export interface DonationData {
   descrition?: any,
   closingDate?: Date,
   photos?: File[] | null,
-  categories?: selectCategory[]
+  categories?: selectCategory[] | string[]
 }
