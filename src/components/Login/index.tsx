@@ -56,7 +56,7 @@ export default function Login() {
     const valid = await validLogin()
 
     if(valid){
-      navigate("/")
+      navigate("/explorer")
     } else{
       setValues({...values, showErrorMessage: true})
     }
@@ -74,7 +74,7 @@ export default function Login() {
                    type="email"
                    error={values.showErrorMessage}
                    value={values.email}
-                   onChange={(e) => setValues({ ...values, email: e.target.value })} 
+                   onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
           </Email>
 
@@ -99,7 +99,7 @@ export default function Login() {
               }
             />
           </Password>
-            
+
           {
             values.showErrorMessage ?
               <LoginErrorMessage>E-mail ou senha incorretos</LoginErrorMessage>
