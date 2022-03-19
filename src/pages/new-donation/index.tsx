@@ -29,6 +29,7 @@ import selectCategory from "../../interfaces/select-category";
 import { AlertErrorComponent } from "../../components/AlertError";
 import { schemaDonation } from './yup-schema'
 import ErrorObj from "../../interfaces/errorObj";
+import savePhoto from "../../service/external-apis/cloudinary/save-photo";
 
 interface AlertInterface {
   show: boolean,
@@ -99,11 +100,14 @@ export default function NewDonation() {
 
   async function saveDonation(): Promise<boolean>{
     setErrors(defaultErrorsDonation())
+
+    const responsePhotos = await savePhoto(photos as File[])
+
     const newDonation = {
       title,
       description,
       closingDate: closingDate?.toString(),
-      photos,
+      photos: responsePhotos,
       categories: categories.map(item => item.value)
     } as DonationData
 
@@ -214,7 +218,7 @@ export default function NewDonation() {
               accept="image/png, image/gif, image/jpeg"
               id='uploadImg'
               name='uploadImg'
-              multiple onChange={e => addPhotos(e.target.files as File[] | null)}
+              multiple onChange={e => {console.log(e.target.value); addPhotos(e.target.files as File[] | null)}}
             />
             <AddFileBtt htmlFor="uploadImg">
               <PicIcon/>
