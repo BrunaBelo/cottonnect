@@ -29,7 +29,6 @@ import selectCategory from "../../interfaces/select-category";
 import { AlertErrorComponent } from "../../components/AlertError";
 import { schemaDonation } from './yup-schema'
 import ErrorObj from "../../interfaces/errorObj";
-import savePhoto from "../../service/external-apis/cloudinary/save-photo";
 
 interface AlertInterface {
   show: boolean,
@@ -101,13 +100,11 @@ export default function NewDonation() {
   async function saveDonation(): Promise<boolean>{
     setErrors(defaultErrorsDonation())
 
-    const responsePhotos = await savePhoto(photos as File[])
-
     const newDonation = {
       title,
       description,
       closingDate: closingDate?.toString(),
-      photos: responsePhotos,
+      photos: photos,
       categories: categories.map(item => item.value)
     } as DonationData
 
@@ -118,6 +115,7 @@ export default function NewDonation() {
         await createDonation(newDonation);
         return true
       } catch (error) {
+        console.log(error)
         setAlertError({ show: true, message: 'Erro ao criar Doação!' })
         setTimeout(() => {
           setAlertError({ show: false, message: '' })
