@@ -1,10 +1,9 @@
-import { DonationPhoto } from "./donation-photo";
 import selectCategory from "./select-category";
 
 export interface DonationData {
-  title?: string,
-  descrition?: any,
+  title: string,
+  description: string,
   closingDate?: Date,
-  photos?: File[] | DonationPhoto[] | null,
+  photos?: File[] | null,
   categories?: selectCategory[] | string[]
 }
