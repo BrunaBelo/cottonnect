@@ -17,7 +17,8 @@ import {
   FileInfo,
   DeleteIcon,
   SubmitDonationBtt,
-  DonateIcon
+  DonateIcon,
+  LoadingCircle
 } from "./styles";
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -29,6 +30,7 @@ import selectCategory from "../../interfaces/select-category";
 import { AlertErrorComponent } from "../../components/AlertError";
 import { schemaDonation } from './yup-schema'
 import ErrorObj from "../../interfaces/errorObj";
+import { CircularProgress } from "@mui/material";
 
 interface AlertInterface {
   show: boolean,
@@ -49,6 +51,7 @@ export default function NewDonation() {
   const [description, setDescription] = useState("")
   const [errors, setErrors] = useState(defaultErrorsDonation())
   const [categoryList, setCategoryList] = useState([] as selectCategory[])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function getCategoriesFromApi(){
@@ -111,8 +114,10 @@ export default function NewDonation() {
     const resultForm = await validateForm(newDonation, schemaDonation)
 
     if(resultForm == true) {
+      setLoading(true)
       try {
         await createDonation(newDonation);
+        setLoading(false)
         return true
       } catch (error) {
         console.log(error)
@@ -121,8 +126,10 @@ export default function NewDonation() {
           setAlertError({ show: false, message: '' })
         }, 5000)
 
+        setLoading(false)
         return false
       }
+
     }else{
       console.log(resultForm)
       const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsDonation())
@@ -244,7 +251,11 @@ export default function NewDonation() {
             </ListPictures>
           </FilesDiv>
 
-          <SubmitDonationBtt onClick={() => saveDonation()}>Doar <DonateIcon/></SubmitDonationBtt>
+          <SubmitDonationBtt disabled={loading} onClick={() => saveDonation()}>
+            {
+              loading ? <>Salvando doação... <LoadingCircle size={20} /></> : <>Doar <DonateIcon/></>
+            }
+          </SubmitDonationBtt>
 
         </FormDonation>
       </Main>

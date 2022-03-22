@@ -5,6 +5,7 @@ import { Attach2Outline } from '@styled-icons/evaicons-outline'
 import { Photograph } from '@styled-icons/heroicons-outline'
 import { Close } from '@styled-icons/evaicons-solid'
 import { DonateHeart } from '@styled-icons/boxicons-regular'
+import { CircularProgress } from "@material-ui/core";
 
 export const Container = styled.div`
   display: flex;
@@ -127,8 +128,21 @@ export const SubmitDonationBtt = styled.button`
   text-transform: uppercase;
   font-weight: 900;
   letter-spacing: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  opacity: ${(props) => props.disabled ? '0.60' : '1'};
+  &:hover {
+    cursor: ${(props) => props.disabled ? 'default' : 'pointer'};
+    opacity: .6;
+  }
 `
 
 export const DonateIcon = styled(DonateHeart)`
   width: 20px;
+`
+
+export const LoadingCircle = styled(CircularProgress)`
+  margin-left: 10px;
 `
