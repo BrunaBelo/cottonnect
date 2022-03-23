@@ -30,7 +30,7 @@ import selectCategory from "../../interfaces/select-category";
 import { AlertErrorComponent } from "../../components/AlertError";
 import { schemaDonation } from './yup-schema'
 import ErrorObj from "../../interfaces/errorObj";
-import { CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface AlertInterface {
   show: boolean,
@@ -38,6 +38,7 @@ interface AlertInterface {
 }
 
 export default function NewDonation() {
+  const navigate = useNavigate();
   const [alertError, setAlertError] = useState({
     show: false,
     message: ''
@@ -70,10 +71,6 @@ export default function NewDonation() {
       getCategoriesFromApi()
     }
   })
-
-  const handleChange = (newValue: Date) => {
-    setClosingDate(newValue);
-  }
 
   const addPhotos = (files: File[] | null) => {
     if(photos == null){
@@ -116,8 +113,9 @@ export default function NewDonation() {
     if(resultForm == true) {
       setLoading(true)
       try {
-        await createDonation(newDonation);
+        const newDonationCreated = await createDonation(newDonation);
         setLoading(false)
+        navigate(`/donation/${newDonationCreated.data.id}`, { state: { successMessage: 'Doação cadastrada com sucesso.', showMessage: true } });
         return true
       } catch (error) {
         console.log(error)

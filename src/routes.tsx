@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import CreateUser from "./components/CreateUser";
 import LeftNavBar from "./components/LeftNavBar";
 import Login from "./components/Login";
+import DonationDetails from "./pages/donation-details";
 import Explorer from "./pages/explorer";
 import Home from "./pages/home";
 import NewDonation from "./pages/new-donation";
@@ -18,6 +19,7 @@ export default function AppRoutes(){
         <Route path="/create-account" element={<CreateUser/>}/>
         <Route path="/explorer" element={<Explorer/>}/>
         <Route path="/new-donation" element={<NewDonation/>}/>
+        <Route path="/donation/:id" element={<DonationDetails/>}/>
       </Routes>
     </BrowserRouter>
   )

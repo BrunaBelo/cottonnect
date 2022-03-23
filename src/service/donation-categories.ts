@@ -13,9 +13,9 @@ export const getCategories = async () => {
 }
 
 
-export const createDonation = async(donation: DonationData): Promise<AxiosResponse | boolean> => {
+export const createDonation = async(donation: DonationData): Promise<AxiosResponse> => {
   const data = buildFormData(donation)
-  let response = false
+  let response = {} as AxiosResponse
 
   try{
     response = await api.post("/donations", data)
