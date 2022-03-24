@@ -38,8 +38,9 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
         console.log('ERRO AO BUSCAR ESTADOS')
       }
     }
-
-    getStatesFromApi()
+    if(statesList.length === 0){
+      getStatesFromApi()
+    }
   })
 
   async function onChangeState(e: any) {

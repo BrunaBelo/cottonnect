@@ -3,12 +3,12 @@ import FormPersonalInformation from './FormPersonalInformation';
 import { Container, CurrentScreen, FormsDiv } from './styles';
 
 import { UserData } from '../../interfaces/userData'
-import Navbar from '../Navbar';
+import Navbar from '../../components/Navbar';
 import FormInfoAddress from './FormAddress';
 import { createUser } from '../../service/user';
 import FormInfoPhone from './FormPhone';
 import FormSuccess from './Success';
-import { AlertErrorComponent } from '../AlertError';
+import { AlertErrorComponent } from '../../components/AlertError';
 
 export default function CreateUser () {
   const [personalInfo, setPersonalInfo] = useState({
