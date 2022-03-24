@@ -115,7 +115,7 @@ export default function NewDonation() {
       try {
         const newDonationCreated = await createDonation(newDonation);
         setLoading(false)
-        navigate(`/donation/${newDonationCreated.data.id}`, { state: { successMessage: 'Doação cadastrada com sucesso.', showMessage: true } });
+        navigate(`/app/donation/${newDonationCreated.data.id}`, { state: { successMessage: 'Doação cadastrada com sucesso.', showMessage: true } });
         return true
       } catch (error) {
         console.log(error)
