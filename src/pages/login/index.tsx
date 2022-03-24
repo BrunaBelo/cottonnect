@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { IconButton, InputAdornment, InputLabel, TextField } from "@material-ui/core";
-import { CurveVetor, Main, FormLogin, Password, FormBox, Email, LoginBtt, UserInput, CredentialActions, ButtonCredentialActions, LoginErrorMessage } from "./styles";
+import { IconButton, InputAdornment, InputLabel } from "@material-ui/core";
+import { 
+  CurveVetor, 
+  Main, 
+  FormLogin, 
+  Password, 
+  FormBox, 
+  Email, 
+  LoginBtt, 
+  UserInput, 
+  CredentialActions, 
+  ButtonCredentialActions, 
+  LoginErrorMessage } from "./styles";
+
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { login } from "../../service/user";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Navbar";
+import Navbar from "../../components/Navbar";
 
 interface State {
   email: string;
@@ -56,7 +68,7 @@ export default function Login() {
     const valid = await validLogin()
 
     if(valid){
-      navigate("/explorer")
+      navigate("/app/explorer")
     } else{
       setValues({...values, showErrorMessage: true})
     }
@@ -75,6 +87,8 @@ export default function Login() {
                    error={values.showErrorMessage}
                    value={values.email}
                    onChange={(e) => setValues({ ...values, email: e.target.value })}
+                   onSubmit={() => checkLogin()}
+                   onKeyDown={(e) => e.key === "Enter" ? checkLogin() : false}
             />
           </Email>
 
@@ -86,6 +100,7 @@ export default function Login() {
               type={values.showPassword ? 'text' : 'password'}
               value={values.password}
               onChange={handleChange('password')}
+              onKeyDown={(e) => e.key === "Enter" ? checkLogin() : false}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton

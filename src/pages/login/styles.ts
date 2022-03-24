@@ -14,7 +14,7 @@ export const Main = styled.div`
   background-image: linear-gradient(300deg, #D9AFD9 0%, #97D9E1 100%);
 `
 
-export const FormLogin = styled.form`
+export const FormLogin = styled.div`
   width: 50%;
   background-color: rgba(255,255,255,.3);
   display: flex;
