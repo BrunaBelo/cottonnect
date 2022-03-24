@@ -10,9 +10,6 @@ export default function Logout() {
     navigate("/login")
   })
 
-  return(
-    <div>
-      
-    </div>
-  )
+  return <></>
+
 }
