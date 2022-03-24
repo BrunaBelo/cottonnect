@@ -34,42 +34,42 @@ export default function LeftNavBar(props: Props) {
     <Container>
       <h1>Cottonnect</h1>
       <List>
-        <ListItem button key="Explorar">
+        <ListItem button component="a" href="/app/explorer">
           <ListItemIcon>
             <DashboardOutlined htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Explorar" />
         </ListItem>
 
-        <ListItem button component="a" href="/new-donation">
+        <ListItem button component="a" href="/app/new-donation">
           <ListItemIcon>
             <AddRounded htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Doar" />
         </ListItem>
 
-        <ListItem button component="a" href="/about">
+        <ListItem button component="a" href="/app/my-donations">
           <ListItemIcon>
             <FavoriteBorderRounded htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Minhas Doações" />
         </ListItem>
 
-        <ListItem button component="a" href="/about">
+        <ListItem button component="a" href="/app/won-donations">
           <ListItemIcon>
             <StarBorderRounded htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Doações Ganhas" />
         </ListItem>
 
-        <ListItem button component="a" href="/about">
+        <ListItem button component="a" href="/app/account">
           <ListItemIcon>
             <AccountCircleOutlined htmlColor='white' />
           </ListItemIcon>
           <TextItem primary="Minha Conta" />
         </ListItem>
 
-        <ListItem button component="a" href="/logout">
+        <ListItem button component="a" href="/app/logout">
           <ListItemIcon>
             <ExitToAppRounded htmlColor='white' />
           </ListItemIcon>
