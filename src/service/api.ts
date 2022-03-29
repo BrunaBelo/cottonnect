@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from 'dotenv/config';
 
 const getToken = (): string => {
   let token = localStorage.getItem('user-token')
@@ -10,7 +11,7 @@ const getToken = (): string => {
 }
 
 const api = axios.create({
-  baseURL: "http://localhost:3333/",
+  baseURL: process.env.REACT_APP_BASE_URL,
   withCredentials: false,
   headers: {
     'Access-Control-Allow-Origin' : '*',
