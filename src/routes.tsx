@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import CreateUser from "./pages/CreateUser";
 import Login from "./pages/login";
-import DonationDetails from "./pages/donation-details";
+import AuctionDetails from "./pages/auction-details";
 import Explorer from "./pages/explorer";
 import Home from "./pages/home";
 import Logout from "./pages/logout";
@@ -32,7 +32,7 @@ export default function AppRoutes(){
           <Route path="logout" element={setAsProtected(<Logout/>)}/>
           <Route path="explorer" element={setAsProtected(<Explorer/>)}/>
           <Route path="new-donation" element={setAsProtected(<NewDonation/>)}/>
-          <Route path="donation/:id" element={setAsProtected(<DonationDetails/>)}/>
+          <Route path="donation/:id" element={setAsProtected(<AuctionDetails/>)}/>
         </Route>
       </Routes>
     </BrowserRouter>

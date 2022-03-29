@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { tokenValidation } from "../../service/auth";
 
 
 type ProtectedRouteProps = {
@@ -9,16 +10,12 @@ type ProtectedRouteProps = {
 export default function ProtectedRoute({ component: Component }: ProtectedRouteProps) {
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // metodo para verificar se token expirou
-  // implementar depois
-  const checkTokenExpiration = () => {
-    return false
-  }
-
-  const checkSession = () => {
-    const token = localStorage.getItem("user-token");
-    if(!token || checkTokenExpiration()){
+  const checkSession = async() => {
+    
+    const validToken = await tokenValidation();
+    if(!validToken){
       navigate("/");
     }
   }
@@ -27,5 +24,5 @@ export default function ProtectedRoute({ component: Component }: ProtectedRouteP
     checkSession();
   })
 
-  return Component
+  return Component;
 };

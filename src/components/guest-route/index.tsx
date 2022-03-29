@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { tokenValidation } from "../../service/auth";
 
 
 type GuestRouteProps = {
@@ -12,11 +13,13 @@ export default function GuestRoute({ component: Component }: GuestRouteProps) {
 
   const navigate = useNavigate();
 
-  const checkSession = () => {
-    const token = localStorage.getItem("user-token");
-    if(token){
+  const checkSession = async() => {
+    const validToken = await tokenValidation();
+
+    if(validToken){
       navigate("/app/explorer");
-    }else{
+    }
+    else{
       setObjToRender(Component);
     }
   }
@@ -24,8 +27,6 @@ export default function GuestRoute({ component: Component }: GuestRouteProps) {
   useEffect(() => {
     checkSession();
   })
-
   
-  return objToRender
-  
+  return objToRender;
 };
