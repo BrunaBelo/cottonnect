@@ -16,30 +16,30 @@ export const getAutionInformation = async(auctionId: string): Promise<Auction> =
   return auction;
 }
 
-export const createAuction = async(donation: AuctionFormData): Promise<AxiosResponse> => {
-  const data = buildFormData(donation)
+export const createAuction = async(auction: AuctionFormData): Promise<AxiosResponse> => {
+  const data = buildFormData(auction)
   let response = {} as AxiosResponse
 
   try{
-    response = await api.post("/donations", data)
+    response = await api.post("/auctions", data)
   }
   catch(err){
-    console.log('Erro ao salvar leilão', err)
+    console.log('Erro ao criar leilão', err)
   }
 
   return response
 }
 
-const buildFormData = (donation: AuctionFormData) => {
+const buildFormData = (auction: AuctionFormData) => {
   const data = new FormData();
-  data.append('title', donation.title)
-  data.append('description', donation.description)
-  data.append('closingDate', (donation.closingDate as Date).toString())
-  donation.categories?.forEach(item => {
+  data.append('title', auction.title)
+  data.append('description', auction.description)
+  data.append('closingDate', (auction.closingDate as Date).toString())
+  auction.categories?.forEach(item => {
     data.append('categories[]', item.toString())
   })
-  if(donation.photos != null){
-    Array.from(donation.photos).forEach(photo => {
+  if(auction.photos != null){
+    Array.from(auction.photos).forEach(photo => {
       data.append('photos', photo, photo.name)
     })
   }
