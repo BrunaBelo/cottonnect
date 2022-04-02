@@ -1,5 +1,5 @@
 import { Category } from "./category";
-import { Idonation } from "./Idonation";
+import { Donation } from "./donation";
 import { IPhoto } from "./Iphoto";
 
 export interface Auction {
@@ -10,7 +10,7 @@ export interface Auction {
 	updatedAt: Date,
 	userId: string,
 	donationObjectId: string,
-	donationObject: Idonation,
+	donationObject: Donation,
 	categories: Category[]
 	photos: IPhoto[]
 }

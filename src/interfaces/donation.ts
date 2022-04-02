@@ -1,7 +1,7 @@
 import { IPhoto } from "./Iphoto";
 import selectCategory from "./select-category";
 
-export interface Idonation {
+export interface Donation {
   id: string,
   title: string,
   description: string,
