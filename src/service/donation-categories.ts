@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { DonationData } from "../interfaces/donationData";
+import { DonationData } from "../interfaces/donation-data";
 import api from "./api";
 
 export const getCategories = async () => {

@@ -1,6 +1,6 @@
 import api from "./api";
 import { AxiosResponse } from "axios";
-import { UserData } from "../interfaces/userData";
+import { UserData } from "../interfaces/user-data";
 
 export const createUser = async(userData: UserData): Promise<AxiosResponse> => {
   const response = await api.post("/users", userData)

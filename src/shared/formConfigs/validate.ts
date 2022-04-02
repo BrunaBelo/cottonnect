@@ -1,4 +1,4 @@
-import ErrorObj from "../../interfaces/errorObj"
+import ErrorObj from "../../interfaces/error-obj"
 
 export function showErrors(err: ErrorObj[], newErrorObj: any) {
   err.forEach(

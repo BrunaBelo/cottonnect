@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FormPersonalInformation from './FormPersonalInformation';
 import { Container, CurrentScreen, FormsDiv } from './styles';
 
-import { UserData } from '../../interfaces/userData'
+import { UserData } from '../../interfaces/user-data'
 import Navbar from '../../components/Navbar';
 import FormInfoAddress from './FormAddress';
 import { createUser } from '../../service/user';

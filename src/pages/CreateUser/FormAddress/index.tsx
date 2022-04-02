@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Main, ImageAddress, FormInputs, ErrorMessage, MapImage, Options, Item } from './styles';
 import { FormControl, InputLabel } from '@material-ui/core';
 
-import PopUpProps from '../../../interfaces/popUp';
-import ErrorObj from '../../../interfaces/errorObj';
+import PopUpProps from '../../../interfaces/pop-up';
+import ErrorObj from '../../../interfaces/error-obj';
 
 import PopUpContainer from '../Container';
 
@@ -75,9 +75,9 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
         <FormInputs>
           <FormControl required>
             <InputLabel shrink htmlFor="state">Estado</InputLabel>
-            <Options 
-              error={errors.state.status} 
-              name="state" 
+            <Options
+              error={errors.state.status}
+              name="state"
               onChange={(e) => onChangeState(e)}
               value={state}
             >
@@ -94,8 +94,8 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
 
           <FormControl required>
             <InputLabel shrink htmlFor="city">Cidade</InputLabel>
-            <Options 
-              error={errors.city.status} 
+            <Options
+              error={errors.city.status}
               name="city"
               onChange={(e) => onChangeCity(e)}
               value={city}

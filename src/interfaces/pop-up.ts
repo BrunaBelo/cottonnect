@@ -1,4 +1,4 @@
-import { UserData } from "./userData";
+import { UserData } from "./user-data";
 
 export default interface PopUpProps {
   index: number,

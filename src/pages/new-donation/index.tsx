@@ -25,11 +25,11 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import { LocalizationProvider } from "@mui/lab";
 import { createDonation, getCategories } from "../../service/donation-categories";
-import { DonationData } from "../../interfaces/donationData";
+import { DonationData } from "../../interfaces/donation-data";
 import selectCategory from "../../interfaces/select-category";
 import { AlertErrorComponent } from "../../components/AlertError";
 import { schemaDonation } from './yup-schema'
-import ErrorObj from "../../interfaces/errorObj";
+import ErrorObj from "../../interfaces/error-obj";
 import { useNavigate } from "react-router-dom";
 
 interface AlertInterface {

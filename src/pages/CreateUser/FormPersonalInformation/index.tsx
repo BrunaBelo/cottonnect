@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
-import { 
-  InputsCreateUser, 
-  ImageCreateAccount, 
-  Main, 
-  InfoAboutUser, 
-  UserInput, 
+import {
+  InputsCreateUser,
+  ImageCreateAccount,
+  Main,
+  InfoAboutUser,
+  UserInput,
   UserInputMoreInfo,} from "./styles"
 
 import ReactInputMask from "react-input-mask";
 import {schemaUserInfos} from './yupSchemas';
 import { changeInputValue, showErrors, validateForm } from '../../../shared/formConfigs/validate';
 
-import ErrorObj from '../../../interfaces/errorObj';
-import PopUpProps from '../../../interfaces/popUp';
+import ErrorObj from '../../../interfaces/error-obj';
+import PopUpProps from '../../../interfaces/pop-up';
 import { defaultErrorsStep1, formatData, handleDataStep1 } from './handleData';
 import PopUpContainer from '../Container';
 import { nextStep } from '../Container/moveStep';
-import { UserData } from '../../../interfaces/userData';
+import { UserData } from '../../../interfaces/user-data';
 
 function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]}: PopUpProps){
   const [name, setName] = useState("")
@@ -35,14 +35,14 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
 
     if(resultForm === true){
       setUserInfo({
-        name, 
-        email, 
-        password, 
+        name,
+        email,
+        password,
         moreInfo,
         phoneNumber: formatData.phoneNumber(phoneNumber),
         cpf: formatData.cpf(cpf)
       })
-      
+
       nextStep(index)
     }else{
       const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsStep1())
@@ -58,102 +58,102 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
         </ImageCreateAccount>
         <InputsCreateUser>
           <InfoAboutUser>
-            
-            <UserInput 
+
+            <UserInput
               name="name"
-              error={errors.name.status} 
-              helperText={errors.name.message} 
-              required 
-              value={name} 
-              onChange={(e)=>changeInputValue(errors, e, setName)} 
-              label="Nome" 
+              error={errors.name.status}
+              helperText={errors.name.message}
+              required
+              value={name}
+              onChange={(e)=>changeInputValue(errors, e, setName)}
+              label="Nome"
             />
-            
-            <UserInput 
+
+            <UserInput
               name="email"
-              error={errors.email.status} 
-              helperText={errors.email.message} 
-              required 
-              value={email} 
-              onChange={(e)=>changeInputValue(errors, e, setEmail)} 
-              label="Email" 
+              error={errors.email.status}
+              helperText={errors.email.message}
+              required
+              value={email}
+              onChange={(e)=>changeInputValue(errors, e, setEmail)}
+              label="Email"
             />
-            
-            <ReactInputMask 
+
+            <ReactInputMask
               name="phoneNumber"
-              mask="(99)99999-9999" 
-              value={phoneNumber} 
+              mask="(99)99999-9999"
+              value={phoneNumber}
               onChange={(e)=>changeInputValue(errors, e, setphoneNumber)}
             >
-              {() => 
-                <UserInput 
-                  error={errors.phoneNumber.status} 
-                  helperText={errors.phoneNumber.message} 
-                  required 
-                  type="text" 
-                  label="Telefone" 
-                /> 
-              } 
-            </ReactInputMask>
-            
-            <ReactInputMask
-              name="cpf"
-              mask="999.999.999-99" 
-              value={cpf} 
-              onChange={(e)=>changeInputValue(errors, e, setCpf)}
-            >
-              {() => 
-                <UserInput 
-                  error={errors.cpf.status} 
-                  helperText={errors.cpf.message} 
-                  required 
-                  type="text" 
-                  label="CPF" 
+              {() =>
+                <UserInput
+                  error={errors.phoneNumber.status}
+                  helperText={errors.phoneNumber.message}
+                  required
+                  type="text"
+                  label="Telefone"
                 />
               }
             </ReactInputMask>
-            
-            <UserInput 
+
+            <ReactInputMask
+              name="cpf"
+              mask="999.999.999-99"
+              value={cpf}
+              onChange={(e)=>changeInputValue(errors, e, setCpf)}
+            >
+              {() =>
+                <UserInput
+                  error={errors.cpf.status}
+                  helperText={errors.cpf.message}
+                  required
+                  type="text"
+                  label="CPF"
+                />
+              }
+            </ReactInputMask>
+
+            <UserInput
               name="password"
-              error={errors.password.status} 
-              helperText={errors.password.message} 
-              required 
-              value={password} 
-              onChange={(e)=>changeInputValue(errors, e, setPassword)} 
-              type="password" 
-              label="Senha"  
+              error={errors.password.status}
+              helperText={errors.password.message}
+              required
+              value={password}
+              onChange={(e)=>changeInputValue(errors, e, setPassword)}
+              type="password"
+              label="Senha"
             />
-            
-            <UserInput 
+
+            <UserInput
               name="confirmPassword"
-              error={errors.confirmPassword.status} 
-              helperText={errors.confirmPassword.message} 
-              required 
-              value={confirmPassword} 
-              onChange={(e)=>changeInputValue(errors, e, setConfirmPassword)} 
-              type="password" 
-              label="Confirmar Senha" 
+              error={errors.confirmPassword.status}
+              helperText={errors.confirmPassword.message}
+              required
+              value={confirmPassword}
+              onChange={(e)=>changeInputValue(errors, e, setConfirmPassword)}
+              type="password"
+              label="Confirmar Senha"
             />
 
           </InfoAboutUser>
 
-          <UserInputMoreInfo 
+          <UserInputMoreInfo
             name="moreInfo"
-            value={moreInfo} 
-            onChange={(e)=>setMoreInfo(e.target.value)} 
-            multiline 
-            minRows="3" 
-            maxRows="6" 
-            label="Informações Adicionais" 
+            value={moreInfo}
+            onChange={(e)=>setMoreInfo(e.target.value)}
+            multiline
+            minRows="3"
+            maxRows="6"
+            label="Informações Adicionais"
           />
         </InputsCreateUser>
-        
+
       </Main>
     )
   }
 
   return (
-    <PopUpContainer 
+    <PopUpContainer
       index={index}
       title="Crie sua conta!"
       main={renderMain}
