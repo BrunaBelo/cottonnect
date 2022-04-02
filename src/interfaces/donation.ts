@@ -1,4 +1,4 @@
-import { IPhoto } from "./Iphoto";
+import { Photo } from "./photo";
 import selectCategory from "./select-category";
 
 export interface Donation {
@@ -6,6 +6,6 @@ export interface Donation {
   title: string,
   description: string,
   closingDate: Date,
-  photos?: IPhoto[],
+  photos?: Photo[],
   categories?: selectCategory[] | string[]
 }

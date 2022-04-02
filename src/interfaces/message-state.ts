@@ -1,4 +1,4 @@
-export default interface ImessageState {
+export default interface MessageState {
   successMessage: '';
   showMessage: false;
 }
