@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import '../../shared/yup-configs/locales'
 
-export const schemaDonation = yup.object().shape({
+export const schemaAuction = yup.object().shape({
   title: yup.string().required(),
   closingDate: yup.string().required(),
   categories: yup.array().notRequired(),

@@ -41,7 +41,7 @@ export default function LeftNavBar(props: Props) {
           <TextItem primary="Explorar" />
         </ListItem>
 
-        <ListItem button component="a" href="/app/new-donation">
+        <ListItem button component="a" href="/app/novo-leilao">
           <ListItemIcon>
             <AddRounded htmlColor='white' />
           </ListItemIcon>

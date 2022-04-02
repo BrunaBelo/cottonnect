@@ -5,7 +5,6 @@ export interface Donation {
   id: string,
   title: string,
   description: string,
-  closingDate: Date,
   photos?: Photo[],
   categories?: selectCategory[] | string[]
 }

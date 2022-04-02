@@ -31,7 +31,7 @@ export const Main = styled.div`
   }
 `
 
-export const FormDonation = styled.div`
+export const FormAuction = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -43,14 +43,14 @@ export const FormDonation = styled.div`
   }
 `
 
-export const DonationInput = styled(TextField)`
+export const AuctionInput = styled(TextField)`
   width: calc(50% - 8px);
   @media (max-width: 900px) {
     width: 100%;
   }
 `
 
-export const DonationInputSelect = styled(Select)`
+export const AuctionInputSelect = styled(Select)`
   width: 100%;
   .basic-multi-select {
     height: 100px;
@@ -118,7 +118,7 @@ export const ListPictures = styled.div`
   row-gap: 5px;
 `
 
-export const SubmitDonationBtt = styled.button`
+export const CreateAuctionBtt = styled.button`
   background-color: var(--primary);
   color: white;
   padding: 15px 10px;

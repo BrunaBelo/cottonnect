@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 
 import LeftNavBar from "../../components/left-nav-bar";
 import { changeInputValue, showErrors, validateForm } from "../../shared/form-configs/validate";
-import { defaultErrorsDonation } from "./handle-data";
+import { defaultErrorsAuction } from "./handle-data";
 import {
   Container,
   Main,
-  FormDonation,
-  DonationInput,
-  DonationInputSelect,
+  FormAuction,
+  AuctionInput,
+  AuctionInputSelect,
   AddFileBtt,
   PicIcon,
   ListPictures,
@@ -16,28 +16,29 @@ import {
   FilesDiv,
   FileInfo,
   DeleteIcon,
-  SubmitDonationBtt,
+  CreateAuctionBtt,
   DonateIcon,
   LoadingCircle
 } from "./styles";
 
+import { useNavigate } from "react-router-dom";
+import { LocalizationProvider } from "@mui/lab";
+import { getCategories } from "../../service/donation-categories";
+import { AuctionFormData } from "../../interfaces/auction-form-data";
+import { AlertErrorComponent } from "../../components/alert-error";
+import { schemaAuction } from './yup-schema'
+import selectCategory from "../../interfaces/select-category";
+import ErrorObj from "../../interfaces/error-obj";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import { LocalizationProvider } from "@mui/lab";
-import { createDonation, getCategories } from "../../service/donation-categories";
-import { DonationData } from "../../interfaces/donation-data";
-import selectCategory from "../../interfaces/select-category";
-import { AlertErrorComponent } from "../../components/alert-error";
-import { schemaDonation } from './yup-schema'
-import ErrorObj from "../../interfaces/error-obj";
-import { useNavigate } from "react-router-dom";
+import { createAuction } from "../../service/auction";
 
 interface AlertInterface {
   show: boolean,
   message: string
 }
 
-export default function NewDonation() {
+export default function NewAuction() {
   const navigate = useNavigate();
   const [alertError, setAlertError] = useState({
     show: false,
@@ -50,7 +51,7 @@ export default function NewDonation() {
   const [categories, setCategories] = useState([] as selectCategory[])
   const [photos, setPhotos] = useState(null as File[] | null)
   const [description, setDescription] = useState("")
-  const [errors, setErrors] = useState(defaultErrorsDonation())
+  const [errors, setErrors] = useState(defaultErrorsAuction())
   const [categoryList, setCategoryList] = useState([] as selectCategory[])
   const [loading, setLoading] = useState(false)
 
@@ -97,29 +98,29 @@ export default function NewDonation() {
     }
   }
 
-  async function saveDonation(): Promise<boolean>{
-    setErrors(defaultErrorsDonation())
+  async function saveAuction(): Promise<boolean>{
+    setErrors(defaultErrorsAuction())
 
-    const newDonation = {
+    const newAuction = {
       title,
       description,
       closingDate: closingDate?.toString(),
       photos: photos,
       categories: categories.map(item => item.value)
-    } as DonationData
+    } as AuctionFormData
 
-    const resultForm = await validateForm(newDonation, schemaDonation)
+    const resultForm = await validateForm(newAuction, schemaAuction)
 
     if(resultForm == true) {
       setLoading(true)
       try {
-        const newDonationCreated = await createDonation(newDonation);
+        const auctionCreated = await createAuction(newAuction);
         setLoading(false)
-        navigate(`/app/donation/${newDonationCreated.data.id}`, { state: { successMessage: 'Doação cadastrada com sucesso.', showMessage: true } });
+        navigate(`/app/leiloes/${auctionCreated.data.id}`, { state: { successMessage: 'Leilão cadastrado com sucesso.', showMessage: true } });
         return true
       } catch (error) {
         console.log(error)
-        setAlertError({ show: true, message: 'Erro ao criar Doação!' })
+        setAlertError({ show: true, message: 'Erro ao criar Leilão!' })
         setTimeout(() => {
           setAlertError({ show: false, message: '' })
         }, 5000)
@@ -130,7 +131,7 @@ export default function NewDonation() {
 
     }else{
       console.log(resultForm)
-      const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsDonation())
+      const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsAuction())
       setErrors(newErrorObj)
     }
 
@@ -143,14 +144,14 @@ export default function NewDonation() {
 
       <Main>
         <h1>Vamos doar? 🥰</h1>
-        <FormDonation>
+        <FormAuction>
           {
             alertError.show ?
               <AlertErrorComponent show={alertError.show} message={alertError.message}/>
             :
               <></>
           }
-          <DonationInput
+          <AuctionInput
               name="title"
               error={errors.title.status}
               helperText={errors.title.message}
@@ -167,7 +168,7 @@ export default function NewDonation() {
               minDate={new Date()}
               value={closingDate}
               onChange={(e) => changeInputValue(errors, {target: {value: e, name: 'closingDate'}}, setClosingDate)}
-              renderInput={(params) => <DonationInput
+              renderInput={(params) => <AuctionInput
                 {...params}
                 name='closingDate'
                 error={errors.closingDate.status}
@@ -176,7 +177,7 @@ export default function NewDonation() {
             />
           </LocalizationProvider>
 
-          <DonationInput
+          <AuctionInput
             name="description"
             error={errors.description.status}
             helperText={errors.description.message}
@@ -190,7 +191,7 @@ export default function NewDonation() {
             fullWidth
           />
 
-          <DonationInputSelect
+          <AuctionInputSelect
             isMulti
             name="categories"
             value={categories}
@@ -249,13 +250,13 @@ export default function NewDonation() {
             </ListPictures>
           </FilesDiv>
 
-          <SubmitDonationBtt disabled={loading} onClick={() => saveDonation()}>
+          <CreateAuctionBtt disabled={loading} onClick={() => saveAuction()}>
             {
-              loading ? <>Salvando doação... <LoadingCircle size={20} /></> : <>Doar <DonateIcon/></>
+              loading ? <>Criando leilão... <LoadingCircle size={20} /></> : <>Doar <DonateIcon/></>
             }
-          </SubmitDonationBtt>
+          </CreateAuctionBtt>
 
-        </FormDonation>
+        </FormAuction>
       </Main>
     </Container>
   )

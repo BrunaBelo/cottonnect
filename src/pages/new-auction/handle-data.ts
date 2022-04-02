@@ -1,4 +1,4 @@
-export function defaultErrorsDonation() {
+export function defaultErrorsAuction() {
   return {
     title: {status: false, message: ""},
     closingDate: {status: false, message: ""},

@@ -23,7 +23,7 @@ export default function DonationDetails() {
       setShowMessageState(false)
     }, 5000)
 
-    const getDonationInfos = async(id: string) => {
+    const getAuction = async(id: string) => {
       id = "d2524c89-94e4-4da5-aae5-163d8d278879"
       const auction = await getAutionInformation(id)
       setAuction(auction)
@@ -32,7 +32,7 @@ export default function DonationDetails() {
     }
 
     if(Object.keys(auction).length === 0){
-      getDonationInfos(auctionId)
+      getAuction(auctionId)
     }
   }, [])
 

@@ -1,6 +1,6 @@
 import selectCategory from "./select-category";
 
-export interface DonationData {
+export interface AuctionFormData {
   id?: string,
   title: string,
   description: string,

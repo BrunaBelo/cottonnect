@@ -7,7 +7,7 @@ import AuctionDetails from "./pages/auction-details";
 import Explorer from "./pages/explorer";
 import Home from "./pages/home";
 import Logout from "./pages/logout";
-import NewDonation from "./pages/new-donation";
+import NewAuction from "./pages/new-auction";
 import ProtectedRoute from "./components/protected-route";
 import GuestRoute from "./components/guest-route"
 
@@ -31,7 +31,7 @@ export default function AppRoutes(){
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>
           <Route path="explorer" element={setAsProtected(<Explorer/>)}/>
-          <Route path="new-donation" element={setAsProtected(<NewDonation/>)}/>
+          <Route path="novo-leilao" element={setAsProtected(<NewAuction/>)}/>
           <Route path="leilao/:id" element={setAsProtected(<AuctionDetails/>)}/>
         </Route>
       </Routes>
