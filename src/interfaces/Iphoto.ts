@@ -1,4 +1,4 @@
-export interface Photo {
+export interface IPhoto {
   id: string,
   assetId: string,
   publicId: string,
