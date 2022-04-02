@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import LeftNavBar from "../../components/LeftNavBar";
-import { changeInputValue, showErrors, validateForm } from "../../shared/formConfigs/validate";
-import { defaultErrorsDonation } from "./handleData";
+import LeftNavBar from "../../components/left-nav-bar";
+import { changeInputValue, showErrors, validateForm } from "../../shared/form-configs/validate";
+import { defaultErrorsDonation } from "./handle-data";
 import {
   Container,
   Main,
@@ -27,7 +27,7 @@ import { LocalizationProvider } from "@mui/lab";
 import { createDonation, getCategories } from "../../service/donation-categories";
 import { DonationData } from "../../interfaces/donation-data";
 import selectCategory from "../../interfaces/select-category";
-import { AlertErrorComponent } from "../../components/AlertError";
+import { AlertErrorComponent } from "../../components/alert-error";
 import { schemaDonation } from './yup-schema'
 import ErrorObj from "../../interfaces/error-obj";
 import { useNavigate } from "react-router-dom";

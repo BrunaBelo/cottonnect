@@ -8,14 +8,14 @@ import {
   UserInputMoreInfo,} from "./styles"
 
 import ReactInputMask from "react-input-mask";
-import {schemaUserInfos} from './yupSchemas';
-import { changeInputValue, showErrors, validateForm } from '../../../shared/formConfigs/validate';
+import {schemaUserInfos} from './yup-schema';
+import { changeInputValue, showErrors, validateForm } from '../../../shared/form-configs/validate';
 
 import ErrorObj from '../../../interfaces/error-obj';
 import PopUpProps from '../../../interfaces/pop-up';
-import { defaultErrorsStep1, formatData, handleDataStep1 } from './handleData';
-import PopUpContainer from '../Container';
-import { nextStep } from '../Container/moveStep';
+import { defaultErrorsStep1, formatData, handleDataStep1 } from './handle-data';
+import PopUpContainer from '../container';
+import { nextStep } from '../container/move-step';
 import { UserData } from '../../../interfaces/user-data';
 
 function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]}: PopUpProps){

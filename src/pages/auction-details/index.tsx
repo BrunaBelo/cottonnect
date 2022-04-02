@@ -2,7 +2,7 @@ import react, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
 import { AlertMessage, Container, Main } from './styles'
 import MessageState from '../../interfaces/message-state'
-import LeftNavBar from '../../components/LeftNavBar';
+import LeftNavBar from '../../components/left-nav-bar';
 import { getAutionInformation } from '../../service/auction';
 import { Donation } from '../../interfaces/donation';
 import { Auction } from '../../interfaces/auction';

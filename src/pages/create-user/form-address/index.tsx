@@ -6,13 +6,13 @@ import { FormControl, InputLabel } from '@material-ui/core';
 import PopUpProps from '../../../interfaces/pop-up';
 import ErrorObj from '../../../interfaces/error-obj';
 
-import PopUpContainer from '../Container';
+import PopUpContainer from '../container';
 
-import { schemaUserAddress } from './yupSchemas';
-import { defaultErrorsStep2, handleDataAddress } from './handleData';
+import { schemaUserAddress } from './yup-schema';
+import { defaultErrorsStep2, handleDataAddress } from './handle-data';
 
-import { changeInputValue, showErrors, validateForm } from '../../../shared/formConfigs/validate';
-import { nextStep } from '../Container/moveStep';
+import { changeInputValue, showErrors, validateForm } from '../../../shared/form-configs/validate';
+import { nextStep } from '../container/move-step';
 import { getStates } from '../../../service/state';
 import { getCities } from '../../../service/cities';
 

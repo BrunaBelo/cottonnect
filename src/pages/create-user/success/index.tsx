@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from '@material-ui/core';
 import { Main, ImageDone, IconSmile, MessageHeader, LetsGoButtons, DoneIcon, SubTitle } from './styles';
-import PopUpContainer from '../Container';
+import PopUpContainer from '../container';
 
 interface SuccessFormInterface {
   index: number
@@ -11,7 +11,7 @@ interface SuccessFormInterface {
 function renderMain(){
   return(
     <Main>
-      
+
       <SubTitle>Sua conta foi registrada, agora você já pode começar doar!</SubTitle>
 
       <ImageDone>

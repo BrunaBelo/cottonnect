@@ -1,6 +1,6 @@
 import react from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from '../../components/Navbar'
+import Navbar from '../../components/navbar'
 import { Main, Container, TextInfo, HomeImage, Image } from './styles'
 
 export default function Home() {

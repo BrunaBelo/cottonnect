@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import FormPersonalInformation from './FormPersonalInformation';
+import FormPersonalInformation from './form-personal-information';
 import { Container, CurrentScreen, FormsDiv } from './styles';
 
 import { UserData } from '../../interfaces/user-data'
-import Navbar from '../../components/Navbar';
-import FormInfoAddress from './FormAddress';
+import Navbar from '../../components/navbar';
+import FormInfoAddress from './form-address';
 import { createUser } from '../../service/user';
-import FormInfoPhone from './FormPhone';
-import FormSuccess from './Success';
-import { AlertErrorComponent } from '../../components/AlertError';
+import FormInfoPhone from './form-phone';
+import FormSuccess from './success';
+import { AlertErrorComponent } from '../../components/alert-error';
 
 export default function CreateUser () {
   const [personalInfo, setPersonalInfo] = useState({

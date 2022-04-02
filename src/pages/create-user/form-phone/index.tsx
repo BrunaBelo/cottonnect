@@ -3,8 +3,8 @@ import React from 'react';
 import { IconButton } from '@material-ui/core';
 import { Main, InfophoneNumber, CodeVerification, Buttons, TitleButton, CancelIcon, ReplayIcon } from './styles';
 import ReactInputVerificationCode from 'react-input-verification-code';
-import PopUpContainer from '../Container';
-import { nextStep } from '../Container/moveStep';
+import PopUpContainer from '../container';
+import { nextStep } from '../container/move-step';
 
 interface FormInfoPhoneInterface {
   index: number
@@ -38,14 +38,14 @@ function renderMain() {
       </CodeVerification>
 
       <Buttons>
-        <IconButton 
-          aria-label="skipNext" 
+        <IconButton
+          aria-label="skipNext"
           onClick={() => skipPhoneVerification(2)}
         >
           <CancelIcon fontSize="small"/> <TitleButton color='#E92E2E'>Pular</TitleButton>
         </IconButton>
 
-        <IconButton 
+        <IconButton
           aria-label="skipNext"
           onClick={() => resendCode()}
         >

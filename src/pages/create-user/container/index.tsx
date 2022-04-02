@@ -1,12 +1,12 @@
 import React from 'react';
-import { backStep } from './moveStep';
-import { 
-  Container, 
-  BttSpace, 
-  ChangeStepBtt, 
-  NextIcon, 
-  Title, 
-  TopDiv, 
+import { backStep } from './move-step';
+import {
+  Container,
+  BttSpace,
+  ChangeStepBtt,
+  NextIcon,
+  Title,
+  TopDiv,
   BackIcon} from './styles'
 
 interface Container {
@@ -22,7 +22,7 @@ function PopUpContainer({title, handleFormValidation, formData, schema, main, in
 
   return (
     <Container>
-      
+
       <TopDiv>
         {
         index == 1?
@@ -42,8 +42,8 @@ function PopUpContainer({title, handleFormValidation, formData, schema, main, in
         {
           index < 2 ?
           <BttSpace>
-            <ChangeStepBtt 
-              type="button" 
+            <ChangeStepBtt
+              type="button"
               onClick={() => handleFormValidation ? handleFormValidation(formData as object, schema) : false}>
               <NextIcon/>
             </ChangeStepBtt>

@@ -1,6 +1,6 @@
 import react from 'react'
 import { Toolbar } from '@material-ui/core'
-import LeftNavBar from '../../components/LeftNavBar'
+import LeftNavBar from '../../components/left-nav-bar'
 import { Container, Main } from './styles'
 
 export default function Explorer() {

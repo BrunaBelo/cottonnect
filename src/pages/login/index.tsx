@@ -1,24 +1,24 @@
 import React from "react";
 
 import { IconButton, InputAdornment, InputLabel } from "@material-ui/core";
-import { 
-  CurveVetor, 
-  Main, 
-  FormLogin, 
-  Password, 
-  FormBox, 
-  Email, 
-  LoginBtt, 
-  UserInput, 
-  CredentialActions, 
-  ButtonCredentialActions, 
+import {
+  CurveVetor,
+  Main,
+  FormLogin,
+  Password,
+  FormBox,
+  Email,
+  LoginBtt,
+  UserInput,
+  CredentialActions,
+  ButtonCredentialActions,
   LoginErrorMessage } from "./styles";
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { login } from "../../service/user";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/navbar";
 
 interface State {
   email: string;

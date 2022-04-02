@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import CreateUser from "./pages/CreateUser";
+import CreateUser from "./pages/create-user";
 import Login from "./pages/login";
 import AuctionDetails from "./pages/auction-details";
 import Explorer from "./pages/explorer";

@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import '../../shared/yupConfigs/locales'
+import '../../shared/yup-configs/locales'
 
 export const schemaDonation = yup.object().shape({
   title: yup.string().required(),
