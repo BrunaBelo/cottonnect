@@ -1,3 +1,4 @@
+import { Input, TextField } from "@material-ui/core";
 import { Alert } from "@mui/material";
 import { Send } from "@styled-icons/boxicons-solid"
 
@@ -17,12 +18,22 @@ export const Main = styled.div`
   align-items: center;
 
   @media (max-width: 900px) {
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
 `
 
 export const AlertMessage = styled(Alert)`
   width: 100%;
+  margin-bottom: 1.5em;
+  width: 80%;
+
+  @media (max-width: 900px) {
+    margin-bottom: 60px;
+    width: 90%;
+  }
+
 `
 
 export const AuctionInfos = styled.div`
@@ -36,6 +47,7 @@ export const AuctionInfos = styled.div`
   @media (max-width: 900px) {
     flex-direction: column;
     min-height: 100vh;
+    background-color: white;
   }
 `
 
@@ -55,13 +67,14 @@ export const DonationPhoto = styled.img`
 `
 
 export const DonationInfo = styled.div`
-  background-color: transparent;
-  padding: 0;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 30vw;
   height: 30vw;
+  background-color: rgba(106, 129, 209, .50);
+  border-radius: 15px;
 
   h1{
     font-size: 18px;
@@ -93,11 +106,12 @@ export const DonationInfo = styled.div`
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(106, 129, 209, .75);
+      background: white;
     }
   }
 
   @media (max-width: 900px) {
+    background-color: transparent;
     width: 90%;
     flex-grow: 1;
     padding: 10px 0;
@@ -115,27 +129,25 @@ export const Bidding = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  input {
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
   @media (max-width: 900px) {
     padding: 0 0 10px 0;
   }
 `
 
-export const BiddingInput = styled.input`
-  background-color: var(--primary);
+export const BiddingInput = styled(TextField)`
+  //background-color: var(--primary);
   padding: 12px 15px;
   border-radius: 10px;
   color: white;
   width: 80%;
-
-  ::placeholder{
-    color: white;
-  }
-
-  ::-webkit-inner-spin-button,
-  ::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
 `
 
 export const BiddingButton = styled.div`
