@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
-import { AlertMessage, AuctionInfos, Bidding, BiddingButton, BiddingInput, Container, DonationInfo, DonationPhoto, DonationPhotosDiv, IconSend, Main } from './styles'
+import { AlertMessage, AlreadySendingBid, AuctionInfos, Bidding, BiddingButton, BiddingInput, Container, DonationInfo, DonationPhoto, DonationPhotosDiv, IconSend, Main } from './styles'
 import MessageState from '../../interfaces/message-state'
 import LeftNavBar from '../../components/left-nav-bar';
 import { getAutionInformation } from '../../service/auction';
@@ -8,7 +8,7 @@ import { Donation } from '../../interfaces/donation';
 import { Auction } from '../../interfaces/auction';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { createBidding } from '../../service/bidding';
+import { checkExistsBidFromAuction, createBidding } from '../../service/bidding';
 
 export default function DonationDetails() {
   const auctionId = useParams().id || '';
@@ -21,6 +21,7 @@ export default function DonationDetails() {
   const [messageErrorInput, setMessageShowErrorInput] = useState("");
   const [auction, setAuction] = useState({} as Auction);
   const [donation, setDonation] = useState({} as Donation);
+  const [alreadySendingBid, setAlreadySendingBid] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -36,7 +37,9 @@ export default function DonationDetails() {
     if(Object.keys(auction).length === 0){
       getAuction(auctionId);
     }
-  }, [message])
+
+    checkExistsBid()
+  }, [message, bidAmount])
 
   const validateInput = ((event: React.KeyboardEvent<HTMLDivElement>) =>{
     const key = event.key;
@@ -69,6 +72,12 @@ export default function DonationDetails() {
     }
   };
 
+  const checkExistsBid = (async () => {
+    const bid = await checkExistsBidFromAuction(auctionId);
+
+    setAlreadySendingBid(bid.length > 0 ? true : false)
+  })
+
   return (
     <Container>
       <LeftNavBar/>
@@ -95,25 +104,31 @@ export default function DonationDetails() {
 
             <p>{donation.description}</p>
 
-            <Bidding>
-              <BiddingInput autoFocus type="number"
-                            error={showErrorInput}
-                            helperText={messageErrorInput}
-                            placeholder="Qual o seu lance?"
-                            onKeyPress={(e) => validateInput(e)}
-                            onChange={(e) => setBidAmount(parseInt(e.target.value))}
-                            FormHelperTextProps = {{
-                              style: { position: 'absolute', marginTop: '50px' }
-                            }}
-                            InputProps={{
-                              style: { color: 'rgb(96, 109, 189)', fontWeight: 'bold' },
-                           }}
-              >
-              </BiddingInput>
-              <BiddingButton onClick={() => sendBid()}>
-                <IconSend></IconSend>
-              </BiddingButton>
-            </Bidding>
+            {
+              alreadySendingBid ?
+                <Bidding>
+                  <AlreadySendingBid>Você já deu um lance nessa doação.</AlreadySendingBid>
+                </Bidding>
+              :
+                <Bidding>
+                  <BiddingInput autoFocus type="number"
+                                error={showErrorInput}
+                                helperText={messageErrorInput}
+                                placeholder="Qual o seu lance?"
+                                onKeyPress={(e) => validateInput(e)}
+                                onChange={(e) => setBidAmount(parseInt(e.target.value))}
+                                FormHelperTextProps = {{
+                                  style: { position: 'absolute', marginTop: '50px' }
+                                }}
+                                InputProps={{
+                                  style: { color: 'rgb(96, 109, 189)', fontWeight: 'bold' },
+                              }}
+                  ></BiddingInput>
+                  <BiddingButton onClick={() => sendBid()}>
+                    <IconSend></IconSend>
+                  </BiddingButton>
+                </Bidding>
+            }
           </DonationInfo>
         </AuctionInfos>
       </Main>

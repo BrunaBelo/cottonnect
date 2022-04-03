@@ -143,7 +143,6 @@ export const Bidding = styled.div`
 `
 
 export const BiddingInput = styled(TextField)`
-  //background-color: var(--primary);
   padding: 12px 15px;
   border-radius: 10px;
   color: white;
@@ -168,4 +167,18 @@ export const BiddingButton = styled.div`
 export const IconSend = styled(Send)`
   width: 25px;
   color: white;
+`
+
+export const AlreadySendingBid = styled.p`
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E68282;
+  border-radius: 10px;
+  padding: 10px;
 `
