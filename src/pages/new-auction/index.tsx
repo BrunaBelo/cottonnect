@@ -226,11 +226,18 @@ export default function NewAuction() {
               id='uploadImg'
               name='uploadImg'
               onChange={e => {console.log(e.target.value); addPhotos((e.target as HTMLInputElement).files as File[] | null)}}
+              InputProps={{
+                endAdornment: (
+                  <>
+                    <AddFileBtt htmlFor="uploadImg">
+                      <PicIcon/>
+                      Anexar Fotos
+                    </AddFileBtt>
+                  </>
+                ),
+              }}
             />
-            <AddFileBtt htmlFor="uploadImg">
-              <PicIcon/>
-              Anexar Fotos
-            </AddFileBtt>
+
 
             <ListPictures>
               {

@@ -45,6 +45,7 @@ export const FormAuction = styled.div`
 
 export const AuctionInput = styled(TextField)`
   width: calc(50% - 8px);
+
   @media (max-width: 900px) {
     width: 100%;
   }
@@ -57,17 +58,19 @@ export const AuctionInputSelect = styled(Select)`
   }
 `
 
+export const BiddingInput = styled(TextField)`
+  display: none;
+`
+
 export const AddFileBtt = styled.label`
-  width: default;
+  width: 100%;
   background-color: transparent;
-  border: rgba(0,0,0,.3) solid 1px;
   color: rgb(127,111,127);
   border-radius: 5px;
   padding: 12px 20px;
   transition: .5s;
 
   &:hover {
-    border: rgb(33, 33, 33) solid 1px;
     cursor: pointer;
   }
 `
