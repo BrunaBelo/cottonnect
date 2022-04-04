@@ -78,6 +78,7 @@ export const DonationInfo = styled.div`
 
   h1{
     font-size: 18px;
+    word-wrap: break-word;
   }
 
   span{

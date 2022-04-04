@@ -10,7 +10,7 @@ setLocale({
     min: ({ min, path }) => ({ path, message: `Fechamento mínimo do leilão é hoje` }),
   },
   array: {
-    min: ({ min, path }) => ({ path, message: `Selecionar no mínimo 1 elemento` })
+    min: ({ min, path }) => ({ path, message: `Selecionar no mínimo 1 elemento` }),
   },
   mixed: {
     required: ({ path }) => ({ path, message: 'Campo obrigatório' }),

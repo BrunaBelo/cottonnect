@@ -32,6 +32,7 @@ import ErrorObj from "../../interfaces/error-obj";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import { createAuction } from "../../service/auction";
+import { TextField } from "@mui/material";
 
 interface AlertInterface {
   show: boolean,
@@ -49,7 +50,7 @@ export default function NewAuction() {
     new Date,
   );
   const [categories, setCategories] = useState([] as selectCategory[])
-  const [photos, setPhotos] = useState(null as File[] | null)
+  const [photos, setPhotos] = useState([] as File[] | null)
   const [description, setDescription] = useState("")
   const [errors, setErrors] = useState(defaultErrorsAuction())
   const [categoryList, setCategoryList] = useState([] as selectCategory[])
@@ -217,12 +218,14 @@ export default function NewAuction() {
           />
 
           <FilesDiv>
-            <input
+            <TextField
+              error={errors.photos.status}
+              helperText={errors.photos.message}
               type='file'
-              accept="image/png, image/gif, image/jpeg"
+              inputProps={{ accept: 'image/png, image/gif, image/jpeg', multiple: 'true' }}
               id='uploadImg'
               name='uploadImg'
-              multiple onChange={e => {console.log(e.target.value); addPhotos(e.target.files as File[] | null)}}
+              onChange={e => {console.log(e.target.value); addPhotos((e.target as HTMLInputElement).files as File[] | null)}}
             />
             <AddFileBtt htmlFor="uploadImg">
               <PicIcon/>
