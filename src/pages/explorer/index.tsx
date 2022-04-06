@@ -1,17 +1,19 @@
 import react from 'react'
-import { Toolbar } from '@material-ui/core'
 import LeftNavBar from '../../components/left-nav-bar'
-import { Container, Main } from './styles'
+import AuctionCard from '../../components/auction-card'
+import { AuctionList, Container, Main } from './styles'
 
 export default function Explorer() {
   return (
     <Container>
       <LeftNavBar />
-      <Main
-        component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% -  240px)` } }}
-      >
-        <Toolbar />
+      <Main>
+        <h1>Filtros</h1>
+        <AuctionList>
+          <AuctionCard/>
+          <AuctionCard/>
+          <AuctionCard/>
+        </AuctionList>
       </Main>
     </Container>
   )
