@@ -1,7 +1,4 @@
-import { Input, TextField } from "@material-ui/core";
 import { Alert } from "@mui/material";
-import { Send } from "@styled-icons/boxicons-solid"
-
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -53,8 +50,13 @@ export const AuctionInfos = styled.div`
 
 export const DonationPhotosDiv = styled.div`
   display: flex;
-  width: 30vw;
+  width: 22vw;
   height: auto;
+
+  @media(max-width: 1400px) {
+    width: 30vw;
+    height: auto;
+  }
 
   @media (max-width: 900px) {
     width: 90%;
@@ -71,10 +73,15 @@ export const DonationInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 30vw;
-  height: 30vw;
+  width: 22vw;
+  height: 22vw;
   background-color: rgba(106, 129, 209, .50);
   border-radius: 15px;
+
+  @media(max-width: 1400px) {
+    width: 30vw;
+    height: 30vw;
+  }
 
   h1{
     font-size: 18px;
@@ -124,62 +131,3 @@ export const DonationInfo = styled.div`
   }
 `
 
-export const Bidding = styled.div`
-  display: flex;
-  display: row;
-  align-items: center;
-  justify-content: space-between;
-
-  input {
-    ::-webkit-inner-spin-button,
-    ::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-
-  @media (max-width: 900px) {
-    padding: 0 0 10px 0;
-  }
-`
-
-export const BiddingInput = styled(TextField)`
-  padding: 12px 15px;
-  border-radius: 10px;
-  color: white;
-  width: 80%;
-`
-
-export const BiddingButton = styled.div`
-  background-color: var(--primary);
-  padding: 7px 15px;
-  border-radius: 10px;
-  width: 15%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    cursor: pointer;
-    opacity: .75;
-  }
-`
-
-export const IconSend = styled(Send)`
-  width: 25px;
-  color: white;
-`
-
-export const AlreadySendingBid = styled.p`
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #E68282;
-  border-radius: 10px;
-  padding: 10px;
-`

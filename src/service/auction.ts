@@ -46,3 +46,16 @@ const buildFormData = (auction: AuctionFormData) => {
 
   return data
 }
+
+export const getAllAuctions = async(cityId: string): Promise<Auction[]> => {
+  let auctions = [] as Auction[]
+
+  try {
+    const response = await api.get(`auctions?cityId=${cityId}`);
+    auctions = response.data;
+  } catch (error) {
+    console.log('Erro ao buscar leilões')
+  }
+
+  return auctions;
+}

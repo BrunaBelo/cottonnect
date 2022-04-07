@@ -18,8 +18,22 @@ export const login = async (email: string, password: string): Promise<boolean>  
   try {
     const response = await api.post('/users/login', {"email": email, "password": password})
     localStorage.setItem("user-token", response.data.token);
+    localStorage.setItem("user-city", response.data.cityId);
     return response.data
   } catch (error) {
     return false
   }
+}
+
+export const getCottonFlakesFromUser = async (): Promise<number> => {
+  let cottons = 0
+
+  try {
+    const response = await api.get("users/get-cotton-flakes")
+    cottons = response.data.cottonFlakes
+  } catch (error) {
+    console.log("Erro ao buscar moedas", error)
+  }
+
+  return cottons
 }

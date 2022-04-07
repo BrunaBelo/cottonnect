@@ -1,44 +1,45 @@
-import react, { useState } from "react";
+import react from "react";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Bidding, BiddingButton, BiddingInput, CardPhoto, Container, DonationDetails, IconSend } from "./styles";
+import { Auction } from "../../interfaces/auction";
+import { createBidding } from "../../service/bidding";
+import BiddingInput from "../bidding-input";
+import { CardPhoto, Container, DonationDetails } from "./styles";
 
-export default function AuctionCard() {
+interface AuctionCardData {
+  auction: Auction
+}
 
-  const [photos, setPhotos] = useState([
-    "https://res.cloudinary.com/dv0bcxpmm/image/upload/s--4cwLP7nc--/v1649115148/zfiqssgk7u5mybqctjvy.png",
-    "https://res.cloudinary.com/dv0bcxpmm/image/upload/s--XAAxUIJ8--/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/dw4sajvte0fzaxzegicx.png"])
+export default function AuctionCard({
+  auction: {
+    id: auctionId,
+    closingDate,
+    donationObject: { title, photos }
+  }}: AuctionCardData) {
 
-  const [donationName, setDonationName] = useState("Exemplo")
+
+  const sendBid = async(bidAmount: number):Promise<void> => {
+    const bid = await createBidding({bidAmount: bidAmount, auctionId: auctionId});
+    const result = Object.keys(bid).length != 0 ? true : false
+  }
 
   return(
     <Container>
       <Carousel showThumbs={false} showStatus={false}>
         {
-         photos.map(p => <CardPhoto src={p}/>)
+          photos?.map(p => <CardPhoto src={p.url}/>)
         }
       </Carousel>
       <DonationDetails>
-        <h1>{donationName}</h1>
-        <p>Até 24/04</p>
-        <Bidding>
-          <BiddingInput autoFocus type="number"
-                        error={false}
-                        helperText={""}
-                        placeholder="Qual o seu lance?"
-                        onKeyPress={(e) => {}}
-                        onChange={(e) => {}}
-                        FormHelperTextProps = {{
-                          style: { position: 'absolute', marginTop: '50px' }
-                        }}
-                        InputProps={{
-                          style: { color: 'rgb(96, 109, 189)', fontWeight: 'bold' },
-                      }}
-          ></BiddingInput>
-          <BiddingButton onClick={() => {}}>
-            <IconSend></IconSend>
-          </BiddingButton>
-        </Bidding>
+        <h1>{title}</h1>
+        <p>Até {new Date(closingDate).toLocaleDateString("pt-BR")}</p>
+        <div id="link-buttons">
+          <a href={`/app/leiloes/${auctionId}`}>Ver detalhes</a>
+        </div>
+        <BiddingInput
+          auctionId={auctionId}
+          sendBid={sendBid}
+        />
       </DonationDetails>
     </Container>
   )

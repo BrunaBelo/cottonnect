@@ -1,5 +1,3 @@
-import { TextField } from "@material-ui/core";
-import { Send } from "@material-ui/icons";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -26,6 +24,7 @@ export const DonationDetails = styled.div`
   h1 {
     font-size: 20px;
     margin-bottom: 5px;
+    word-wrap: break-word;
   }
 
   p {
@@ -33,7 +32,21 @@ export const DonationDetails = styled.div`
     margin-bottom: 20px;
   }
 
-  button {
+  #link-buttons {
+    margin-bottom: 20px;
+    a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 14px;
+      background-color: white;
+      padding: 7px;
+      border-radius: 5px;
+
+      &:hover {
+        opacity: .75;
+      }
+    }
 
   }
 `
@@ -60,62 +73,3 @@ export const CardPhoto = styled.img`
   }
 `
 
-export const Bidding = styled.div`
-  display: flex;
-  display: row;
-  align-items: center;
-  justify-content: space-between;
-
-  input {
-    ::-webkit-inner-spin-button,
-    ::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-
-  @media (max-width: 900px) {
-    padding: 0 0 10px 0;
-  }
-`
-
-export const BiddingInput = styled(TextField)`
-  padding: 12px 15px;
-  border-radius: 10px;
-  color: white;
-  width: 80%;
-`
-
-export const BiddingButton = styled.div`
-  background-color: var(--primary);
-  padding: 7px 15px;
-  border-radius: 10px;
-  width: 15%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    cursor: pointer;
-    opacity: .75;
-  }
-`
-
-export const IconSend = styled(Send)`
-  width: 25px;
-  color: white;
-`
-
-export const AlreadySendingBid = styled.p`
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #E68282;
-  border-radius: 10px;
-  padding: 10px;
-`
