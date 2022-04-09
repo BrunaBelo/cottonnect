@@ -75,7 +75,7 @@ export const DonationInfo = styled.div`
   justify-content: space-between;
   width: 22vw;
   height: 22vw;
-  background-color: rgba(106, 129, 209, .50);
+  background-color: var(--light-primary);
   border-radius: 15px;
 
   @media(max-width: 1400px) {

@@ -10,6 +10,7 @@ import Logout from "./pages/logout";
 import NewAuction from "./pages/new-auction";
 import ProtectedRoute from "./components/protected-route";
 import GuestRoute from "./components/guest-route"
+import MyDonations from "./pages/my-donations";
 
 export default function AppRoutes(){
 
@@ -33,6 +34,7 @@ export default function AppRoutes(){
           <Route path="explorer" element={setAsProtected(<Explorer/>)}/>
           <Route path="novo-leilao" element={setAsProtected(<NewAuction/>)}/>
           <Route path="leiloes/:id" element={setAsProtected(<AuctionDetails/>)}/>
+          <Route path="minhas-doacoes" element={setAsProtected(<MyDonations/>)}/>
         </Route>
       </Routes>
     </BrowserRouter>
