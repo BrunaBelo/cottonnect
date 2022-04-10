@@ -1,6 +1,7 @@
 import react, { useEffect, useState } from 'react'
 import { Tooltip } from '@material-ui/core'
 import { Actions, CoinIcon, Container, Content, Header, StatusIndicator } from './styles'
+import { Auction } from '../../interfaces/auction'
 
 interface AuctionStatus {
   open: string,
@@ -20,10 +21,11 @@ interface ButtonMessageByProfile {
 }
 
 interface DonationCardProps {
-  profile: string
+  profile: string,
+  auction: Auction
 }
 
-export default function DonationCard({profile}: DonationCardProps) {
+export default function DonationCard({ profile, auction }: DonationCardProps) {
 
   const donationSuccessButtonText = "Ao clicar nesse botão, você confirma o recebimento do produto e transfere o valor do lance para o doador"
   const donationFailedButtonText = "Ao clicar nesse botão, você rejeita a doação"
@@ -75,7 +77,7 @@ export default function DonationCard({profile}: DonationCardProps) {
   return(
     <Container>
       <Header>
-        <h1>Nome da doação</h1>
+        <h1>{auction.donationObject.title}</h1>
         <div>
           <StatusIndicator backgroundColor={getStatusColor()}>
             <span>{statusText}</span>
@@ -93,7 +95,7 @@ export default function DonationCard({profile}: DonationCardProps) {
         </div>
       </Header>
       <Content>
-        <p>Descricao da doacao</p>
+        <p>{auction.donationObject.description}</p>
         {
           status == "waiting" ?
           <Actions>
