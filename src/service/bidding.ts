@@ -26,3 +26,16 @@ export const checkExistsBidFromAuction = async(auctionId: String): Promise<Biddi
 
   return bidding;
 }
+
+export const getBidWinner = async(auctionId: String): Promise<Bidding> => {
+  let bidding = {} as Bidding;
+
+  try {
+    const response = await api.get("/biddings/get-winner", { params: { auctionId: auctionId } });
+    bidding = response.data;
+  } catch (error) {
+    console.log(`Erro ao buscar ganhador do leilão ${error}`);
+  }
+
+  return bidding;
+}

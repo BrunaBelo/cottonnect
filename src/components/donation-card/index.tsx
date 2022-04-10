@@ -2,6 +2,8 @@ import react, { useEffect, useState } from 'react'
 import { Tooltip } from '@material-ui/core'
 import { Actions, CoinIcon, Container, Content, Header, StatusIndicator } from './styles'
 import { Auction } from '../../interfaces/auction'
+import { Bidding } from '../../interfaces/bidding'
+import { getBidWinner } from '../../service/bidding'
 
 interface AuctionStatus {
   open: string,
@@ -53,13 +55,18 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
     }
   }
 
-  const [status, setStatus] = useState("waiting" as keyof AuctionStatus)
-  const [statusText, setStatusText] = useState("")
-  const [buttonsText, setButtonsText] = useState({confirm: "", reject: ""})
+  const [status, setStatus] = useState(auction.status as keyof AuctionStatus);
+  const [statusText, setStatusText] = useState("");
+  const [buttonsText, setButtonsText] = useState({confirm: "", reject: ""});
+  const [bidWinner, setBidWinner] = useState({} as Bidding);
 
   useEffect(() => {
-    getStatusTitle()
-    getButtonText()
+    getStatusTitle();
+    getButtonText();
+
+    if (status != 'open'){
+      getWinner();
+    }
   }, [statusText])
 
   const getStatusColor = (): string => {
@@ -74,6 +81,11 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
     setButtonsText(buttonsMessage[profile as keyof ButtonMessageByProfile])
   }
 
+  const getWinner = async () => {
+    const winner = await getBidWinner(auction.id);
+    setBidWinner(winner);
+  }
+
   return(
     <Container>
       <Header>
@@ -84,7 +96,7 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
             {
               status != "open" ?
               <>
-                <span id="number-coin">10</span>
+                <span id="number-coin">{bidWinner.bidAmount}</span>
                 <CoinIcon/>
               </>
               :
