@@ -9,11 +9,7 @@ export const Container = styled.div`
   background-color: var(--light-primary);
   padding: 10px;
   border-radius: 10px;
-  width: 50%;
-
-  @media (max-width: 920px) {
-    width: 100%;
-  }
+  width: 100%;
 `
 
 export const Header = styled.div`
@@ -23,6 +19,11 @@ export const Header = styled.div`
   align-items: center;
   h1 {
     font-size: 22px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @media (max-width: 920px) {
@@ -83,10 +84,10 @@ export const Actions = styled.div`
   }
 
   #donation-success {
-    background-color: #43d375;
+    background-color: var(--primary);
   }
 
   #donation-failed {
-    background-color: #ee7168;
+    background-color: var(--primary);
   }
 `

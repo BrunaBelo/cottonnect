@@ -3,7 +3,7 @@ import DonationCard from '../../components/donation-card'
 import LeftNavBar from '../../components/left-nav-bar'
 import { Auction } from '../../interfaces/auction'
 import { getAuctionsDonated } from '../../service/auction'
-import { Container } from './styles'
+import { Container, DonationsCard } from './styles'
 
 export default function MyDonations({}){
   const [auctions, setAuctions] = useState([] as Auction[]);
@@ -20,16 +20,18 @@ export default function MyDonations({}){
   return(
     <Container>
       <LeftNavBar />
-      {
-        auctions.map(auction => {
-          return(
-            <DonationCard
-              profile='owner'
-              auction={auction}
-            />
-          )
-        })
-      }
+      <DonationsCard>
+        {
+          auctions.map(auction => {
+            return(
+              <DonationCard
+                profile='owner'
+                auction={auction}
+              />
+            )
+          })
+        }
+      </DonationsCard>
     </Container>
   )
 }
