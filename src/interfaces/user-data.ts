@@ -4,7 +4,7 @@ export interface UserData {
   cpf?: string,
   phoneNumber?: string,
   password?: string,
-  moreInfo?: string,
+  additionalInformation?: string,
   stateId?: string,
   cityId?: string
 }

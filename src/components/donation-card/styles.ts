@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { Coins } from "@styled-icons/remix-fill/Coins";
+import { Whatsapp } from "@styled-icons/bootstrap/Whatsapp";
+import { Email } from "@styled-icons/evaicons-solid/Email";
+import { Box } from "@mui/material";
+import { TelephoneFill } from "@styled-icons/bootstrap/TelephoneFill"
+import { User } from "@styled-icons/boxicons-solid/User";
+import { InfoCircleFill } from "@styled-icons/bootstrap/InfoCircleFill";
 
 interface StatusProps {
   backgroundColor: string
@@ -52,7 +58,7 @@ export const CoinIcon = styled(Coins)`
 
 export const Content = styled.div`
   p {
-    margin-top: 10px;
+    margin: 10px 0;
     font-size: 14px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -69,6 +75,13 @@ export const Content = styled.div`
   }
 `
 
+export const SeeDetails = styled.a`
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+`
+
 export const Actions = styled.div`
   display: flex;
   flex-direction: row;
@@ -83,11 +96,75 @@ export const Actions = styled.div`
     color: white;
   }
 
-  #donation-success {
-    background-color: var(--primary);
-  }
-
-  #donation-failed {
+  #donation-success, #user-winner, #donation-failed {
     background-color: var(--primary);
   }
 `
+
+export const WhatsappLink = styled.a`
+  background-color: #25D366;
+  padding: 8px 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-decoration: none;
+`
+
+export const WhatsappIcon = styled(Whatsapp)`
+  width: 15px;
+  margin-right: 5px;
+`
+
+export const EmailIcon = styled(Email)`
+  width: 15px;
+  margin-right: 5px;
+  color: var(--primary);
+`
+
+export const TelIcon = styled(TelephoneFill)`
+  width: 15px;
+  margin-right: 5px;
+  color: var(--primary);
+`
+
+export const UserIcon = styled(User)`
+  width: 15px;
+  margin-right: 5px;
+  color: var(--primary);
+`
+
+export const InfoIcon = styled(InfoCircleFill)`
+  width: 15px;
+  margin-right: 5px;
+  color: var(--primary);
+`
+
+export const BoxModal = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: white;
+  box-shadow: 24px;
+  padding: 30px;
+  border-radius: 20px;
+
+  h2 {
+    font-size: larger;
+    margin-bottom: 20px;
+    color: var(--primary);
+  }
+
+  p {
+    word-wrap: break-word;
+    margin-bottom: 2px;
+  }
+`
+

@@ -21,5 +21,5 @@ export const schemaUserInfos = yup.object().shape({
   }),
   password: yup.string().required().min(8).max(30),
   confirmPassword: yup.string().required().oneOf([yup.ref('password'), null]),
-  moreInfo: yup.string().max(280)
+  additionalInformation: yup.string().max(280)
 })

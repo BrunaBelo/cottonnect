@@ -5,7 +5,7 @@ import {
   Main,
   InfoAboutUser,
   UserInput,
-  UserInputMoreInfo,} from "./styles"
+  UserInputadditionalInformation,} from "./styles"
 
 import ReactInputMask from "react-input-mask";
 import {schemaUserInfos} from './yup-schema';
@@ -25,7 +25,7 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
   const [cpf, setCpf] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-  const [moreInfo, setMoreInfo] = useState("")
+  const [additionalInformation, setadditionalInformation] = useState("")
   const [errors, setErrors] = useState(defaultErrorsStep1())
 
   // Metodo para lidar com informacoes do usuario
@@ -38,7 +38,7 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
         name,
         email,
         password,
-        moreInfo,
+        additionalInformation,
         phoneNumber: formatData.phoneNumber(phoneNumber),
         cpf: formatData.cpf(cpf)
       })
@@ -137,10 +137,10 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
 
           </InfoAboutUser>
 
-          <UserInputMoreInfo
-            name="moreInfo"
-            value={moreInfo}
-            onChange={(e)=>setMoreInfo(e.target.value)}
+          <UserInputadditionalInformation
+            name="additionalInformation"
+            value={additionalInformation}
+            onChange={(e)=>setadditionalInformation(e.target.value)}
             multiline
             minRows="3"
             maxRows="6"
@@ -158,7 +158,7 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
       title="Crie sua conta!"
       main={renderMain}
       handleFormValidation={handleFormInfo}
-      formData={handleDataStep1(name, email, phoneNumber, cpf, password, confirmPassword, moreInfo)}
+      formData={handleDataStep1(name, email, phoneNumber, cpf, password, confirmPassword, additionalInformation)}
       schema = {schemaUserInfos}
     />
   );

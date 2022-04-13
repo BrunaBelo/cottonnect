@@ -1,12 +1,12 @@
 // Metodo para tratar e formatar as informacoes inputadas pelo usuario
 export function handleDataStep1(
-  name: string, 
-  email: string, 
-  phoneNumber: string, 
-  cpf: string, 
-  password: string, 
-  confirmPassword: string, 
-  moreInfo: string) {
+  name: string,
+  email: string,
+  phoneNumber: string,
+  cpf: string,
+  password: string,
+  confirmPassword: string,
+  additionalInformation: string) {
   return {
     name,
     email,
@@ -14,7 +14,7 @@ export function handleDataStep1(
     cpf: formatData.cpf(cpf),
     password,
     confirmPassword,
-    moreInfo
+    additionalInformation
   }
 }
 

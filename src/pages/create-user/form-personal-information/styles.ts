@@ -31,7 +31,7 @@ export const UserInput = styled(TextField)`
   }
 `
 
-export const UserInputMoreInfo = styled(UserInput)`
+export const UserInputadditionalInformation = styled(UserInput)`
   width: 100%;
 `
 

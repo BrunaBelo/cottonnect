@@ -32,7 +32,7 @@ export const getBidWinner = async(auctionId: String): Promise<Bidding> => {
 
   try {
     const response = await api.get("/biddings/get-winner", { params: { auctionId: auctionId } });
-    bidding = response.data;
+    bidding = response.data[0];
   } catch (error) {
     console.log(`Erro ao buscar ganhador do leilão ${error}`);
   }

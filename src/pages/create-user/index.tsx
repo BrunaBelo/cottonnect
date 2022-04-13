@@ -17,7 +17,7 @@ export default function CreateUser () {
     cpf: '',
     phoneNumber: '',
     password: '',
-    moreInfo: ''
+    additionalInformation: ''
   } as UserData)
 
   const [address, setAddress] = useState({

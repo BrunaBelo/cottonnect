@@ -1,9 +1,12 @@
 import react, { useEffect, useState } from 'react'
 import { Tooltip } from '@material-ui/core'
-import { Actions, CoinIcon, Container, Content, Header, StatusIndicator } from './styles'
+import { Actions, CoinIcon, Container, Content, Header, SeeDetails, StatusIndicator } from './styles'
 import { Auction } from '../../interfaces/auction'
 import { Bidding } from '../../interfaces/bidding'
 import { getBidWinner } from '../../service/bidding'
+import { UserData } from '../../interfaces/user-data'
+import UserModal from './modal-user'
+import Confetti from 'react-confetti';
 
 interface AuctionStatus {
   open: string,
@@ -60,6 +63,10 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
   const [buttonsText, setButtonsText] = useState({confirm: "", reject: ""});
   const [bidWinner, setBidWinner] = useState({} as Bidding);
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     getStatusTitle();
     getButtonText();
@@ -88,6 +95,9 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
 
   return(
     <Container>
+      {
+        open ? <Confetti/> : <></>
+      }
       <Header>
         <h1>{auction.donationObject.title}</h1>
         <div>
@@ -108,20 +118,37 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
       </Header>
       <Content>
         <p>{auction.donationObject.description}</p>
+        <SeeDetails href={`/app/leiloes/${auction.id}`}>
+          Ver detalhes
+        </SeeDetails>
         {
-          status == "waiting" ?
+          status != "open" ?
           <Actions>
-            <Tooltip title={donationSuccessButtonText}>
-              <button id="donation-success">{buttonsText.confirm}</button>
-            </Tooltip>
-            <Tooltip title={donationFailedButtonText}>
-              <button id="donation-failed">{buttonsText.reject}</button>
-            </Tooltip>
+            {
+              status == "waiting" ?
+                <>
+                  <Tooltip title={donationSuccessButtonText}>
+                    <button id="donation-success">{buttonsText.confirm}</button>
+                  </Tooltip>
+                  <Tooltip title={donationFailedButtonText}>
+                    <button id="donation-failed">{buttonsText.reject}</button>
+                  </Tooltip>
+                </>
+              :
+                <></>
+            }
+            <button id="user-winner" onClick={handleOpen}>Ver usuário ganhador</button>
           </Actions>
           :
           <></>
         }
       </Content>
+      <UserModal
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        user={bidWinner.user as UserData}
+      />
     </Container>
   )
 }
