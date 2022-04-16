@@ -40,7 +40,7 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
 
   const statusTitle: AuctionStatus = {
     "open": "Aberto",
-    "waiting": "Aguardando Troca",
+    "waiting": "Em Andamento",
     "success": "Concluído",
   }
 
