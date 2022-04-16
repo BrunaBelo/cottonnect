@@ -11,7 +11,7 @@ export const Container = styled.div`
   }
 
   @media(max-width: 900px) {
-    width: 60vw;
+    width: 40vw;
   }
 
   @media(max-width: 599px) {
@@ -68,8 +68,8 @@ export const CardPhoto = styled.img`
   }
 
   @media(max-width: 900px) {
-    width: 60vw;
-    height: 60vw;
+    width: 40vw;
+    height: 36vw;
   }
 
   @media(max-width: 599px) {

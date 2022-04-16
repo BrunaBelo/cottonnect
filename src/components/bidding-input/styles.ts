@@ -60,4 +60,9 @@ export const AlreadySendingBid = styled.p`
   background-color: #E68282;
   border-radius: 10px;
   padding: 10px;
+
+
+  @media(max-width: 928px){
+    padding: 10px 5px;
+  }
 `

@@ -9,18 +9,35 @@ export const Container = styled.div`
 export const Main = styled.div`
   width: 100%;
   padding: 30px 50px;
-
-  @media(max-width: 900px){
-    padding: 30px 10px;
-  }
 `
 
 export const AuctionList = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   row-gap: 30px;
+  column-gap: 30px;
+
+  @media(max-width: 1200px){
+    column-gap: 100px;
+  }
+
+  @media(max-width: 1099px){
+    column-gap: 65px;
+  }
+
+  @media(max-width: 1012px){
+    column-gap: 60px;
+  }
+
+  @media(max-width: 999px){
+    column-gap: 40px;
+  }
+
+  @media(max-width: 950px){
+    column-gap: 20px;
+  }
 
   @media(max-width: 900px){
     flex-direction: column;
