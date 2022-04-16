@@ -32,6 +32,12 @@ export const DonationDetails = styled.div`
     margin-bottom: 20px;
   }
 
+  #lengthBidding {
+    font-size: 12px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
   #link-buttons {
     margin-bottom: 20px;
     a {
@@ -47,7 +53,6 @@ export const DonationDetails = styled.div`
         opacity: .75;
       }
     }
-
   }
 `
 

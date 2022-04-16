@@ -14,13 +14,24 @@ export default function AuctionCard({
   auction: {
     id: auctionId,
     closingDate,
-    donationObject: { title, photos }
+    donationObject: { title, photos },
+    biddings
   }}: AuctionCardData) {
-
 
   const sendBid = async(bidAmount: number):Promise<void> => {
     const bid = await createBidding({bidAmount: bidAmount, auctionId: auctionId});
     const result = Object.keys(bid).length != 0 ? true : false
+  }
+
+  const buildTextBiddingCount = (): string => {
+    switch (biddings.length) {
+      case 0:
+        return 'Seja o primeiro a dar um lance!';
+      case 1:
+        return 'Há apenas 1 lance nesse leilão.';
+      default:
+        return `Há ${biddings.length} lances nesse leilão.`;
+    }
   }
 
   return(
@@ -35,6 +46,9 @@ export default function AuctionCard({
         <p>Até {new Date(closingDate).toLocaleDateString("pt-BR")}</p>
         <div id="link-buttons">
           <a href={`/app/leiloes/${auctionId}`}>Ver detalhes</a>
+        </div>
+        <div id="lengthBidding">
+          <span>{buildTextBiddingCount()}</span>
         </div>
         <BiddingInput
           auctionId={auctionId}
