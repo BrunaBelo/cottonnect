@@ -16,13 +16,9 @@ interface AuctionStatus {
 
 interface ButtonMessageByProfile {
   owner: {
-    confirm: string,
-    reject: string,
     user: string
   },
   receiver: {
-    confirm: string,
-    reject: string,
     user: string
   }
 }
@@ -50,20 +46,16 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
 
   const buttonsMessage: ButtonMessageByProfile = {
     owner: {
-      confirm: "Confirmar Entrega",
-      reject: "Doação Rejeitada",
       user: "Ver Usuário Ganhador"
     },
     receiver: {
-      confirm: "Confirmar Recebimento",
-      reject: "Rejeitar Doação",
       user: "Ver Proprietário do Leilão"
     }
   }
 
   const [status, setStatus] = useState(auction.status as keyof AuctionStatus);
   const [statusText, setStatusText] = useState("");
-  const [buttonsText, setButtonsText] = useState({confirm: "", reject: "", user: ""});
+  const [buttonsText, setButtonsText] = useState({user: ""});
   const [bidWinner, setBidWinner] = useState({} as Bidding);
 
   const [open, setOpen] = useState(false);
@@ -128,13 +120,13 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
           status != "open" ?
           <Actions>
             {
-              status == "waiting" ?
+              profile == 'receiver' && status == "waiting" ?
                 <>
                   <Tooltip title={donationSuccessButtonText}>
-                    <button id="donation-success">{buttonsText.confirm}</button>
+                    <button id="donation-success">Confirmar Recebimento</button>
                   </Tooltip>
                   <Tooltip title={donationFailedButtonText}>
-                    <button id="donation-failed">{buttonsText.reject}</button>
+                    <button id="donation-failed">Rejeitar Doação</button>
                   </Tooltip>
                 </>
               :
