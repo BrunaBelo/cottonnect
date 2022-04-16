@@ -10,13 +10,18 @@ export default function Explorer() {
   const [auctions, setAuctions] = useState([] as Auction[])
 
   useEffect(() => {
-    getAll()
+    getAll();
   }, [])
 
   const getAll = async() => {
     const cityId = localStorage.getItem("user-city") as string
     const allAuctions = await getAllAuctions(cityId)
     setAuctions(allAuctions)
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto"
+    });
   }
 
   return (
