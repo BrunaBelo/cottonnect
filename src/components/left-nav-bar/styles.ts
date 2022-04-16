@@ -9,6 +9,7 @@ export const Container = styled.div`
   height: 100%;
   color: #424552;
   color: white;
+  z-index: 0;
 
   h1 {
     padding: 30px 10px;

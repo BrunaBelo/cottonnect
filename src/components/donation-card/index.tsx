@@ -17,11 +17,13 @@ interface AuctionStatus {
 interface ButtonMessageByProfile {
   owner: {
     confirm: string,
-    reject: string
+    reject: string,
+    user: string
   },
   receiver: {
     confirm: string,
-    reject: string
+    reject: string,
+    user: string
   }
 }
 
@@ -31,7 +33,6 @@ interface DonationCardProps {
 }
 
 export default function DonationCard({ profile, auction }: DonationCardProps) {
-
   const donationSuccessButtonText = "Ao clicar nesse botão, você confirma o recebimento do produto e transfere o valor do lance para o doador"
   const donationFailedButtonText = "Ao clicar nesse botão, você rejeita a doação"
 
@@ -50,17 +51,19 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
   const buttonsMessage: ButtonMessageByProfile = {
     owner: {
       confirm: "Confirmar Entrega",
-      reject: "Doação Rejeitada"
+      reject: "Doação Rejeitada",
+      user: "Ver Usuário Ganhador"
     },
     receiver: {
       confirm: "Confirmar Recebimento",
-      reject: "Rejeitar Doação"
+      reject: "Rejeitar Doação",
+      user: "Ver Proprietário do Leilão"
     }
   }
 
   const [status, setStatus] = useState(auction.status as keyof AuctionStatus);
   const [statusText, setStatusText] = useState("");
-  const [buttonsText, setButtonsText] = useState({confirm: "", reject: ""});
+  const [buttonsText, setButtonsText] = useState({confirm: "", reject: "", user: ""});
   const [bidWinner, setBidWinner] = useState({} as Bidding);
 
   const [open, setOpen] = useState(false);
@@ -137,7 +140,8 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
               :
                 <></>
             }
-            <button id="user-winner" onClick={handleOpen}>Ver usuário ganhador</button>
+
+            <button id="user-winner" onClick={handleOpen}>{buttonsText.user}</button>
           </Actions>
           :
           <></>
@@ -147,7 +151,7 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        user={bidWinner.user as UserData}
+        user={profile == 'owner' ? bidWinner.user as UserData : auction.user as UserData}
       />
     </Container>
   )

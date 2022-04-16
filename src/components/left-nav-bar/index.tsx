@@ -55,7 +55,7 @@ export default function LeftNavBar(props: Props) {
           <TextItem primary="Minhas Doações" />
         </ListItem>
 
-        <ListItem button component="a" href="/app/won-donations">
+        <ListItem button component="a" href="/app/leiloes-ganhos">
           <ListItemIcon>
             <StarBorderRounded htmlColor='white' />
           </ListItemIcon>
@@ -82,7 +82,7 @@ export default function LeftNavBar(props: Props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', zIndex: '0' }}>
       <AppBar
         elevation={0}
         color="transparent"
