@@ -77,7 +77,7 @@ export const Content = styled.div`
 `
 
 export const SeeDetails = styled.a`
-  color: white;
+  color: var(--primary);
   text-decoration: none;
   font-size: 15px;
   font-weight: bold;

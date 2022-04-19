@@ -30,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
 
   :root {
     --primary: #6A81D1;
-    --light-primary: rgba(106, 129, 209, .50);
+    --light-primary:  #ebedf5;
     --button-navigation: #5969F5;
     --button-navigation2: #ABB2EB;
     --font-color: #505873;
