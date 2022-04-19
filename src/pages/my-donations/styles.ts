@@ -19,6 +19,20 @@ export const DonationsCard = styled.div`
   width: 100%;
 `
 
+export const NoAuctions = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+
+  span {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary);
+  }
+`
+
 export const Loading = styled.div`
   display: flex;
   flex-direction: row;

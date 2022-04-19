@@ -3,7 +3,7 @@ import DonationCard from '../../components/donation-card'
 import LeftNavBar from '../../components/left-nav-bar'
 import { Auction } from '../../interfaces/auction'
 import { getAuctionsDonated } from '../../service/auction'
-import { Container, DonationsCard, Loading } from './styles'
+import { Container, DonationsCard, Loading, NoAuctions } from './styles'
 import { Box, CircularProgress, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel} from '@mui/lab';
 
@@ -60,7 +60,7 @@ export default function MyDonations({}){
       {
           loading ? <Loading><CircularProgress size={40} /></Loading>
           :
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: '100%', height: '100%' }}>
               <TabContext value={value}>
                 <TabList onChange={handleChange}>
                   <Tab label="Abertos" value="1" />
@@ -71,7 +71,26 @@ export default function MyDonations({}){
                 <DonationsCard>
                   <TabPanel value="1">
                       {
-                        auctionsOpen.map(auction => {
+                        auctionsOpen != null && auctionsOpen.length > 0 ?
+                          auctionsOpen.map(auction => {
+                            return(
+                              <DonationCard
+                                profile='owner'
+                                auctionParam={auction}
+                              />
+                            )
+                          })
+                        :
+                          <NoAuctions>
+                            <span>Nenhum leilão aberto foi encontrado.</span>
+                          </NoAuctions>
+                      }
+                  </TabPanel>
+
+                  <TabPanel value="2">
+                    {
+                      auctionsInProgress != null && auctionsInProgress.length > 0 ?
+                        auctionsInProgress.map(auction => {
                           return(
                             <DonationCard
                               profile='owner'
@@ -79,45 +98,46 @@ export default function MyDonations({}){
                             />
                           )
                         })
-                      }
-                  </TabPanel>
-
-                  <TabPanel value="2">
-                    {
-                      auctionsInProgress.map(auction => {
-                        return(
-                          <DonationCard
-                            profile='owner'
-                            auctionParam={auction}
-                          />
-                        )
-                      })
+                      :
+                        <NoAuctions>
+                          <span>Nenhum leilão em progresso foi encontrado.</span>
+                        </NoAuctions>
                     }
                   </TabPanel>
 
                   <TabPanel value="3">
                     {
-                      auctionsCompleted.map(auction => {
-                        return(
-                          <DonationCard
-                            profile='owner'
-                            auctionParam={auction}
-                          />
-                        )
-                      })
+                      auctionsCompleted != null && auctionsCompleted.length > 0 ?
+                        auctionsCompleted.map(auction => {
+                          return(
+                            <DonationCard
+                              profile='owner'
+                              auctionParam={auction}
+                            />
+                          )
+                        })
+                      :
+                        <NoAuctions>
+                          <span>Nenhum leilão em concluído foi encontrado.</span>
+                        </NoAuctions>
                     }
                   </TabPanel>
 
                   <TabPanel value="4">
                     {
-                      auctionsRejected.map(auction => {
-                        return(
-                          <DonationCard
-                            profile='owner'
-                            auctionParam={auction}
-                          />
-                        )
-                      })
+                      auctionsRejected != null && auctionsRejected.length > 0 ?
+                        auctionsRejected.map(auction => {
+                          return(
+                            <DonationCard
+                              profile='owner'
+                              auctionParam={auction}
+                            />
+                          )
+                        })
+                      :
+                        <NoAuctions>
+                          <span>Nenhum leilão em rejeitado foi encontrado.</span>
+                        </NoAuctions>
                     }
                   </TabPanel>
                 </DonationsCard>
