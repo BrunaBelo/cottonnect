@@ -7,7 +7,7 @@ import { getBidWinner } from '../../service/bidding'
 import { UserData } from '../../interfaces/user-data'
 import UserModal from './modal-user'
 import Confetti from 'react-confetti';
-import { rejectDonation } from '../../service/auction'
+import { acceptDonation, rejectDonation } from '../../service/auction'
 
 interface AuctionStatus {
   waiting: string,
@@ -75,6 +75,11 @@ export default function DonationCard({ profile, auctionParam }: DonationCardProp
     setAuction(auctionResponse);
   }
 
+  const accept = async () => {
+    const auctionResponse = await acceptDonation(auction.id);
+    setAuction(auctionResponse);
+  }
+
   const getWinner = async () => {
     const winner = await getBidWinner(auction.id);
     setBidWinner(winner);
@@ -118,7 +123,7 @@ export default function DonationCard({ profile, auctionParam }: DonationCardProp
               profile == 'receiver' && auction.status == "waiting" ?
                 <>
                   <Tooltip title={donationSuccessButtonText}>
-                    <button id="donation-success">Confirmar Recebimento</button>
+                    <button id="donation-success" onClick={() => accept()}>Confirmar Recebimento</button>
                   </Tooltip>
                   <Tooltip title={donationFailedButtonText}>
                     <button id="donation-failed" onClick={() => reject()}>Rejeitar Doação</button>

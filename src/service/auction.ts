@@ -98,3 +98,16 @@ export const rejectDonation = async(auctionId: string): Promise<Auction> => {
 
   return auction;
 }
+
+export const acceptDonation = async(auctionId: string): Promise<Auction> => {
+  let auction = {} as Auction;
+
+  try {
+    const response = await api.get(`auctions/accept/${auctionId}`);
+    auction = response.data;
+  } catch (error) {
+    console.log('Erro ao aceitar doação');
+  }
+
+  return auction;
+}
