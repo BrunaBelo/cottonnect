@@ -10,6 +10,8 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 export default function WonAuctions() {
   const [auctionsInProgress, setAuctionsInProgress] = useState([] as Auction[]);
   const [auctionsCompleted, setAuctionsCompleted] = useState([] as Auction[]);
+  const [auctionsRejected, setAuctionsRejected] = useState([] as Auction[]);
+
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(false);
 
@@ -31,8 +33,13 @@ export default function WonAuctions() {
         return auction.status === 'success';
       });
 
+      const auctionsRejected = auctionsDonated.filter(function (auction, index){
+        return auction.status === 'rejected';
+      });
+
       setAuctionsInProgress(auctionsInProgress);
       setAuctionsCompleted(auctionsCompleted);
+      setAuctionsRejected(auctionsRejected);
 
       setLoading(false);
     } catch (error) {
@@ -55,6 +62,7 @@ export default function WonAuctions() {
                 <TabList onChange={handleChange}>
                   <Tab label="Em Andamento" value="1" />
                   <Tab label="Concluídos" value="2" />
+                  <Tab label="Rejeitados" value="3" />
                 </TabList>
                 <DonationsCard>
                   <TabPanel value="1">
@@ -63,7 +71,7 @@ export default function WonAuctions() {
                         return(
                           <DonationCard
                             profile='receiver'
-                            auction={auction}
+                            auctionParam={auction}
                           />
                         )
                       })
@@ -76,7 +84,20 @@ export default function WonAuctions() {
                         return(
                           <DonationCard
                             profile='receiver'
-                            auction={auction}
+                            auctionParam={auction}
+                          />
+                        )
+                      })
+                    }
+                  </TabPanel>
+
+                  <TabPanel value="3">
+                    {
+                      auctionsRejected.map(auction => {
+                        return(
+                          <DonationCard
+                            profile='receiver'
+                            auctionParam={auction}
                           />
                         )
                       })

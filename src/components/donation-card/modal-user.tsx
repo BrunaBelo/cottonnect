@@ -10,7 +10,6 @@ interface ModalProps {
   user: UserData
 }
 
-
 export default function UserModal({ open, handleOpen, handleClose, user }: ModalProps) {
   const defaultMessage = 'Ganhei'
 

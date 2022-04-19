@@ -97,7 +97,7 @@ export const Actions = styled.div`
     color: white;
   }
 
-  #donation-success, #user-winner, #donation-failed {
+  #donation-success, #user-winner, #donation-failed, #reactivate-auction {
     background-color: var(--primary);
   }
 `

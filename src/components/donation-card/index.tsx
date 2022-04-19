@@ -7,6 +7,7 @@ import { getBidWinner } from '../../service/bidding'
 import { UserData } from '../../interfaces/user-data'
 import UserModal from './modal-user'
 import Confetti from 'react-confetti';
+import { rejectDonation } from '../../service/auction'
 
 interface AuctionStatus {
   waiting: string,
@@ -24,12 +25,13 @@ interface ButtonMessageByProfile {
 
 interface DonationCardProps {
   profile: string,
-  auction: Auction
+  auctionParam: Auction
 }
 
-export default function DonationCard({ profile, auction }: DonationCardProps) {
+export default function DonationCard({ profile, auctionParam }: DonationCardProps) {
   const donationSuccessButtonText = "Ao clicar nesse botão, você confirma o recebimento do produto e transfere o valor do lance para o doador"
   const donationFailedButtonText = "Ao clicar nesse botão, você rejeita a doação"
+  const reactivateAuctionButtonText = "Não há lances para gerar um novo ganhador, ao clicar nesse botão o leilão sera reativado para receber novos lances"
 
   const statusColors: AuctionStatus = {
     "waiting": "#fbaf00",
@@ -48,6 +50,7 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
   const [buttonsText, setButtonsText] = useState({user: ""});
   const [bidWinner, setBidWinner] = useState({} as Bidding);
   const [open, setOpen] = useState(false);
+  const [auction, setAuction] = useState(auctionParam as Auction);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -67,9 +70,18 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
     setButtonsText(buttonsMessage[profile as keyof ButtonMessageByProfile])
   }
 
+  const reject = async () => {
+    const auctionResponse = await rejectDonation(auction.id);
+    setAuction(auctionResponse);
+  }
+
   const getWinner = async () => {
     const winner = await getBidWinner(auction.id);
     setBidWinner(winner);
+  }
+
+  const reactivateAuction = async () => {
+
   }
 
   return(
@@ -82,7 +94,7 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
         <div>
           <StatusIndicator backgroundColor={getStatusColor()}>
             {
-              auction.status != "open" ?
+              auction.status != "open" && auction.status != "rejected"?
               <>
                 <span id="number-coin">{bidWinner.bidAmount}</span>
                 <CoinIcon/>
@@ -109,14 +121,27 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
                     <button id="donation-success">Confirmar Recebimento</button>
                   </Tooltip>
                   <Tooltip title={donationFailedButtonText}>
-                    <button id="donation-failed">Rejeitar Doação</button>
+                    <button id="donation-failed" onClick={() => reject()}>Rejeitar Doação</button>
                   </Tooltip>
                 </>
               :
                 <></>
             }
 
-            <button id="user-winner" onClick={handleOpen}>{buttonsText.user}</button>
+            { auction.status != "rejected" ?
+                <button id="user-winner" onClick={handleOpen}>{buttonsText.user}</button>
+              :
+                <></>
+            }
+
+            { auction.status == "rejected" && profile == "owner"?
+                <Tooltip title={reactivateAuctionButtonText}>
+                  <button id="reactivate-auction" onClick={() => reactivateAuction()}>Reativar Leilão</button>
+                </Tooltip>
+              :
+                <></>
+            }
+
           </Actions>
           :
           <></>

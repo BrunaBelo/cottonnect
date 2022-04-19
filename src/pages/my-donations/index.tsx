@@ -11,6 +11,7 @@ export default function MyDonations({}){
   const [auctionsOpen, setAuctionsOpen] = useState([] as Auction[]);
   const [auctionsInProgress, setAuctionsInProgress] = useState([] as Auction[]);
   const [auctionsCompleted, setAuctionsCompleted] = useState([] as Auction[]);
+  const [auctionsRejected, setAuctionsRejected] = useState([] as Auction[]);
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(false);
 
@@ -35,9 +36,14 @@ export default function MyDonations({}){
         return auction.status === 'success';
       });
 
+      const auctionsRejected = auctionsDonated.filter(function (auction, index){
+        return auction.status === 'rejected';
+      });
+
       setAuctionsOpen(auctionsOpen);
       setAuctionsInProgress(auctionsInProgress);
       setAuctionsCompleted(auctionsCompleted);
+      setAuctionsRejected(auctionsRejected);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -60,6 +66,7 @@ export default function MyDonations({}){
                   <Tab label="Abertos" value="1" />
                   <Tab label="Em Andamento" value="2" />
                   <Tab label="Concluídos" value="3" />
+                  <Tab label="Rejeitados" value="4" />
                 </TabList>
                 <DonationsCard>
                   <TabPanel value="1">
@@ -68,7 +75,7 @@ export default function MyDonations({}){
                           return(
                             <DonationCard
                               profile='owner'
-                              auction={auction}
+                              auctionParam={auction}
                             />
                           )
                         })
@@ -81,7 +88,7 @@ export default function MyDonations({}){
                         return(
                           <DonationCard
                             profile='owner'
-                            auction={auction}
+                            auctionParam={auction}
                           />
                         )
                       })
@@ -94,7 +101,20 @@ export default function MyDonations({}){
                         return(
                           <DonationCard
                             profile='owner'
-                            auction={auction}
+                            auctionParam={auction}
+                          />
+                        )
+                      })
+                    }
+                  </TabPanel>
+
+                  <TabPanel value="4">
+                    {
+                      auctionsRejected.map(auction => {
+                        return(
+                          <DonationCard
+                            profile='owner'
+                            auctionParam={auction}
                           />
                         )
                       })

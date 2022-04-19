@@ -85,3 +85,16 @@ export const getAuctionsWon = async(): Promise<Auction[]> => {
 
   return auctions;
 }
+
+export const rejectDonation = async(auctionId: string): Promise<Auction> => {
+  let auction = {} as Auction;
+
+  try {
+    const response = await api.get(`auctions/reject/${auctionId}`);
+    auction = response.data;
+  } catch (error) {
+    console.log('Erro ao rejeitar doação');
+  }
+
+  return auction;
+}
