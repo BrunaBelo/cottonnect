@@ -1,5 +1,5 @@
-import react, { useState } from "react";
-import { Box, Modal, Typography } from "@mui/material";
+import react from "react";
+import { Modal, Typography } from "@mui/material";
 import { UserData } from "../../interfaces/user-data";
 import { WhatsappLink, WhatsappIcon, EmailIcon, BoxModal, TelIcon, UserIcon, InfoIcon } from "./styles";
 
@@ -22,7 +22,7 @@ export default function UserModal({ open, handleOpen, handleClose, user }: Modal
       aria-describedby="modal-modal-description"
     >
       <BoxModal>
-        <h2>Dados do Ganhador</h2>
+        <h2>Dados do Usuário</h2>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           {
             user ?

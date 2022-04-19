@@ -16,6 +16,7 @@ export const Container = styled.div`
   padding: 10px;
   border-radius: 10px;
   width: 100%;
+  margin-bottom: 10px;
 `
 
 export const Header = styled.div`

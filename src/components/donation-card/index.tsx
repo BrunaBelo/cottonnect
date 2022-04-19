@@ -9,7 +9,6 @@ import UserModal from './modal-user'
 import Confetti from 'react-confetti';
 
 interface AuctionStatus {
-  open: string,
   waiting: string,
   success: string,
 }
@@ -33,15 +32,8 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
   const donationFailedButtonText = "Ao clicar nesse botão, você rejeita a doação"
 
   const statusColors: AuctionStatus = {
-    "open": "#5829a7",
     "waiting": "#fbaf00",
     "success": "#43d375",
-  }
-
-  const statusTitle: AuctionStatus = {
-    "open": "Aberto",
-    "waiting": "Em Andamento",
-    "success": "Concluído",
   }
 
   const buttonsMessage: ButtonMessageByProfile = {
@@ -53,30 +45,22 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
     }
   }
 
-  const [status, setStatus] = useState(auction.status as keyof AuctionStatus);
-  const [statusText, setStatusText] = useState("");
   const [buttonsText, setButtonsText] = useState({user: ""});
   const [bidWinner, setBidWinner] = useState({} as Bidding);
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    getStatusTitle();
     getButtonText();
 
-    if (status != 'open'){
+    if (auction.status != 'open'){
       getWinner();
     }
-  }, [statusText])
+  }, [])
 
   const getStatusColor = (): string => {
-    return statusColors[status]
-  }
-
-  const getStatusTitle = () => {
-    setStatusText(statusTitle[status])
+    return statusColors[auction.status as keyof AuctionStatus]
   }
 
   const getButtonText = () => {
@@ -97,9 +81,8 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
         <h1>{auction.donationObject.title}</h1>
         <div>
           <StatusIndicator backgroundColor={getStatusColor()}>
-            <span>{statusText}</span>
             {
-              status != "open" ?
+              auction.status != "open" ?
               <>
                 <span id="number-coin">{bidWinner.bidAmount}</span>
                 <CoinIcon/>
@@ -117,10 +100,10 @@ export default function DonationCard({ profile, auction }: DonationCardProps) {
           Ver detalhes
         </SeeDetails>
         {
-          status != "open" ?
+          auction.status != "open" ?
           <Actions>
             {
-              profile == 'receiver' && status == "waiting" ?
+              profile == 'receiver' && auction.status == "waiting" ?
                 <>
                   <Tooltip title={donationSuccessButtonText}>
                     <button id="donation-success">Confirmar Recebimento</button>
