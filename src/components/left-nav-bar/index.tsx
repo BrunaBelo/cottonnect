@@ -15,7 +15,7 @@ import { Menu,
          StarBorderRounded,
          DashboardOutlined,
          AccountCircleOutlined } from '@material-ui/icons';
-import { Container, TextItem } from './styles';
+import { CoinIcon, CoinInformation, Container, TextItem } from './styles';
 
 const drawerWidth = 240;
 interface Props {
@@ -32,50 +32,57 @@ export default function LeftNavBar(props: Props) {
 
   const drawer = (
     <Container>
-      <h1>Cottonnect</h1>
-      <List>
-        <ListItem button component="a" href="/app/explorer">
-          <ListItemIcon>
-            <DashboardOutlined htmlColor='white' />
-          </ListItemIcon>
-          <TextItem primary="Explorar" />
-        </ListItem>
+      <div>
 
-        <ListItem button component="a" href="/app/novo-leilao">
-          <ListItemIcon>
-            <AddRounded htmlColor='white' />
-          </ListItemIcon>
-          <TextItem primary="Doar" />
-        </ListItem>
+        <h1>Cottonnect</h1>
+        <List>
+          <ListItem button component="a" href="/app/explorer">
+            <ListItemIcon>
+              <DashboardOutlined htmlColor='white' />
+            </ListItemIcon>
+            <TextItem primary="Explorar" />
+          </ListItem>
 
-        <ListItem button component="a" href="/app/minhas-doacoes">
-          <ListItemIcon>
-            <FavoriteBorderRounded htmlColor='white' />
-          </ListItemIcon>
-          <TextItem primary="Minhas Doações" />
-        </ListItem>
+          <ListItem button component="a" href="/app/novo-leilao">
+            <ListItemIcon>
+              <AddRounded htmlColor='white' />
+            </ListItemIcon>
+            <TextItem primary="Doar" />
+          </ListItem>
 
-        <ListItem button component="a" href="/app/leiloes-ganhos">
-          <ListItemIcon>
-            <StarBorderRounded htmlColor='white' />
-          </ListItemIcon>
-          <TextItem primary="Doações Ganhas" />
-        </ListItem>
+          <ListItem button component="a" href="/app/minhas-doacoes">
+            <ListItemIcon>
+              <FavoriteBorderRounded htmlColor='white' />
+            </ListItemIcon>
+            <TextItem primary="Minhas Doações" />
+          </ListItem>
 
-        <ListItem button component="a" href="/app/account">
-          <ListItemIcon>
-            <AccountCircleOutlined htmlColor='white' />
-          </ListItemIcon>
-          <TextItem primary="Minha Conta" />
-        </ListItem>
+          <ListItem button component="a" href="/app/leiloes-ganhos">
+            <ListItemIcon>
+              <StarBorderRounded htmlColor='white' />
+            </ListItemIcon>
+            <TextItem primary="Doações Ganhas" />
+          </ListItem>
 
-        <ListItem button component="a" href="/app/logout">
-          <ListItemIcon>
-            <ExitToAppRounded htmlColor='white' />
-          </ListItemIcon>
-          <TextItem primary="Sair" />
-        </ListItem>
-      </List>
+          <ListItem button component="a" href="/app/account">
+            <ListItemIcon>
+              <AccountCircleOutlined htmlColor='white' />
+            </ListItemIcon>
+            <TextItem primary="Minha Conta" />
+          </ListItem>
+
+          <ListItem button component="a" href="/app/logout">
+            <ListItemIcon>
+              <ExitToAppRounded htmlColor='white' />
+            </ListItemIcon>
+            <TextItem primary="Sair" />
+          </ListItem>
+        </List>
+      </div>
+
+      <CoinInformation>
+        <span><CoinIcon/>Saldo: 130</span>
+      </CoinInformation>
     </Container>
   );
 
