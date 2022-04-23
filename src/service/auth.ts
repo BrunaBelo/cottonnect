@@ -1,4 +1,4 @@
-import api from "./api";
+import axios from "axios";
 
 export const tokenValidation = async(): Promise<boolean> => {
   const token = localStorage.getItem("user-token");
@@ -6,11 +6,19 @@ export const tokenValidation = async(): Promise<boolean> => {
     return false;
   }
 
-  //implementar chamada a api para verificar validade do token
   try{
-    const response = await api.get("users/token-renewal");
+    const response = await axios.get("users/token-renewal", {
+      baseURL: process.env.REACT_APP_BASE_URL,
+      withCredentials: false,
+      headers: {
+        'Access-Control-Allow-Origin' : '*',
+        'Content-Type' : 'application/json;charset=utf-8',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        "x-access-token": token
+        }
+    });
+
     const newToken = response.data.token;
-    console.log(newToken)
     localStorage.setItem("user-token", newToken);
   }
   catch{
@@ -18,4 +26,4 @@ export const tokenValidation = async(): Promise<boolean> => {
   }
 
   return true;
-  }
+}
