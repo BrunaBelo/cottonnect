@@ -25,10 +25,11 @@ interface ButtonMessageByProfile {
 
 interface DonationCardProps {
   profile: string,
-  auctionParam: Auction
+  auctionParam: Auction,
+  setUpdateAuctions: react.Dispatch<react.SetStateAction<boolean>>
 }
 
-export default function DonationCard({ profile, auctionParam }: DonationCardProps) {
+export default function DonationCard({ profile, auctionParam , setUpdateAuctions}: DonationCardProps) {
   const donationSuccessButtonText = "Ao clicar nesse botão, você confirma o recebimento do produto e transfere o valor do lance para o doador"
   const donationFailedButtonText = "Ao clicar nesse botão, você rejeita a doação"
   const reactivateAuctionButtonText = "Não há lances para gerar um novo ganhador, ao clicar nesse botão o leilão sera reativado para receber novos lances"
@@ -71,13 +72,19 @@ export default function DonationCard({ profile, auctionParam }: DonationCardProp
   }
 
   const reject = async () => {
+    setUpdateAuctions(false);
+
     const auctionResponse = await rejectDonation(auction.id);
     setAuction(auctionResponse);
+    setUpdateAuctions(true);
   }
 
   const accept = async () => {
+    setUpdateAuctions(false);
+
     const auctionResponse = await acceptDonation(auction.id);
     setAuction(auctionResponse);
+    setUpdateAuctions(true);
   }
 
   const getWinner = async () => {

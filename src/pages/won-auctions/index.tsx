@@ -11,13 +11,13 @@ export default function WonAuctions() {
   const [auctionsInProgress, setAuctionsInProgress] = useState([] as Auction[]);
   const [auctionsCompleted, setAuctionsCompleted] = useState([] as Auction[]);
   const [auctionsRejected, setAuctionsRejected] = useState([] as Auction[]);
-
+  const [updateAuctions, setUpdateAuctions] = useState(false);
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getAuctions();
-  }, [])
+  }, [updateAuctions])
 
   const getAuctions = (async () => {
     try {
@@ -73,6 +73,7 @@ export default function WonAuctions() {
                             <DonationCard
                               profile='receiver'
                               auctionParam={auction}
+                              setUpdateAuctions={setUpdateAuctions}
                             />
                           )
                         })
@@ -91,6 +92,7 @@ export default function WonAuctions() {
                             <DonationCard
                               profile='receiver'
                               auctionParam={auction}
+                              setUpdateAuctions={setUpdateAuctions}
                             />
                           )
                         })
@@ -109,6 +111,7 @@ export default function WonAuctions() {
                             <DonationCard
                               profile='receiver'
                               auctionParam={auction}
+                              setUpdateAuctions={setUpdateAuctions}
                             />
                           )
                         })

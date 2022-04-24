@@ -64,7 +64,7 @@ export default function LeftNavBar(props: Props) {
             <TextItem primary="Doações Ganhas" />
           </ListItem>
 
-          <ListItem button component="a" href="/app/account">
+          <ListItem button component="a" href="/app/minha-conta">
             <ListItemIcon>
               <AccountCircleOutlined htmlColor='white' />
             </ListItemIcon>

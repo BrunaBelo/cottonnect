@@ -14,10 +14,11 @@ export default function MyDonations({}){
   const [auctionsRejected, setAuctionsRejected] = useState([] as Auction[]);
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(false);
+  const [updateAuctions, setUpdateAuctions] = useState(false);
 
   useEffect(() => {
     getAuctions();
-  }, [])
+  }, [updateAuctions])
 
   const getAuctions = (async () => {
     try {
@@ -77,6 +78,7 @@ export default function MyDonations({}){
                               <DonationCard
                                 profile='owner'
                                 auctionParam={auction}
+                                setUpdateAuctions={setUpdateAuctions}
                               />
                             )
                           })
@@ -95,6 +97,7 @@ export default function MyDonations({}){
                             <DonationCard
                               profile='owner'
                               auctionParam={auction}
+                              setUpdateAuctions={setUpdateAuctions}
                             />
                           )
                         })
@@ -113,6 +116,7 @@ export default function MyDonations({}){
                             <DonationCard
                               profile='owner'
                               auctionParam={auction}
+                              setUpdateAuctions={setUpdateAuctions}
                             />
                           )
                         })
@@ -131,6 +135,7 @@ export default function MyDonations({}){
                             <DonationCard
                               profile='owner'
                               auctionParam={auction}
+                              setUpdateAuctions={setUpdateAuctions}
                             />
                           )
                         })

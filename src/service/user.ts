@@ -19,6 +19,7 @@ export const login = async (email: string, password: string): Promise<boolean>  
     const response = await api.post('/users/login', {"email": email, "password": password})
     localStorage.setItem("user-token", response.data.token);
     localStorage.setItem("user-city", response.data.cityId);
+    localStorage.setItem("user-id", response.data.id);
     return response.data
   } catch (error) {
     return false

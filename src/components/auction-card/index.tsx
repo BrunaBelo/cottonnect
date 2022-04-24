@@ -15,7 +15,8 @@ export default function AuctionCard({
     id: auctionId,
     closingDate,
     donationObject: { title, photos },
-    biddings
+    biddings,
+    userId
   }}: AuctionCardData) {
 
   const sendBid = async(bidAmount: number):Promise<void> => {
@@ -50,10 +51,16 @@ export default function AuctionCard({
         <div id="lengthBidding">
           <span>{buildTextBiddingCount()}</span>
         </div>
-        <BiddingInput
-          auctionId={auctionId}
-          sendBid={sendBid}
-        />
+        {
+          userId != localStorage.getItem("user-id") ?
+            <BiddingInput
+            auctionId={auctionId}
+            sendBid={sendBid}
+            />
+          :
+          <></>
+        }
+
       </DonationDetails>
     </Container>
   )
