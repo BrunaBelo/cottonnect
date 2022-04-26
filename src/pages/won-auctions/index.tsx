@@ -3,9 +3,10 @@ import DonationCard from "../../components/donation-card";
 import LeftNavBar from "../../components/left-nav-bar";
 import { Auction } from "../../interfaces/auction";
 import { getAuctionsWon } from "../../service/auction";
-import { Container, DonationsCard, Loading, NoAuctions } from "./styles";
-import { Box, CircularProgress, Tab } from '@mui/material';
+import { Container, DonationsCard, NoAuctions } from "./styles";
+import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
+import Loading from "../../components/loading";
 
 export default function WonAuctions() {
   const [auctionsInProgress, setAuctionsInProgress] = useState([] as Auction[]);
@@ -55,7 +56,7 @@ export default function WonAuctions() {
     <Container>
       <LeftNavBar />
         {
-          loading ? <Loading><CircularProgress size={40} /></Loading>
+          loading ? <Loading></Loading>
           :
             <Box sx={{ width: '100%' }}>
               <TabContext value={value}>

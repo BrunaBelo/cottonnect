@@ -33,11 +33,3 @@ export const NoAuctions = styled.div`
   }
 `
 
-export const Loading = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-`

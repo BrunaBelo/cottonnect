@@ -36,14 +36,6 @@ export const DonationsCard = styled.div`
   width: 100%;
 `
 
-export const Loading = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-`
 export const NoAuctions = styled.div`
   display: flex;
   flex-direction: row;

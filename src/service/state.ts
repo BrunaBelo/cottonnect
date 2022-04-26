@@ -1,7 +1,14 @@
 import api from "./api";
 
 export const getStates = async () => {
-  const result = await api.get('/states')
+  let states = {};
 
-  return result
+  try {
+    const result = await api.get('/states');
+    states = result.data;
+  } catch (error) {
+    console.log(`Erro ao buscar estados ${error}`);
+  }
+
+  return states;
 }

@@ -22,7 +22,6 @@ interface selectLocation {
 }
 
 function FormInfoAddress({index, componentState: [address, setAddress], saveUser}: PopUpProps) {
-
   const [statesList, setStatesList] = useState([] as selectLocation[])
   const [citiesList, setCitiesList] = useState([] as selectLocation[])
   const [state, setState] = useState("")
@@ -32,8 +31,8 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
   useEffect(() => {
     async function getStatesFromApi(){
       try{
-        const { data } = await getStates()
-        await populateSelectLocation(data, setStatesList)
+        const state = await getStates()
+        await populateSelectLocation(state, setStatesList)
       }catch{
         console.log('ERRO AO BUSCAR ESTADOS')
       }
@@ -46,8 +45,8 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
   async function onChangeState(e: any) {
     changeInputValue(errors, e, setState)
 
-    const { data } = await getCities(e.target.value)
-    await populateSelectLocation(data, setCitiesList)
+    const city = await getCities(e.target.value)
+    await populateSelectLocation(city, setCitiesList)
   }
 
   function onChangeCity(e: any) {

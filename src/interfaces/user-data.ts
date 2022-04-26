@@ -1,3 +1,5 @@
+import { City } from "./city"
+
 export interface UserData {
   name?: string,
   email?: string,
@@ -7,4 +9,5 @@ export interface UserData {
   additionalInformation?: string,
   stateId?: string,
   cityId?: string
+  city?: City
 }

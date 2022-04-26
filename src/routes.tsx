@@ -12,6 +12,7 @@ import ProtectedRoute from "./components/protected-route";
 import GuestRoute from "./components/guest-route"
 import MyDonations from "./pages/my-donations";
 import WonAuctions from "./pages/won-auctions";
+import UserEdition from "./pages/user-edition";
 
 export default function AppRoutes(){
 
@@ -32,6 +33,7 @@ export default function AppRoutes(){
         <Route path="/about"/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>
+          <Route path="minha-conta" element={setAsProtected(<UserEdition/>)}/>
           <Route path="explorer" element={setAsProtected(<Explorer/>)}/>
           <Route path="novo-leilao" element={setAsProtected(<NewAuction/>)}/>
           <Route path="leiloes/:id" element={setAsProtected(<AuctionDetails/>)}/>
