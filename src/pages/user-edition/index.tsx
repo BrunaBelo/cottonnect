@@ -91,13 +91,14 @@ export default function UserEdition() {
   }
 
   async function updateCurrentUser(): Promise<void> {
-    setErrors(defaultErrors())
+    setErrors(defaultErrors());
 
-    const resultForm = await validateForm(user, userSchema);
+    const resultForm = await validateForm(
+      { email, phoneNumber, additionalInformation, city, state }, userSchema);
     if(resultForm === true){
       await updateUser(user);
     }else{
-      setErrors(showErrors(resultForm as ErrorObj[], defaultErrors()))
+      setErrors(showErrors(resultForm as ErrorObj[], defaultErrors()));
     }
   }
 

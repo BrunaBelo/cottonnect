@@ -9,9 +9,17 @@ export const createUser = async(userData: UserData): Promise<AxiosResponse> => {
 }
 
 export const validateUser = async (type: string, value: any): Promise<boolean>  => {
-  const response = await api.get(`/users/validate-user?type=${type}&value=${value}`);
+  const userId = localStorage.getItem("user-id") || "";
+  let isValid = false;
 
-  return response.data.result;
+  try {
+    const response = await api.get(`/users/validate-user?type=${type}&value=${value}&userId=${userId}`);
+    isValid = response.data.result;
+  } catch (error) {
+    console.log("Erro ao buscar usuário", error);
+  }
+
+  return isValid;
 }
 
 export const login = async (email: string, password: string): Promise<boolean>  => {
@@ -46,7 +54,7 @@ export const getUser = async (userId: string): Promise<UserData> => {
     const response = await api.get(`users/${userId}`);
     user = response.data;
   } catch (error) {
-    console.log("Erro ao atualizar usuário", error);
+    console.log("Erro ao buscar usuário", error);
   }
 
   return user;
@@ -59,7 +67,7 @@ export const updateUser = async (userData: UserData): Promise<UserData> => {
     const response = await api.put(`users/`, userData);
     user = response.data;
   } catch (error) {
-    console.log("Erro ao buscar usuário", error);
+    console.log("Erro ao atualizar usuário", error);
   }
 
   return user;
