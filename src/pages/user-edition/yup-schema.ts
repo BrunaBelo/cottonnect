@@ -8,7 +8,7 @@ export const userSchema = yup.object().shape({
       const response = await validateUser("email", values)
       return response
   }),
-  phoneNumber: yup.string().required().min(11).max(11, { path: 'phoneNumber', message: "Telefone inválido" })
+  phoneNumber: yup.string().required().min(14).max(14)
     .test("Unique", { path: 'phoneNumber', message: "Telefone já existe" }, async (values) => {
     const response = await validateUser("phoneNumber", values)
     return response

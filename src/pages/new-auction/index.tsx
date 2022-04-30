@@ -66,7 +66,7 @@ export default function NewAuction() {
 
         setCategoryList(dataAux)
       }catch{
-        console.log('ERRO AO BUSCAR CATEGORIAS')
+        console.log('Erro ao buscar categorias')
       }
     }
     if(categoryList.length == 0){

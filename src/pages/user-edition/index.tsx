@@ -9,6 +9,7 @@ import { defaultErrors } from "./handle-data";
 import { changeInputValue, showErrors, validateForm } from "../../shared/form-configs/validate";
 import { userSchema } from "./yup-schema";
 import ErrorObj from "../../interfaces/error-obj";
+import ReactInputMask from "react-input-mask";
 import { Main,
   Container,
   EditUserInput,
@@ -23,6 +24,8 @@ import { Main,
   EditAdditionalInformationInput,
   UserIcon} from "./styles";
 import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
+import { AlertMessage } from "../auction-details/styles";
+import { City } from "../../interfaces/city";
 
 interface selectLocation {
   id: string,
@@ -40,11 +43,17 @@ export default function UserEdition() {
   const [citiesList, setCitiesList] = useState([] as selectLocation[]);
   const [errors, setErrors] = useState(defaultErrors());
   const [loading, setLoading] = useState(false);
+  const [loadingSave, setLoadingSave] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
     getCurrentUser();
     getStatesFromApi();
-  }, []);
+
+    setTimeout(() => {
+      setUpdated(false);
+    }, 5000)
+  }, [updated]);
 
   const getCurrentUser = (async () => {
     setLoading(true);
@@ -73,6 +82,7 @@ export default function UserEdition() {
     changeInputValue(errors, e, setState);
 
     const city = await getCities(e.target.value);
+    setCity("");
     await populateSelectLocation(city, setCitiesList);
   }
 
@@ -84,7 +94,7 @@ export default function UserEdition() {
     let locations: selectLocation[] = [];
 
     data.forEach((location: selectLocation) => {
-      locations.push({name: location.name, id: location.id})
+      locations.push({ name: location.name, id: location.id })
     });
 
     setList(locations);
@@ -96,11 +106,32 @@ export default function UserEdition() {
     const resultForm = await validateForm(
       { email, phoneNumber, additionalInformation, city, state }, userSchema);
     if(resultForm === true){
-      await updateUser(user);
+      setLoadingSave(true);
+      await updateUser(buildUser());
+      setUpdated(true);
+      setLoadingSave(false);
     }else{
       setErrors(showErrors(resultForm as ErrorObj[], defaultErrors()));
     }
   }
+
+  function buildUser(): UserData {
+    user.email = email;
+    user.phoneNumber = phoneNumber;
+    user.additionalInformation = additionalInformation;
+    user.cityId = city;
+    user.city = citiesList.find(element => element.id === city) as City;
+
+    return user;
+  }
+
+  function buldingMessage() {
+    if (updated === true){
+      return (<AlertMessage severity="success">{"Sua conta foi atualizada com sucesso."}</AlertMessage>)
+    }else {
+      return (<AlertMessage severity="error">{"Erro ao atualizar sua conta."}</AlertMessage>)
+    }
+  };
 
   return(
     <Container>
@@ -111,6 +142,9 @@ export default function UserEdition() {
           <Loading></Loading>
         :
         <Main>
+          {
+            updated ? buldingMessage(): <></>
+          }
           <h2>Meus Dados <UserIcon /></h2>
           <FormUpdateUser>
             <EditInput>
@@ -126,16 +160,25 @@ export default function UserEdition() {
               />
             </EditInput>
 
+
+
             <EditInput>
-              <EditUserInput
-                name="telefone"
-                error={errors.phoneNumber.status}
-                helperText={errors.phoneNumber.message}
-                required
+              <ReactInputMask
+                name="phoneNumber"
+                mask="(99)99999-9999"
                 value={phoneNumber}
                 onChange={(e)=>changeInputValue(errors, e, setPhoneNumber)}
-                label="Telefone"
-              />
+              >
+                {() =>
+                  <EditUserInput
+                    error={errors.phoneNumber.status}
+                    helperText={errors.phoneNumber.message}
+                    required
+                    type="text"
+                    label="Telefone"
+                  />
+                }
+              </ReactInputMask>
             </EditInput>
 
             <EditInput>
@@ -200,7 +243,7 @@ export default function UserEdition() {
 
             <UpdateUser disabled={loading} onClick={() => updateCurrentUser()}>
               {
-                loading ? <>Salvando informações... <LoadingCircle size={20} /></> : <>Salvar <EditIcon /></>
+                loadingSave ? <>Salvando informações... <LoadingCircle size={20} /></> : <>Salvar <EditIcon /></>
               }
             </UpdateUser>
           </FormUpdateUser>

@@ -64,7 +64,7 @@ export const updateUser = async (userData: UserData): Promise<UserData> => {
   let user = {} as UserData;
 
   try {
-    const response = await api.put(`users/`, userData);
+    const response = await api.put(`users/${userData.id}`, userData);
     user = response.data;
   } catch (error) {
     console.log("Erro ao atualizar usuário", error);

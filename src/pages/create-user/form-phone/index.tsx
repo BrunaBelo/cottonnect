@@ -2,17 +2,16 @@ import React from 'react';
 
 import { IconButton } from '@material-ui/core';
 import { Main, InfophoneNumber, CodeVerification, Buttons, TitleButton, CancelIcon, ReplayIcon } from './styles';
+import { nextStep } from '../container/move-step';
 import ReactInputVerificationCode from 'react-input-verification-code';
 import PopUpContainer from '../container';
-import { nextStep } from '../container/move-step';
 
 interface FormInfoPhoneInterface {
   index: number
 }
 
 function validateUserPhoneCode(code: string, index: number){
-  console.log(`the users code is ${code}`)
-  nextStep(index)
+  nextStep(index);
 }
 
 function resendCode(){
@@ -20,8 +19,7 @@ function resendCode(){
 }
 
 function skipPhoneVerification(index: number){
-  console.log('the user wanna skip the phone verification')
-  nextStep(index)
+  nextStep(index);
 }
 
 function renderMain() {
