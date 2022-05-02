@@ -28,14 +28,13 @@ interface State {
 }
 
 export default function Login() {
+  const navigate = useNavigate();
   const [values, setValues] = React.useState<State>({
     email: '',
     password: '',
     showPassword: false,
     showErrorMessage: false
   });
-
-  const navigate = useNavigate()
 
   const handleChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,7 +124,9 @@ export default function Login() {
           <LoginBtt type="button" onClick={() => { checkLogin() }}>Login</LoginBtt>
 
           <CredentialActions>
-            <ButtonCredentialActions>Esqueceu a senha?</ButtonCredentialActions>
+            <Link to="/forgot-account">
+              <ButtonCredentialActions>Esqueceu a senha?</ButtonCredentialActions>
+            </Link>
             <Link to="/create-account">
               <ButtonCredentialActions>Não possui conta? Cadastre-se!</ButtonCredentialActions>
             </Link>

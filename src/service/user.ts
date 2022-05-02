@@ -72,3 +72,16 @@ export const updateUser = async (userData: UserData): Promise<UserData> => {
 
   return user;
 }
+
+export const forgotAccount = async (email: string): Promise<Boolean> => {
+  let result = false;
+
+  try {
+    const response = await api.get(`users/forgot-account/${email}`);
+    result = response.data;
+  } catch (error) {
+    console.log("Erro ao gerar link para recuperar conta", error);
+  }
+
+  return result;
+}

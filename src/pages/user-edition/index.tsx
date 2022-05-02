@@ -160,8 +160,6 @@ export default function UserEdition() {
               />
             </EditInput>
 
-
-
             <EditInput>
               <ReactInputMask
                 name="phoneNumber"
