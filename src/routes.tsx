@@ -14,6 +14,7 @@ import MyDonations from "./pages/my-donations";
 import WonAuctions from "./pages/won-auctions";
 import UserEdition from "./pages/user-edition";
 import ForgotAccount from "./pages/forgot-account";
+import ForgotAccountSuccess from "./pages/forgot-account-success";
 
 export default function AppRoutes(){
 
@@ -32,6 +33,7 @@ export default function AppRoutes(){
         <Route path="/login" element={setAsGuest(<Login/>)}/>
         <Route path="/create-account" element={setAsGuest(<CreateUser/>)}/>
         <Route path="/recuperar-conta" element={setAsGuest(<ForgotAccount/>)}/>
+        <Route path="/recuperar-conta/sucesso" element={setAsGuest(<ForgotAccountSuccess/>)}/>
         <Route path="/about"/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>

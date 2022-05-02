@@ -30,7 +30,7 @@ export default function ForgotAccount(){
     if(isValidForm === true){
       const result = await forgotAccount(email);
       if (result === true){
-        navigate("/recuperar-conta/sucesso");
+        navigate("/recuperar-conta/sucesso", { state: { email } });
       }else{
         setErrorSend(true);
       }
