@@ -45,7 +45,7 @@ export default function ForgotAccount(){
     <Container>
       <Main>
         {
-          errorSend ? <AlertMessage severity="error">{"Erro enviar link para recuperação da conta."}</AlertMessage> : <></>
+          errorSend ? <AlertMessage severity="error">{"Erro enviar link para recuperação da conta. Confira se o e-mail esta correto."}</AlertMessage> : <></>
         }
         <h1>Esqueci minha senha</h1>
         <div>
