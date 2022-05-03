@@ -15,6 +15,7 @@ import WonAuctions from "./pages/won-auctions";
 import UserEdition from "./pages/user-edition";
 import ForgotAccount from "./pages/recover-account/forgot-account";
 import ForgotAccountSuccess from "./pages/recover-account/forgot-account-success";
+import ChangePassword from "./pages/recover-account/change-password";
 
 export default function AppRoutes(){
 
@@ -34,6 +35,7 @@ export default function AppRoutes(){
         <Route path="/create-account" element={setAsGuest(<CreateUser/>)}/>
         <Route path="/recuperar-conta" element={setAsGuest(<ForgotAccount/>)}/>
         <Route path="/recuperar-conta/sucesso" element={setAsGuest(<ForgotAccountSuccess/>)}/>
+        <Route path="/alterar-senha" element={setAsGuest(<ChangePassword/>)}/>
         <Route path="/about"/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>

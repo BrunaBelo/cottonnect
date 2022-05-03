@@ -4,7 +4,7 @@ import { useState } from "react";
 import { changeInputValue, showErrors, validateForm } from "../../../shared/form-configs/validate";
 import { Container, EmailInput, LoadingCircle, Main, SendLink } from "./styles";
 import { forgotAccount } from "../../../service/user";
-import { AlertMessage } from "../../auction-details/styles";
+import { AlertMessage } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { ForgotAccountSchema } from "./yup-schema";
 
@@ -43,10 +43,10 @@ export default function ForgotAccount(){
 
   return(
     <Container>
+      {
+        errorSend ? <AlertMessage severity="error">{"Erro enviar link para recuperação da conta. Confira se o e-mail esta correto."}</AlertMessage> : <></>
+      }
       <Main>
-        {
-          errorSend ? <AlertMessage severity="error">{"Erro enviar link para recuperação da conta. Confira se o e-mail esta correto."}</AlertMessage> : <></>
-        }
         <h1>Esqueci minha senha</h1>
         <div>
           <h2>Não se preocupe, podemos te ajudar a recuperá-la.</h2>

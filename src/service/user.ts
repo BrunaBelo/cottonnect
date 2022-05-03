@@ -85,3 +85,19 @@ export const forgotAccount = async (email: string): Promise<Boolean> => {
 
   return result;
 }
+
+export const changePassword = async (email: string, password: string, code: string): Promise<Boolean> => {
+  let result = false;
+
+  try {
+    const response = await api.post(`users/change-password`, {
+      email, password, code
+    });
+
+    result = response.data;
+  } catch (error) {
+    console.log("Erro ao alterar senha", error);
+  }
+
+  return result;
+}

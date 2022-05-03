@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { CircularProgress } from '@material-ui/core';
+import { LockPassword } from '@styled-icons/remix-line/';
 import { Alert } from "@mui/material";
+
 
 export const Container = styled.div`
   display: flex;
@@ -27,51 +29,36 @@ export const Main = styled.div`
   background-color: var(--light-primary);
   border-radius: 10px;
   row-gap: 30px;
-  padding: 45px;
+  padding: 20px 45px;
 
   h1{
-    font-size: 20px;
+    font-size: 18px;
   }
 
   h2{
-    font-size: 17px;
-  }
-
-  h3{
-    font-size: 15px;
-    margin-top: 5px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--primary);
+    margin-top: 10px;
   }
 
   span{
+    text-align: center;
     font-size: 12px;
-    margin-top: 10px;
   }
 
   @media (max-width: 600px) {
     background-color: transparent;
     row-gap: 20px;
-    padding: 30px;
-
-    h1{
-      font-size: 18px;
-    }
-
-    h2{
-      font-size: 12px;
-    }
-
-    h3{
-      font-size: 12px;
-      margin-top: 5px;
-    }
+    padding: 10px;
   }
 `
 
-export const EmailInput = styled(TextField)`
+export const PasswordInput = styled(TextField)`
   width: 100%;
 `
 
-export const SendLink = styled.button`
+export const ChangePasswordButton = styled.button`
   background-color: var(--primary);
   padding: 10px 80px;
   color: white;
@@ -82,6 +69,11 @@ export const SendLink = styled.button`
 
 export const LoadingCircle = styled(CircularProgress)`
   margin-left: 10px;
+`
+
+export const IconLockPassword = styled(LockPassword)`
+  width: 25%;
+  color: var(--primary);
 `
 
 export const AlertMessage = styled(Alert)`
