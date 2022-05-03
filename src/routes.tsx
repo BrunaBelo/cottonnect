@@ -13,8 +13,8 @@ import GuestRoute from "./components/guest-route"
 import MyDonations from "./pages/my-donations";
 import WonAuctions from "./pages/won-auctions";
 import UserEdition from "./pages/user-edition";
-import ForgotAccount from "./pages/forgot-account";
-import ForgotAccountSuccess from "./pages/forgot-account-success";
+import ForgotAccount from "./pages/recover-account/forgot-account";
+import ForgotAccountSuccess from "./pages/recover-account/forgot-account-success";
 
 export default function AppRoutes(){
 

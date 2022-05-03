@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import ErrorObj from "../../interfaces/error-obj";
+import ErrorObj from "../../../interfaces/error-obj";
 import { useState } from "react";
-import { changeInputValue, showErrors, validateForm } from "../../shared/form-configs/validate";
+import { changeInputValue, showErrors, validateForm } from "../../../shared/form-configs/validate";
 import { Container, EmailInput, LoadingCircle, Main, SendLink } from "./styles";
-import { forgotAccount } from "../../service/user";
-import { AlertMessage } from "../auction-details/styles";
+import { forgotAccount } from "../../../service/user";
+import { AlertMessage } from "../../auction-details/styles";
 import { useNavigate } from "react-router-dom";
 import { ForgotAccountSchema } from "./yup-schema";
 
