@@ -124,7 +124,7 @@ export default function Login() {
           <LoginBtt type="button" onClick={() => { checkLogin() }}>Login</LoginBtt>
 
           <CredentialActions>
-            <Link to="/forgot-account">
+            <Link to="/recuperar-conta">
               <ButtonCredentialActions>Esqueceu a senha?</ButtonCredentialActions>
             </Link>
             <Link to="/create-account">

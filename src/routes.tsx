@@ -39,7 +39,7 @@ export default function AppRoutes(){
         <Route path="/about"/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>
-          <Route path="minha-conta" element={setAsProtected(<UserEdition/>)}/>
+          <Route path="meus-dados" element={setAsProtected(<UserEdition/>)}/>
           <Route path="explorer" element={setAsProtected(<Explorer/>)}/>
           <Route path="novo-leilao" element={setAsProtected(<NewAuction/>)}/>
           <Route path="leiloes/:id" element={setAsProtected(<AuctionDetails/>)}/>

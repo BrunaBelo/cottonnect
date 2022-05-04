@@ -1,5 +1,5 @@
 import { ListItemText } from "@material-ui/core";
-import { Coins } from "@styled-icons/remix-fill/Coins";
+import { Cloudy } from "@styled-icons/ionicons-sharp/Cloudy";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -43,7 +43,7 @@ export const CoinInformation = styled.div`
   color: var(--primary);
 `
 
-export const CoinIcon = styled(Coins)`
-  width: 20px;
-  margin-right: 5px;
+export const CoinIcon = styled(Cloudy)`
+  width: 17px;
+  margin-right: 10px;
 `

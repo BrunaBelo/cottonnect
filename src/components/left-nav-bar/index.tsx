@@ -34,7 +34,7 @@ export default function LeftNavBar(props: Props) {
     <Container>
       <div>
 
-        <h1>Cottonnect</h1>
+        <h1>Cottonnect <CoinIcon/></h1>
         <List>
           <ListItem button component="a" href="/app/explorer">
             <ListItemIcon>
@@ -61,14 +61,14 @@ export default function LeftNavBar(props: Props) {
             <ListItemIcon>
               <StarBorderRounded htmlColor='white' />
             </ListItemIcon>
-            <TextItem primary="Doações Ganhas" />
+            <TextItem primary="Meus Recebidos" />
           </ListItem>
 
-          <ListItem button component="a" href="/app/minha-conta">
+          <ListItem button component="a" href="/app/meus-dados">
             <ListItemIcon>
               <AccountCircleOutlined htmlColor='white' />
             </ListItemIcon>
-            <TextItem primary="Minha Conta" />
+            <TextItem primary="Meus Dados" />
           </ListItem>
 
           <ListItem button component="a" href="/app/logout">

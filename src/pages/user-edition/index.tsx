@@ -173,7 +173,7 @@ export default function UserEdition() {
                     helperText={errors.phoneNumber.message}
                     required
                     type="text"
-                    label="Telefone"
+                    label="Celular"
                   />
                 }
               </ReactInputMask>
@@ -234,7 +234,7 @@ export default function UserEdition() {
                 minRows="3"
                 maxRows="6"
                 onChange={(e)=>changeInputValue(errors, e, setAdditionalInformation)}
-                label="Descrição"
+                label="Informações Adicionais"
                 fullWidth
               />
             </EditAdditionalInformationInput>

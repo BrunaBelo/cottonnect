@@ -68,7 +68,7 @@ export default function MyDonations({}){
                   <Tab label="Abertos" value="1" />
                   <Tab label="Em Andamento" value="2" />
                   <Tab label="Concluídos" value="3" />
-                  <Tab label="Rejeitados" value="4" />
+                  <Tab label="Sem Ganhadores" value="4" />
                 </TabList>
                 <DonationsCard>
                   <TabPanel value="1">
@@ -142,7 +142,7 @@ export default function MyDonations({}){
                         })
                       :
                         <NoAuctions>
-                          <span>Nenhum leilão em rejeitado foi encontrado.</span>
+                          <span>Nenhum leilão sem ganhador foi encontrado.</span>
                         </NoAuctions>
                     }
                   </TabPanel>

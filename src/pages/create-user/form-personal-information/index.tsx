@@ -91,7 +91,7 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
                   helperText={errors.phoneNumber.message}
                   required
                   type="text"
-                  label="Telefone"
+                  label="Celular"
                 />
               }
             </ReactInputMask>

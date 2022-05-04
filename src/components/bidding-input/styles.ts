@@ -26,6 +26,10 @@ export const BiddingInputField = styled(TextField)`
   border-radius: 10px;
   color: white;
   width: 80%;
+
+  label {
+    font-style: italic;
+  }
 `
 
 export const BiddingButton = styled.div`

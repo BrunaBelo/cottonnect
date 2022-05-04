@@ -27,11 +27,11 @@ export default function AuctionCard({
   const buildTextBiddingCount = (): string => {
     switch (biddings.length) {
       case 0:
-        return 'Seja o primeiro a dar um lance!';
+        return 'Esse leilão ainda não tem gratificações.';
       case 1:
-        return 'Há apenas 1 lance nesse leilão.';
+        return 'Há 1 gratificação para esse leilão.';
       default:
-        return `Há ${biddings.length} lances nesse leilão.`;
+        return `Há ${biddings.length} gratificações nesse leilão :).`;
     }
   }
 

@@ -53,6 +53,21 @@ export default function DonationDetails() {
     }
   };
 
+  const buildTextBiddingCount = (): string => {
+    if(auction.biddings){
+      switch (auction.biddings.length) {
+        case 0:
+          return 'Esse leilão ainda não tem gratificações.';
+        case 1:
+          return 'Há 1 gratificação para esse leilão.';
+        default:
+          return `Há ${auction.biddings.length} gratificações nesse leilão :).`;
+      }
+    }
+
+    return "Esse leilão ainda não tem gratificações."
+  }
+
   return (
     <Container>
       <LeftNavBar/>
@@ -76,12 +91,19 @@ export default function DonationDetails() {
               <h1>{donation.title}</h1>
               <span>Até {new Date(auction.closingDate).toLocaleDateString("pt-BR")}</span>
             </div>
+            <div id="lengthBidding">
+              <span>{buildTextBiddingCount()}</span>
+            </div>
 
             <p>{donation.description}</p>
-            <BiddingInput
-              auctionId={auctionId}
-              sendBid={sendBid}
-            />
+            {
+              auction.userId != localStorage.getItem("user-id") ?
+                <BiddingInput
+                  auctionId={auctionId}
+                  sendBid={sendBid}
+                />
+              : <></>
+            }
           </DonationInfo>
         </AuctionInfos>
       </Main>

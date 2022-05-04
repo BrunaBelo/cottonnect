@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Coins } from "@styled-icons/remix-fill/Coins";
+import { Cloudy } from "@styled-icons/ionicons-sharp/Cloudy";
 import { Whatsapp } from "@styled-icons/bootstrap/Whatsapp";
 import { Email } from "@styled-icons/evaicons-solid/Email";
 import { Box } from "@mui/material";
@@ -53,8 +53,9 @@ export const StatusIndicator = styled.span<StatusProps>`
   }
 `
 
-export const CoinIcon = styled(Coins)`
-  width: 20px;
+export const CoinIcon = styled(Cloudy)`
+  width: 15px;
+  margin-left: 5px;
 `
 
 export const Content = styled.div`

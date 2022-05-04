@@ -39,7 +39,6 @@ export const AuctionInfos = styled.div`
   align-items: center;
   justify-content: center;
   height: 400px;
-  column-gap: 10px;
 
   @media (max-width: 900px) {
     flex-direction: column;
@@ -51,7 +50,10 @@ export const AuctionInfos = styled.div`
 export const DonationPhotosDiv = styled.div`
   display: flex;
   width: 22vw;
-  height: auto;
+  height: 400px;
+  border: solid var(--light-primary) 2px;
+  box-shadow: 5px 3px 10px var(--light-primary);
+  border-radius: 15px 0 0 15px;
 
   @media(max-width: 1400px) {
     width: 30vw;
@@ -65,7 +67,7 @@ export const DonationPhotosDiv = styled.div`
 `
 
 export const DonationPhoto = styled.img`
-  border-radius: 15px;
+  padding: 10px;
 `
 
 export const DonationInfo = styled.div`
@@ -76,7 +78,7 @@ export const DonationInfo = styled.div`
   width: 22vw;
   height: 22vw;
   background-color: var(--light-primary);
-  border-radius: 15px;
+  border-radius: 0 15px 15px 0;
 
   @media(max-width: 1400px) {
     width: 30vw;
@@ -91,6 +93,12 @@ export const DonationInfo = styled.div`
   span{
     margin: 10px 0 0 0;
     font-size: 13px;
+  }
+
+  #lengthBidding {
+    font-size: 12px;
+    margin: 10px 0;
+    font-weight: bold;
   }
 
   p{

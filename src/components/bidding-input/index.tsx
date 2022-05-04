@@ -76,14 +76,14 @@ export default function BiddingInput({
           type="number"
           error={showErrorInput}
           helperText={messageErrorInput}
-          placeholder="Qual o seu lance?"
+          placeholder="Qual o valor da sua gratificação?"
           onKeyPress={(e) => validateInput(e)}
           onChange={(e) => setBidAmount(parseInt(e.target.value))}
           FormHelperTextProps = {{
             style: { fontSize: '10px' }
           }}
           InputProps={{
-            style: { color: 'rgb(96, 109, 189)', fontWeight: 'bold' },
+            style: { color: 'rgb(96, 109, 189)', fontWeight: 'bold', fontSize: '13.5px'},
           }}
         />
         <BiddingButton onClick={() => saveBidding()}>

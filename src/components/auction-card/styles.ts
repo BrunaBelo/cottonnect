@@ -4,6 +4,8 @@ export const Container = styled.div`
   border-radius: 20px 20px;
   background-color: #B4C0E8;
   width: 22vw;
+  border: solid var(--light-primary) 2px;
+  box-shadow: 5px 3px 10px var(--light-primary);
 
   @media(max-width: 1200px) {
     width: 30vw;
@@ -22,9 +24,12 @@ export const Container = styled.div`
 export const DonationDetails = styled.div`
   padding: 15px;
   h1 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 5px;
-    word-wrap: break-word;
+    white-space: nowrap;
+    width: 12em;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   p {
