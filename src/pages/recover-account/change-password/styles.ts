@@ -35,13 +35,6 @@ export const Main = styled.div`
     font-size: 18px;
   }
 
-  h2{
-    font-size: 14px;
-    text-align: center;
-    color: var(--primary);
-    margin-top: 10px;
-  }
-
   span{
     text-align: center;
     font-size: 12px;

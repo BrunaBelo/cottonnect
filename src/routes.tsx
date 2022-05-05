@@ -16,6 +16,7 @@ import UserEdition from "./pages/user-edition";
 import ForgotAccount from "./pages/recover-account/forgot-account";
 import ForgotAccountSuccess from "./pages/recover-account/forgot-account-success";
 import ChangePassword from "./pages/recover-account/change-password";
+import ChangePasswordSuccess from "./pages/recover-account/change-password-success";
 
 export default function AppRoutes(){
 
@@ -36,6 +37,7 @@ export default function AppRoutes(){
         <Route path="/recuperar-conta" element={setAsGuest(<ForgotAccount/>)}/>
         <Route path="/recuperar-conta/sucesso" element={setAsGuest(<ForgotAccountSuccess/>)}/>
         <Route path="/alterar-senha" element={setAsGuest(<ChangePassword/>)}/>
+        <Route path="/alterar-senha/sucesso" element={setAsGuest(<ChangePasswordSuccess/>)}/>
         <Route path="/about"/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>

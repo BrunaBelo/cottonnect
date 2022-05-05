@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 export default function ChangePassword(){
   const navigate = useNavigate();
   const search = useLocation().search;
-  const email = new URLSearchParams(search).get("email") || "";
+  const userId = new URLSearchParams(search).get("userId") || "";
   const code = new URLSearchParams(search).get("code") || "";
 
   const defaultErrors = {
@@ -37,9 +37,9 @@ export default function ChangePassword(){
 
     const isValidForm = await validateForm({ password, confirmPassword }, ChangePasswordSchema);
     if(isValidForm === true){
-      const result = await changePassword(email, password, code);
+      const result = await changePassword(userId, password, code);
       if (result == true){
-        navigate("/login");
+        navigate("/alterar-senha/sucesso");
       }else{
         setErrorChangePassword(true);
       }
@@ -58,8 +58,7 @@ export default function ChangePassword(){
       <Main>
         <IconLockPassword />
         <div>
-          <h1>Definir nova senha para:</h1>
-          <h2>{email}</h2>
+          <h1>Definir nova senha</h1>
         </div>
 
         <PasswordInput
@@ -85,7 +84,6 @@ export default function ChangePassword(){
         />
 
         <span>*Certifique-se de que tenha pelo menos 8 caracteres.</span>
-
 
         <ChangePasswordButton disabled={loading} onClick={() => changeUserPassword()}>
           {

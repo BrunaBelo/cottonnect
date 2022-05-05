@@ -86,12 +86,12 @@ export const forgotAccount = async (email: string): Promise<Boolean> => {
   return result;
 }
 
-export const changePassword = async (email: string, password: string, code: string): Promise<Boolean> => {
+export const changePassword = async (userId: string, password: string, code: string): Promise<Boolean> => {
   let result = false;
 
   try {
     const response = await api.post(`users/change-password`, {
-      email, password, code
+      userId, password, code
     });
 
     result = response.data;
