@@ -101,3 +101,17 @@ export const changePassword = async (userId: string, password: string, code: str
 
   return result;
 }
+
+export const confirmationAccount = async (userId: string): Promise<Boolean> => {
+  let result = false;
+
+  try {
+    const response = await api.get(`users/confirm-account?id=${userId}`);
+    result = response.data;
+  } catch (error) {
+    console.log("Erro confirmar conta", error);
+  }
+
+  return result;
+}
+

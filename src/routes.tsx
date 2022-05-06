@@ -17,6 +17,8 @@ import ForgotAccount from "./pages/recover-account/forgot-account";
 import ForgotAccountSuccess from "./pages/recover-account/forgot-account-success";
 import ChangePassword from "./pages/recover-account/change-password";
 import ChangePasswordSuccess from "./pages/recover-account/change-password-success";
+import ConfirmationEmail from "./pages/confirmation-account/confirmation-email";
+import ConfirmationEmailSuccess from "./pages/confirmation-account/confirmation-email-success";
 
 export default function AppRoutes(){
 
@@ -38,6 +40,8 @@ export default function AppRoutes(){
         <Route path="/recuperar-conta/sucesso" element={setAsGuest(<ForgotAccountSuccess/>)}/>
         <Route path="/alterar-senha" element={setAsGuest(<ChangePassword/>)}/>
         <Route path="/alterar-senha/sucesso" element={setAsGuest(<ChangePasswordSuccess/>)}/>
+        <Route path="/confirmar-conta" element={setAsGuest(<ConfirmationEmail/>)}/>
+        <Route path="/confirmar-conta/sucesso" element={setAsGuest(<ConfirmationEmailSuccess/>)}/>
         <Route path="/about"/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>
