@@ -90,6 +90,7 @@ export default function FormInfoPhone({index, userId}: FormInfoPhoneInterface) {
         index={index}
         title="Confirme seu número!"
         main={renderMain}
+        width={100}
       />
     </div>
   );

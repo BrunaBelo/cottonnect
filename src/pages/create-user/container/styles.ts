@@ -2,16 +2,20 @@ import styled from 'styled-components';
 
 import { ArrowForwardIos } from '@material-ui/icons';
 
-export const Container = styled.form`
+interface ContainerProps {
+  width: number
+}
+
+export const Container = styled.form<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: ${(props) => props.width ? `${props.width}%` : '70%'};
   background-color: white;
   border-radius: 20px;
   padding: 20px 50px;
-  
+
   @media (max-width: 500px) {
     width: 100%;
     border-radius: 0;
@@ -62,7 +66,7 @@ export const NextIcon = styled(ArrowForwardIos)`
 
 export const BackIcon = styled(NextIcon)`
   transform: scale(.8) rotate(180deg);
-` 
+`
 
 export const Title = styled.div`
   background-color: transparent;

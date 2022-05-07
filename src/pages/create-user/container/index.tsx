@@ -15,14 +15,13 @@ interface Container {
   handleFormValidation?: (data: object, schema: any) => Promise<void>,
   formData?: object,
   schema?: any,
-  index: number
+  index: number,
+  width?: number
 }
 
-function PopUpContainer({title, handleFormValidation, formData, schema, main, index}: Container){
-
+function PopUpContainer({title, handleFormValidation, formData, schema, main, index, width = 70}: Container){
   return (
-    <Container>
-
+    <Container width={width}>
       <TopDiv>
         {
         index == 1?
