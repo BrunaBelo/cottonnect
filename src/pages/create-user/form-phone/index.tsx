@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import { Main, InfophoneNumber, CodeVerification, Buttons, TitleButton, CancelIcon, ReplayIcon, AlertMessage } from './styles';
 import { nextStep } from '../container/move-step';
+import { confirmationPhone, resendCodeVerification } from '../../../service/user';
 import ReactInputVerificationCode from 'react-input-verification-code';
 import PopUpContainer from '../container';
-import { confirmationPhone } from '../../../service/user';
 
 interface FormInfoPhoneInterface {
   index: number
@@ -14,12 +14,23 @@ interface FormInfoPhoneInterface {
 
 export default function FormInfoPhone({index, userId}: FormInfoPhoneInterface) {
   const [alertError, setAlertError] = useState(false);
+  const [resentCode, setResentCode] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setAlertError(false);
+      setResentCode(false);
     }, 5000)
-  }, [alertError])
+  }, [alertError, resentCode])
+
+
+  function buldingMessage() {
+    if (resentCode === true){
+      return (<AlertMessage severity="success">{"O código foi reenviado com sucesso."}</AlertMessage>)
+    }else {
+      return (<AlertMessage severity="error">{"Erro ao reenviar código de verificação."}</AlertMessage>)
+    }
+  };
 
   function renderMain() {
     async function validateUserPhoneCode(code: string, index: number){
@@ -27,8 +38,9 @@ export default function FormInfoPhone({index, userId}: FormInfoPhoneInterface) {
       verified ? nextStep(index) : setAlertError(true);
     }
 
-    function resendCode(){
-      console.log('the user wanna receive the code again')
+    async function resendCode(){
+      const resent = await resendCodeVerification(userId);
+      setResentCode(resent as boolean);
     }
 
     function skipPhoneVerification(index: number){
@@ -70,6 +82,9 @@ export default function FormInfoPhone({index, userId}: FormInfoPhoneInterface) {
     <div>
       {
         alertError ? <AlertMessage severity="error">{"Código Inválido."}</AlertMessage> : <></>
+      }
+      {
+        resentCode ? buldingMessage(): <></>
       }
       <PopUpContainer
         index={index}

@@ -128,7 +128,20 @@ export const confirmationPhone = async (userId: string, code: string): Promise<B
     const response = await api.get(`users/confirm-phone-number?userId=${userId}&code=${code}`);
     result = response.data;
   } catch (error) {
-    console.log("Erro confirmar número de telefone", error);
+    console.log("Erro confirmar número de celular", error);
+  }
+
+  return result;
+}
+
+export const resendCodeVerification = async (userId: string): Promise<Boolean> => {
+  let result = false;
+
+  try {
+    const response = await api.get(`users/resend-code-verification-phone?userId=${userId}`);
+    result = response.data;
+  } catch (error) {
+    console.log("Erro ao reenviar codigo para o número de celular", error);
   }
 
   return result;
