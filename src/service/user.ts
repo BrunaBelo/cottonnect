@@ -1,11 +1,17 @@
 import api from "./api";
-import { AxiosResponse } from "axios";
 import { UserData } from "../interfaces/user-data";
 
-export const createUser = async(userData: UserData): Promise<AxiosResponse> => {
-  const response = await api.post("/users", userData);
+export const createUser = async(userData: UserData): Promise<UserData> => {
+  let user = {} as UserData;
 
-  return response;
+  try {
+    const response = await api.post("/users", userData);
+    user = response.data;
+  } catch (error) {
+    console.log("Erro ao criar novo usuário", error);
+  }
+
+  return user;
 }
 
 export const validateUser = async (type: string, value: any): Promise<boolean>  => {
@@ -110,6 +116,19 @@ export const confirmationAccount = async (userId: string): Promise<Boolean> => {
     result = response.data;
   } catch (error) {
     console.log("Erro confirmar conta", error);
+  }
+
+  return result;
+}
+
+export const confirmationPhone = async (userId: string, code: string): Promise<Boolean> => {
+  let result = false;
+
+  try {
+    const response = await api.get(`users/confirm-phone-number?userId=${userId}&code=${code}`);
+    result = response.data;
+  } catch (error) {
+    console.log("Erro confirmar número de telefone", error);
   }
 
   return result;

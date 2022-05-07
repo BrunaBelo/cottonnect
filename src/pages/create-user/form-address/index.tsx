@@ -40,7 +40,7 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
     if(statesList.length === 0){
       getStatesFromApi()
     }
-  })
+  }, []);
 
   async function onChangeState(e: any) {
     changeInputValue(errors, e, setState)

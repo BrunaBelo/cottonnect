@@ -30,6 +30,8 @@ export default function CreateUser () {
     message: ''
   })
 
+  const [user, setUser] = useState({} as UserData)
+
   async function saveUser(): Promise<boolean>{
     const newUser = {
       ...personalInfo,
@@ -37,7 +39,8 @@ export default function CreateUser () {
     } as UserData
 
     try {
-      await createUser(newUser);
+      const respoonseUser = await createUser(newUser);
+      setUser(respoonseUser);
       return true
     } catch (error) {
       console.log(error)
@@ -67,7 +70,7 @@ export default function CreateUser () {
           <FormInfoAddress componentState={[address, setAddress]} saveUser={saveUser} index={1}/>
         </CurrentScreen>
         <CurrentScreen id="2">
-          <FormInfoPhone index={2}/>
+          <FormInfoPhone index={2} userId={user.id as string}/>
         </CurrentScreen>
         <CurrentScreen id="3">
           <FormSuccess index={3}/>

@@ -1,67 +1,82 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { IconButton } from '@material-ui/core';
-import { Main, InfophoneNumber, CodeVerification, Buttons, TitleButton, CancelIcon, ReplayIcon } from './styles';
+import { Main, InfophoneNumber, CodeVerification, Buttons, TitleButton, CancelIcon, ReplayIcon, AlertMessage } from './styles';
 import { nextStep } from '../container/move-step';
 import ReactInputVerificationCode from 'react-input-verification-code';
 import PopUpContainer from '../container';
+import { confirmationPhone } from '../../../service/user';
 
 interface FormInfoPhoneInterface {
   index: number
+  userId: string
 }
 
-function validateUserPhoneCode(code: string, index: number){
-  nextStep(index);
-}
+export default function FormInfoPhone({index, userId}: FormInfoPhoneInterface) {
+  const [alertError, setAlertError] = useState(false);
 
-function resendCode(){
-  console.log('the user wanna receive the code again')
-}
+  useEffect(() => {
+    setTimeout(() => {
+      setAlertError(false);
+    }, 5000)
+  }, [alertError])
 
-function skipPhoneVerification(index: number){
-  nextStep(index);
-}
+  function renderMain() {
+    async function validateUserPhoneCode(code: string, index: number){
+      const verified = await confirmationPhone(userId, code);
+      verified ? nextStep(index) : setAlertError(true);
+    }
 
-function renderMain() {
-  return(
-    <Main>
-      <InfophoneNumber>
-        Insira o código de validação que foi enviado para o seu celular
-      </InfophoneNumber>
+    function resendCode(){
+      console.log('the user wanna receive the code again')
+    }
 
-      <CodeVerification>
-        <ReactInputVerificationCode
-          onCompleted={(e) => validateUserPhoneCode(e, 2)}
-        />
-      </CodeVerification>
+    function skipPhoneVerification(index: number){
+      nextStep(index);
+    }
 
-      <Buttons>
-        <IconButton
-          aria-label="skipNext"
-          onClick={() => skipPhoneVerification(2)}
-        >
-          <CancelIcon fontSize="small"/> <TitleButton color='#E92E2E'>Pular</TitleButton>
-        </IconButton>
+    return(
+      <Main>
+        <InfophoneNumber>
+          Insira o código de validação que foi enviado para o seu celular por SMS
+        </InfophoneNumber>
 
-        <IconButton
-          aria-label="skipNext"
-          onClick={() => resendCode()}
-        >
-          <ReplayIcon fontSize="small"/> <TitleButton>Reenviar</TitleButton>
-        </IconButton>
-      </Buttons>
-    </Main>
-  )
-}
+        <CodeVerification>
+          <ReactInputVerificationCode
+            onCompleted={(e) => validateUserPhoneCode(e, 2)}
+          />
+        </CodeVerification>
 
+        <Buttons>
+          <IconButton
+            aria-label="skipNext"
+            onClick={() => skipPhoneVerification(2)}
+          >
+            <CancelIcon fontSize="small"/> <TitleButton color='#E92E2E'>Pular</TitleButton>
+          </IconButton>
 
-export default function FormInfoPhone({index}: FormInfoPhoneInterface) {
+          <IconButton
+            aria-label="skipNext"
+            onClick={() => resendCode()}
+          >
+            <ReplayIcon fontSize="small"/> <TitleButton>Reenviar</TitleButton>
+          </IconButton>
+        </Buttons>
+      </Main>
+    )
+  }
+
   return (
-    <PopUpContainer
-      index={index}
-      title="Confirme seu número!"
-      main={renderMain}
-    />
+    <div>
+      {
+        alertError ? <AlertMessage severity="error">{"Código Inválido."}</AlertMessage> : <></>
+      }
+      <PopUpContainer
+        index={index}
+        title="Confirme seu número!"
+        main={renderMain}
+      />
+    </div>
   );
 };
 

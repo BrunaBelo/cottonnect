@@ -1,4 +1,5 @@
 import { Cancel, Replay } from '@material-ui/icons';
+import { Alert } from '@mui/material';
 import styled from 'styled-components';
 
 export const Main = styled.div`
@@ -49,4 +50,15 @@ export const CancelIcon = styled(Cancel)`
 export const ReplayIcon = styled(Replay)`
   color: var(--primary);
   transform: scale(1.1)
+`
+
+export const AlertMessage = styled(Alert)`
+  width: 100%;
+  margin-bottom: 1.5em;
+
+  @media (max-width: 900px) {
+    margin-bottom: 60px;
+    width: 90%;
+  }
+
 `
