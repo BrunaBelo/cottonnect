@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import { ArrowForwardIos } from '@material-ui/icons';
 
 interface ContainerProps {
@@ -80,3 +79,5 @@ export const Title = styled.div`
     width: 60%;
   }
 `
+
+

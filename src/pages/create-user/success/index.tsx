@@ -1,8 +1,6 @@
 import React from 'react';
-
-import { Button } from '@material-ui/core';
-import { Main, ImageDone, IconSmile, MessageHeader, LetsGoButtons, DoneIcon, SubTitle } from './styles';
 import PopUpContainer from '../container';
+import { Main, ImageDone, DoneIcon, SubTitle } from './styles';
 
 interface SuccessFormInterface {
   index: number
@@ -11,17 +9,10 @@ interface SuccessFormInterface {
 function renderMain(){
   return(
     <Main>
-
-      <SubTitle>Sua conta foi registrada, agora você já pode começar doar!</SubTitle>
-
+      <SubTitle>Sua conta foi registrada, agora é só você fazer login e já pode começar doar!</SubTitle>
       <ImageDone>
         <DoneIcon src="/images/done.png" alt="Conta Criada" />
       </ImageDone>
-
-      <LetsGoButtons>
-        <Button color="primary" className="lets-go">Let's Goooo</Button>
-      </LetsGoButtons>
-
     </Main>
   )
 }

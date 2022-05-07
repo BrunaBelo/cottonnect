@@ -43,27 +43,3 @@ export const IconSmile = styled.div`
   }
 `;
 
-export const LetsGoButtons = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  
-  button{
-    background-color: var(--primary);
-    padding: 10px 20px;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-    transition: .2s;
-  }
-
-  button:hover{
-    opacity: .7;
-    background-color: var(--primary);
-    padding: 10px 20px;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-  }
-`;

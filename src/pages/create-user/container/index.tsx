@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import React from 'react';
 import { backStep } from './move-step';
 import {
@@ -7,7 +8,7 @@ import {
   NextIcon,
   Title,
   TopDiv,
-  BackIcon} from './styles'
+  BackIcon } from './styles'
 
 interface Container {
   title: string,
@@ -16,10 +17,11 @@ interface Container {
   formData?: object,
   schema?: any,
   index: number,
-  width?: number
+  width?: number,
+  loading?: boolean
 }
 
-function PopUpContainer({title, handleFormValidation, formData, schema, main, index, width = 70}: Container){
+function PopUpContainer({title, handleFormValidation, formData, schema, main, index, width = 70, loading = false}: Container){
   return (
     <Container width={width}>
       <TopDiv>
@@ -43,8 +45,12 @@ function PopUpContainer({title, handleFormValidation, formData, schema, main, in
           <BttSpace>
             <ChangeStepBtt
               type="button"
+              disabled={loading}
               onClick={() => handleFormValidation ? handleFormValidation(formData as object, schema) : false}>
-              <NextIcon/>
+              {
+                loading ? <><CircularProgress style={{'color': 'white'}} size={10} /></>
+                : <><NextIcon/></>
+              }
             </ChangeStepBtt>
           </BttSpace>
           :

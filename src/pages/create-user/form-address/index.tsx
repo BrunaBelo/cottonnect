@@ -22,25 +22,31 @@ interface selectLocation {
 }
 
 function FormInfoAddress({index, componentState: [address, setAddress], saveUser}: PopUpProps) {
-  const [statesList, setStatesList] = useState([] as selectLocation[])
-  const [citiesList, setCitiesList] = useState([] as selectLocation[])
-  const [state, setState] = useState("")
-  const [city, setCity] = useState("")
-  const [errors, setErrors] = useState(defaultErrorsStep2())
+  const [statesList, setStatesList] = useState([] as selectLocation[]);
+  const [citiesList, setCitiesList] = useState([] as selectLocation[]);
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [errors, setErrors] = useState(defaultErrorsStep2());
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getStatesFromApi(){
       try{
-        const state = await getStates()
-        await populateSelectLocation(state, setStatesList)
+        const state = await getStates();
+        await populateSelectLocation(state, setStatesList);
       }catch{
-        console.log('ERRO AO BUSCAR ESTADOS')
+        console.log('Erro ao buscar estados');
       }
     }
+
     if(statesList.length === 0){
-      getStatesFromApi()
+      getStatesFromApi();
     }
-  }, []);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, [loading]);
 
   async function onChangeState(e: any) {
     changeInputValue(errors, e, setState)
@@ -121,7 +127,7 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
   // Metodo para lidar com informacoes do usuario
   async function handleFormInfo(data: object, schema: any): Promise<void> {
     setErrors(defaultErrorsStep2())
-
+    setLoading(true);
     const resultForm = await validateForm(data, schema)
     if(resultForm === true){
       if(saveUser){
@@ -131,6 +137,8 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
       const newErrorObj = showErrors(resultForm as ErrorObj[], defaultErrorsStep2())
       setErrors(newErrorObj)
     }
+
+    setLoading(false);
   }
 
   return (
@@ -140,7 +148,8 @@ function FormInfoAddress({index, componentState: [address, setAddress], saveUser
       main={renderMain}
       handleFormValidation={handleFormInfo}
       formData={handleDataAddress(city, state)}
-      schema = {schemaUserAddress}
+      schema={schemaUserAddress}
+      loading={loading}
     />
   );
 };
