@@ -36,12 +36,12 @@ export default function AppRoutes(){
         <Route path="/" element={setAsGuest(<Home/>)}/>
         <Route path="/login" element={setAsGuest(<Login/>)}/>
         <Route path="/create-account" element={setAsGuest(<CreateUser/>)}/>
-        <Route path="/recuperar-conta" element={setAsGuest(<ForgotAccount/>)}/>
-        <Route path="/recuperar-conta/sucesso" element={setAsGuest(<ForgotAccountSuccess/>)}/>
-        <Route path="/alterar-senha" element={setAsGuest(<ChangePassword/>)}/>
-        <Route path="/alterar-senha/sucesso" element={setAsGuest(<ChangePasswordSuccess/>)}/>
-        <Route path="/confirmar-conta" element={setAsGuest(<ConfirmationEmail/>)}/>
-        <Route path="/confirmar-conta/sucesso" element={setAsGuest(<ConfirmationEmailSuccess/>)}/>
+        <Route path="/recuperar-conta" element={<ForgotAccount/>}/>
+        <Route path="/recuperar-conta/sucesso" element={<ForgotAccountSuccess/>}/>
+        <Route path="/alterar-senha" element={<ChangePassword/>}/>
+        <Route path="/alterar-senha/sucesso" element={<ChangePasswordSuccess/>}/>
+        <Route path="/confirmar-conta" element={<ConfirmationEmail/>}/>
+        <Route path="/confirmar-conta/sucesso" element={<ConfirmationEmailSuccess/>}/>
         <Route path="/about"/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>

@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from 'react';
 import LeftNavBar from '../../components/left-nav-bar';
 import AuctionCard from '../../components/auction-card';
-import { AuctionList, Container, Main } from './styles';
+import { AuctionList, Container, Main, NoAuctions } from './styles';
 import { getAllAuctions } from "../../service/auction";
 import { Auction } from '../../interfaces/auction';
 
@@ -29,17 +29,24 @@ export default function Explorer() {
       <LeftNavBar />
       <Main>
         {/* <h1>Filtros</h1> */}
-        <AuctionList>
-          {
-            auctions.map(auction => {
-              return(
-                <AuctionCard
-                  auction={auction}
-                />
-              )
-            })
-          }
-        </AuctionList>
+        {
+          auctions.length > 0 ?
+            <AuctionList>
+              {
+                auctions.map(auction => {
+                  return(
+                    <AuctionCard
+                      auction={auction}
+                    />
+                  )
+                })
+              }
+            </AuctionList>
+          :
+            <NoAuctions>
+              <span>Nenhum leilão foi encontrado na sua cidade. Tente novamente mais tarde 😉</span>
+            </NoAuctions>
+        }
       </Main>
     </Container>
   )
