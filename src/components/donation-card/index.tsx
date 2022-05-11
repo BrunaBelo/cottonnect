@@ -32,7 +32,6 @@ interface DonationCardProps {
 export default function DonationCard({ profile, auctionParam , setUpdateAuctions}: DonationCardProps) {
   const donationSuccessButtonText = "Ao clicar nesse botão, você confirma o recebimento do produto e transfere o valor do lance para o doador"
   const donationFailedButtonText = "Ao clicar nesse botão, você rejeita a doação"
-  const reactivateAuctionButtonText = "Não há lances para gerar um novo ganhador, ao clicar nesse botão o leilão sera reativado para receber novos lances"
 
   const statusColors: AuctionStatus = {
     "waiting": "#fbaf00",
@@ -92,10 +91,6 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
     setBidWinner(winner);
   }
 
-  const reactivateAuction = async () => {
-
-  }
-
   return(
     <Container>
       {
@@ -139,21 +134,11 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
               :
                 <></>
             }
-
             { auction.status != "rejected" ?
                 <button id="user-winner" onClick={handleOpen}>{buttonsText.user}</button>
               :
                 <></>
             }
-
-            { auction.status == "rejected" && profile == "owner"?
-                <Tooltip title={reactivateAuctionButtonText}>
-                  <button id="reactivate-auction" onClick={() => reactivateAuction()}>Reativar Leilão</button>
-                </Tooltip>
-              :
-                <></>
-            }
-
           </Actions>
           :
           <></>
