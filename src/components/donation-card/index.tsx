@@ -8,6 +8,7 @@ import { UserData } from '../../interfaces/user-data'
 import UserModal from './modal-user'
 import Confetti from 'react-confetti';
 import { acceptDonation, rejectDonation } from '../../service/auction'
+import ModalConfirm from './modal-confirm'
 
 interface AuctionStatus {
   waiting: string,
@@ -50,9 +51,13 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
   const [buttonsText, setButtonsText] = useState({user: ""});
   const [bidWinner, setBidWinner] = useState({} as Bidding);
   const [open, setOpen] = useState(false);
+  const [openConfirmModal, setOpenConfim] = useState(false);
   const [auction, setAuction] = useState(auctionParam as Auction);
+  const [action, setAction] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleOpenConfirmModal = () => setOpenConfim(true);
+  const handleCloseConfirmModal = () => setOpenConfim(false);
 
   useEffect(() => {
     getButtonText();
@@ -84,6 +89,11 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
     const auctionResponse = await acceptDonation(auction.id);
     setAuction(auctionResponse);
     setUpdateAuctions(true);
+  }
+
+  const callModal = async (action: string) => {
+    setAction(action);
+    handleOpenConfirmModal();
   }
 
   const getWinner = async () => {
@@ -125,10 +135,10 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
               profile == 'receiver' && auction.status == "waiting" ?
                 <>
                   <Tooltip title={donationSuccessButtonText}>
-                    <button id="donation-success" onClick={() => accept()}>Confirmar Recebimento</button>
+                    <button id="donation-success" onClick={() => callModal("accept")}>Confirmar Recebimento</button>
                   </Tooltip>
                   <Tooltip title={donationFailedButtonText}>
-                    <button id="donation-failed" onClick={() => reject()}>Rejeitar Doação</button>
+                    <button id="donation-failed" onClick={() => callModal("reject")}>Rejeitar Doação</button>
                   </Tooltip>
                 </>
               :
@@ -149,6 +159,12 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
         handleOpen={handleOpen}
         handleClose={handleClose}
         user={profile == 'owner' ? bidWinner.user as UserData : auction.user as UserData}
+      />
+      <ModalConfirm
+        open={openConfirmModal}
+        handleOpen={handleOpenConfirmModal}
+        handleClose={handleCloseConfirmModal}
+        action={action == "accept" ? accept : reject}
       />
     </Container>
   )
