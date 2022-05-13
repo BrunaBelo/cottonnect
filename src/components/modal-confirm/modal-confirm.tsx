@@ -28,10 +28,8 @@ export default function ModalConfirm({ open, handleOpen, handleClose, action }: 
         </DialogContentText>
       </DialogContent>
       <DialogActions>
+        <Button onClick={handleClose} autoFocus>Não</Button>
         <Button onClick={runActionAndClose}>Sim</Button>
-        <Button onClick={handleClose} autoFocus>
-          Não
-        </Button>
       </DialogActions>
     </Dialog>
   )

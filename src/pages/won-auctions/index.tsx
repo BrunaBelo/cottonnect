@@ -3,7 +3,7 @@ import DonationCard from "../../components/donation-card";
 import LeftNavBar from "../../components/left-nav-bar";
 import { Auction } from "../../interfaces/auction";
 import { getAuctionsWon } from "../../service/auction";
-import { Container, DonationsCard, NoAuctions } from "./styles";
+import { AlertMessage, Container, DonationsCard, NoAuctions, Main } from "./styles";
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import Loading from "../../components/loading";
@@ -15,9 +15,14 @@ export default function WonAuctions() {
   const [updateAuctions, setUpdateAuctions] = useState(false);
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(false);
+  const [notice, setNotice] = useState({ show: false, message: "", type: "" });
 
   useEffect(() => {
     getAuctions();
+
+    setTimeout(() => {
+      setNotice({ show: false, message: "", type: "" });
+    }, 5000);
   }, [updateAuctions])
 
   const getAuctions = (async () => {
@@ -52,9 +57,19 @@ export default function WonAuctions() {
     setValue(newValue);
   };
 
+  function buldingMessage() {
+    if (notice.type === "success"){
+      return (<AlertMessage severity="success">{notice.message}</AlertMessage>);
+    }else {
+      return (<AlertMessage severity="error">{notice.message}</AlertMessage>);
+    }
+  };
+
   return(
     <Container>
       <LeftNavBar />
+      <Main>
+        { notice.show ? buldingMessage(): <></> }
         {
           loading ? <Loading></Loading>
           :
@@ -75,6 +90,7 @@ export default function WonAuctions() {
                               profile='receiver'
                               auctionParam={auction}
                               setUpdateAuctions={setUpdateAuctions}
+                              setNotice={setNotice}
                             />
                           )
                         })
@@ -94,6 +110,7 @@ export default function WonAuctions() {
                               profile='receiver'
                               auctionParam={auction}
                               setUpdateAuctions={setUpdateAuctions}
+                              setNotice={setNotice}
                             />
                           )
                         })
@@ -113,6 +130,7 @@ export default function WonAuctions() {
                               profile='receiver'
                               auctionParam={auction}
                               setUpdateAuctions={setUpdateAuctions}
+                              setNotice={setNotice}
                             />
                           )
                         })
@@ -126,6 +144,7 @@ export default function WonAuctions() {
               </TabContext>
             </Box>
         }
+      </Main>
     </Container>
   )
 }

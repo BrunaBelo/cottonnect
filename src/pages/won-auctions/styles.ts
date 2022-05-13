@@ -1,3 +1,4 @@
+import { Alert } from "@mui/material";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -14,13 +15,11 @@ export const Container = styled.div`
 `
 
 export const Main = styled.div`
-  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 15px;
-  width: 70%;
+  width: 100%;
 
   @media (max-width: 920px) {
     width: 60%;
@@ -48,4 +47,15 @@ export const NoAuctions = styled.div`
     font-weight: bold;
     color: var(--primary);
   }
+`
+
+export const AlertMessage = styled(Alert)`
+  width: 100%;
+  margin-bottom: 1.5em;
+
+  @media (max-width: 900px) {
+    margin-bottom: 60px;
+    width: 90%;
+  }
+
 `

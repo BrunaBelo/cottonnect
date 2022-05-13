@@ -28,9 +28,10 @@ interface DonationCardProps {
   profile: string,
   auctionParam: Auction,
   setUpdateAuctions: react.Dispatch<react.SetStateAction<boolean>>
+  setNotice?: react.Dispatch<react.SetStateAction<{ show: boolean; message: string; type: string; }>>
 }
 
-export default function DonationCard({ profile, auctionParam , setUpdateAuctions}: DonationCardProps) {
+export default function DonationCard({ profile, auctionParam , setUpdateAuctions, setNotice }: DonationCardProps) {
   const donationSuccessButtonText = "Ao clicar nesse botão, você confirma o recebimento do produto e transfere o valor do lance para o doador"
   const donationFailedButtonText = "Ao clicar nesse botão, você rejeita a doação"
 
@@ -79,14 +80,37 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
     setUpdateAuctions(false);
 
     const auctionResponse = await rejectDonation(auction.id);
-    setAuction(auctionResponse);
-    setUpdateAuctions(true);
+
+    if(Object.keys(auctionResponse).length != 0){
+      setAuction(auctionResponse);
+      setUpdateAuctions(true);
+
+      if(setNotice != undefined){
+        setNotice({ show: true, message: "Doação rejeitada com sucesso", type: "success" });
+      }
+    }else{
+      if(setNotice != undefined){
+        setNotice({ show: true, message: "Erro ao rejeitar doação", type: "error" });
+      }
+    }
   }
 
   const accept = async () => {
     setUpdateAuctions(false);
 
     const auctionResponse = await acceptDonation(auction.id);
+    if(Object.keys(auctionResponse).length != 0){
+      setAuction(auctionResponse);
+      setUpdateAuctions(true);
+
+      if(setNotice != undefined){
+        setNotice({ show: true, message: "Doação aceita com sucesso", type: "success" });
+      }
+    }else{
+      if(setNotice != undefined){
+        setNotice({ show: true, message: "Erro ao aceitar doação", type: "error" });
+      }
+    }
     setAuction(auctionResponse);
     setUpdateAuctions(true);
   }
