@@ -31,6 +31,7 @@ import { Main,
 import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import { AlertMessage } from "../auction-details/styles";
 import { City } from "../../interfaces/city";
+import { formatData } from "../create-user/form-personal-information/handle-data";
 
 interface selectLocation {
   id: string,
@@ -107,24 +108,30 @@ export default function UserEdition() {
 
   async function updateCurrentUser(): Promise<void> {
     setErrors(defaultErrors());
+    setLoadingSave(true);
 
-    const resultForm = await validateForm(
-      { email, phoneNumber, additionalInformation, city, state }, userSchema);
+    const resultForm = await validateForm({
+      email,
+      phoneNumber: formatData.phoneNumber(phoneNumber),
+      additionalInformation,
+      city,
+      state
+    }, userSchema);
+
     if(resultForm === true){
-      setLoadingSave(true);
-
       const result = await updateUser(buildUser());
 
-      if(Object.keys(result).length === 0){
-        setNotice({ show: true, message: "Erro ao atualizar sua conta", type: "error" });
-      }else {
+      if(Object.keys(result).length != 0){
+        setUser(result);
         setNotice({ show: true, message: "Sua conta foi atualizada com sucesso", type: "success"});
+      }else {
+        setNotice({ show: true, message: "Erro ao atualizar sua conta", type: "error" });
       }
-
-      setLoadingSave(false);
     }else{
       setErrors(showErrors(resultForm as ErrorObj[], defaultErrors()));
     }
+
+    setLoadingSave(false);
   }
 
   async function resendMailer(): Promise<void> {

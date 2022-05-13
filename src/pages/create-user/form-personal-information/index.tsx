@@ -30,8 +30,8 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
 
   // Metodo para lidar com informacoes do usuario
   async function handleFormInfo(data: UserData, schema: any): Promise<void> {
-    setErrors(defaultErrorsStep1())
-    const resultForm = await validateForm(data, schema)
+    setErrors(defaultErrorsStep1());
+    const resultForm = await validateForm(data, schema);
 
     if(resultForm === true){
       setUserInfo({
