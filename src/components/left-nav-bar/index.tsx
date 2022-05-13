@@ -1,4 +1,4 @@
-import * as React from 'react';
+import react, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,7 +15,7 @@ import { Menu,
          StarBorderRounded,
          DashboardOutlined,
          AccountCircleOutlined } from '@material-ui/icons';
-import { CoinIcon, CoinInformation, Container, TextItem } from './styles';
+import { CoinIcon, CoinInformation, Container, Logo, TextItem } from './styles';
 
 const drawerWidth = 240;
 interface Props {
@@ -24,7 +24,7 @@ interface Props {
 
 export default function LeftNavBar(props: Props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -33,8 +33,7 @@ export default function LeftNavBar(props: Props) {
   const drawer = (
     <Container>
       <div>
-
-        <h1>Cottonnect <CoinIcon/></h1>
+        <h1>Cottonnect <Logo src="/images/logo.png" /></h1>
         <List>
           <ListItem button component="a" href="/app/explorer">
             <ListItemIcon>
