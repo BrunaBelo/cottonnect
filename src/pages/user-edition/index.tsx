@@ -2,7 +2,7 @@ import react, { useEffect, useState } from "react";
 import LeftNavBar from "../../components/left-nav-bar";
 import Loading from "../../components/loading";
 import { UserData } from "../../interfaces/user-data";
-import { getUser, updateUser } from "../../service/user";
+import { confirmationAccount, getUser, resendCodeVerification, sendMailerConfirmAccount, updateUser } from "../../service/user";
 import { getStates } from "../../service/state";
 import { getCities } from "../../service/cities";
 import { defaultErrors } from "./handle-data";
@@ -22,7 +22,12 @@ import { Main,
   EditInput,
   FormUpdateUser,
   EditAdditionalInformationInput,
-  UserIcon} from "./styles";
+  UserIcon,
+  SMSIcon,
+  MailerIcon,
+  SendMailerAgain,
+  ConfirmationActions,
+  SendSmsAgain} from "./styles";
 import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import { AlertMessage } from "../auction-details/styles";
 import { City } from "../../interfaces/city";
@@ -44,16 +49,16 @@ export default function UserEdition() {
   const [errors, setErrors] = useState(defaultErrors());
   const [loading, setLoading] = useState(false);
   const [loadingSave, setLoadingSave] = useState(false);
-  const [updated, setUpdated] = useState(false);
+  const [notice, setNotice] = useState({ show: false, message: "", type: "" });
 
   useEffect(() => {
     getCurrentUser();
     getStatesFromApi();
 
     setTimeout(() => {
-      setUpdated(false);
+      setNotice({ show: false, message: "", type: "" });
     }, 5000)
-  }, [updated]);
+  }, []);
 
   const getCurrentUser = (async () => {
     setLoading(true);
@@ -107,11 +112,36 @@ export default function UserEdition() {
       { email, phoneNumber, additionalInformation, city, state }, userSchema);
     if(resultForm === true){
       setLoadingSave(true);
-      await updateUser(buildUser());
-      setUpdated(true);
+
+      const result = await updateUser(buildUser());
+
+      if(Object.keys(result).length === 0){
+        setNotice({ show: true, message: "Erro ao atualizar sua conta", type: "error" });
+      }else {
+        setNotice({ show: true, message: "Sua conta foi atualizada com sucesso", type: "success"});
+      }
+
       setLoadingSave(false);
     }else{
       setErrors(showErrors(resultForm as ErrorObj[], defaultErrors()));
+    }
+  }
+
+  async function resendMailer(): Promise<void> {
+    const result = await sendMailerConfirmAccount(user.id as string);
+    if (result === true){
+      setNotice({ show: true, message: "Sucesso ao enviar email de confirmação de conta", type: "success" });
+    }else{
+      setNotice({ show: true, message: "Erro ao enviar email de confirmação de conta", type: "error"});
+    }
+  }
+
+  async function resendSms(): Promise<void> {
+    const result = await resendCodeVerification(user.id as string);
+    if (result === true){
+      setNotice({ show: true, message: "Sucesso ao enviar sms de confirmação de conta", type: "success" });
+    }else{
+      setNotice({ show: true, message: "Erro ao enviar sms de confirmação de conta", type: "error"});
     }
   }
 
@@ -126,10 +156,10 @@ export default function UserEdition() {
   }
 
   function buldingMessage() {
-    if (updated === true){
-      return (<AlertMessage severity="success">{"Sua conta foi atualizada com sucesso."}</AlertMessage>)
+    if (notice.type === "success"){
+      return (<AlertMessage severity="success">{notice.message}</AlertMessage>);
     }else {
-      return (<AlertMessage severity="error">{"Erro ao atualizar sua conta."}</AlertMessage>)
+      return (<AlertMessage severity="error">{notice.message}</AlertMessage>);
     }
   };
 
@@ -143,7 +173,7 @@ export default function UserEdition() {
         :
         <Main>
           {
-            updated ? buldingMessage(): <></>
+            notice.show ? buldingMessage(): <></>
           }
           <h2>Meus Dados <UserIcon /></h2>
           <FormUpdateUser>
@@ -244,6 +274,20 @@ export default function UserEdition() {
                 loadingSave ? <>Salvando informações... <LoadingCircle size={20} /></> : <>Salvar <EditIcon /></>
               }
             </UpdateUser>
+
+            {
+              user.isAllowed == true?
+                <ConfirmationActions>
+                  <SendMailerAgain onClick={() => resendMailer()}>
+                    Reenviar email de confirmação <MailerIcon />
+                  </SendMailerAgain>
+                  <SendSmsAgain onClick={() => resendSms()}>
+                    Reenviar SMS de confirmação <SMSIcon />
+                  </SendSmsAgain>
+                </ConfirmationActions>
+              :
+                <></>
+            }
           </FormUpdateUser>
         </Main>
       }

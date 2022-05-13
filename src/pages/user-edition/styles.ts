@@ -3,6 +3,8 @@ import { CircularProgress } from '@material-ui/core';
 import { MenuItem, Select, TextField } from '@mui/material';
 import { Save } from "@styled-icons/bootstrap/"
 import { User } from '@styled-icons/boxicons-regular';
+import { MailSend } from '@styled-icons/boxicons-regular';
+import { Sms } from '@styled-icons/material';
 
 export const Container = styled.div`
   display: flex;
@@ -113,4 +115,36 @@ export const EditAdditionalInformationInput = styled.div`
   @media (max-width: 900px) {
     width: 100%;
   }
+`
+
+export const ConfirmationActions = styled.div`
+  display: flex;
+  width: 75%;
+  column-gap: 20px;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+`
+
+export const SendMailerAgain = styled.button`
+  padding: 15px 10px;
+  border-radius: 15px;
+  width: 100%;
+`
+
+export const SendSmsAgain = styled.button`
+  padding: 15px 10px;
+  border-radius: 15px;
+  width: 100%;
+`
+
+export const MailerIcon = styled(MailSend)`
+  width: 26px;
+`
+
+export const SMSIcon = styled(Sms)`
+  width: 26px;
 `

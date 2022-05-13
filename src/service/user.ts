@@ -3,6 +3,7 @@ import { UserData } from "../interfaces/user-data";
 
 export const createUser = async(userData: UserData): Promise<UserData> => {
   let user = {} as UserData;
+  delete userData.isAllowed;
 
   try {
     const response = await api.post("/users", userData);
@@ -68,6 +69,7 @@ export const getUser = async (userId: string): Promise<UserData> => {
 
 export const updateUser = async (userData: UserData): Promise<UserData> => {
   let user = {} as UserData;
+  delete userData.isAllowed;
 
   try {
     const response = await api.put(`users/${userData.id}`, userData);
@@ -113,6 +115,19 @@ export const confirmationAccount = async (userId: string): Promise<Boolean> => {
 
   try {
     const response = await api.get(`users/confirm-account?id=${userId}`);
+    result = response.data;
+  } catch (error) {
+    console.log("Erro confirmar conta", error);
+  }
+
+  return result;
+}
+
+export const sendMailerConfirmAccount = async (userId: string): Promise<Boolean> => {
+  let result = false;
+
+  try {
+    const response = await api.get(`users/send-mailer-confirm-account?id=${userId}`);
     result = response.data;
   } catch (error) {
     console.log("Erro confirmar conta", error);
