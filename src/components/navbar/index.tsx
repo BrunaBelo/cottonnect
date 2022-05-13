@@ -16,7 +16,7 @@ export default function Navbar({dark = false, actionButton = false}: ScreenStyle
           <Link to="/">
             <PageOption dark={dark}>Início</PageOption>
           </Link>
-          <Link to="/about">
+          <Link to="/sobre">
             <PageOption dark={dark}>Sobre nós</PageOption>
           </Link>
         </Options>

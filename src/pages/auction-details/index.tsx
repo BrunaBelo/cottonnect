@@ -1,17 +1,17 @@
 import react, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
 import { AlertMessage, AuctionInfos, ConfirmYourAccount, Container, DonationInfo, DonationPhoto, DonationPhotosDiv, Main } from './styles'
-import MessageState from '../../interfaces/message-state'
-import LeftNavBar from '../../components/left-nav-bar';
 import { getAutionInformation } from '../../service/auction';
 import { Donation } from '../../interfaces/donation';
 import { Auction } from '../../interfaces/auction';
 import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import BiddingInput from '../../components/bidding-input';
 import { createBidding } from '../../service/bidding';
 import { UserData } from '../../interfaces/user-data';
 import { getUser } from '../../service/user';
+import BiddingInput from '../../components/bidding-input';
+import MessageState from '../../interfaces/message-state'
+import LeftNavBar from '../../components/left-nav-bar';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function DonationDetails() {
   const auctionId = useParams().id || '';

@@ -19,6 +19,7 @@ import ChangePassword from "./pages/recover-account/change-password";
 import ChangePasswordSuccess from "./pages/recover-account/change-password-success";
 import ConfirmationEmail from "./pages/confirmation-account/confirmation-email";
 import ConfirmationEmailSuccess from "./pages/confirmation-account/confirmation-email-success";
+import About from "./pages/about";
 
 export default function AppRoutes(){
 
@@ -42,7 +43,7 @@ export default function AppRoutes(){
         <Route path="/alterar-senha/sucesso" element={<ChangePasswordSuccess/>}/>
         <Route path="/confirmar-conta" element={<ConfirmationEmail/>}/>
         <Route path="/confirmar-conta/sucesso" element={<ConfirmationEmailSuccess/>}/>
-        <Route path="/about"/>
+        <Route path="/sobre" element={<About/>}/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>
           <Route path="meus-dados" element={setAsProtected(<UserEdition/>)}/>
