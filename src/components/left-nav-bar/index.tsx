@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import react, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,7 +15,9 @@ import { Menu,
          StarBorderRounded,
          DashboardOutlined,
          AccountCircleOutlined } from '@material-ui/icons';
-import { CoinIcon, CoinInformation, Container, Logo, TextItem } from './styles';
+import { CoinInformation, Container, Logo, TextItem } from './styles';
+import { getUser } from '../../service/user';
+import { UserData } from '../../interfaces/user-data';
 
 const drawerWidth = 240;
 interface Props {
@@ -25,10 +27,21 @@ interface Props {
 export default function LeftNavBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [saldo, setSaldo] = useState(0);
+  const [localUserId, setLocalUserId] = useState(localStorage.getItem("user-id") || "");
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const getCurrentUser = async(): Promise<void> => {
+    const user = await getUser(localUserId);
+    setSaldo(user.cottonFlakes as number);
+  }
 
   const drawer = (
     <Container>
@@ -80,7 +93,7 @@ export default function LeftNavBar(props: Props) {
       </div>
 
       <CoinInformation>
-        <span><CoinIcon/>Saldo: 130</span>
+        <span>Seu Saldo: {saldo}</span>
       </CoinInformation>
     </Container>
   );

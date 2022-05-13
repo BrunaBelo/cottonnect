@@ -43,13 +43,6 @@ export const CoinInformation = styled.div`
   color: var(--primary);
 `
 
-export const CoinIcon = styled(Cloudy)`
-  width: 17px;
-  margin-right: 10px;
-`
-
 export const Logo = styled.img`
   width: 33px;
 `
-
-
