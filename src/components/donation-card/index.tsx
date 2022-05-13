@@ -8,7 +8,7 @@ import { UserData } from '../../interfaces/user-data'
 import UserModal from './modal-user'
 import Confetti from 'react-confetti';
 import { acceptDonation, rejectDonation } from '../../service/auction'
-import ModalConfirm from './modal-confirm'
+import ModalConfirm from '../modal-confirm/modal-confirm'
 
 interface AuctionStatus {
   waiting: string,

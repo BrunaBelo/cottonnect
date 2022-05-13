@@ -2,6 +2,7 @@ import react, { useState, useEffect } from "react";
 import { AlreadySendingBid, Bidding, BiddingInputField, BiddingButton, IconSend } from "./styles";
 import { checkExistsBidFromAuction } from '../../service/bidding';
 import { getCottonFlakesFromUser } from "../../service/user";
+import ModalConfirm from "../modal-confirm/modal-confirm";
 
 interface BiddingInputData {
   auctionId: string,
@@ -13,10 +14,13 @@ export default function BiddingInput({
   sendBid
 }: BiddingInputData) {
 
-  const [bidAmount, setBidAmount] = useState(0)
-  const [alreadySendingBid, setAlreadySendingBid] = useState(false)
-  const [showErrorInput, setShowErrorInput] = useState(false)
-  const [messageErrorInput, setMessageShowErrorInput] = useState("")
+  const [bidAmount, setBidAmount] = useState(0);
+  const [alreadySendingBid, setAlreadySendingBid] = useState(false);
+  const [showErrorInput, setShowErrorInput] = useState(false);
+  const [messageErrorInput, setMessageShowErrorInput] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     checkExistsBid()
@@ -86,11 +90,18 @@ export default function BiddingInput({
             style: { color: 'rgb(96, 109, 189)', fontWeight: 'bold', fontSize: '13.5px'},
           }}
         />
-        <BiddingButton onClick={() => saveBidding()}>
+        <BiddingButton onClick={() => handleOpen()}>
           <IconSend></IconSend>
         </BiddingButton>
       </Bidding>
     }
+
+    <ModalConfirm
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        action={saveBidding}
+      />
     </>
   )
 }

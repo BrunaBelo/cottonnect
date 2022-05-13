@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 export default function ModalConfirm({ open, handleOpen, handleClose, action }: ModalProps) {
-  const rejectAndClose = async () => {
+  const runActionAndClose = async () => {
     await action();
     handleClose();
   }
@@ -28,7 +28,7 @@ export default function ModalConfirm({ open, handleOpen, handleClose, action }: 
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={rejectAndClose}>Sim</Button>
+        <Button onClick={runActionAndClose}>Sim</Button>
         <Button onClick={handleClose} autoFocus>
           Não
         </Button>
