@@ -9,6 +9,7 @@ export interface UserData {
   password?: string,
   additionalInformation?: string,
   stateId?: string,
+  isAllowed?: boolean,
   cityId?: string
   city?: City
 }

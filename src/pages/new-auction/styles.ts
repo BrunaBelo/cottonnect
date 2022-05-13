@@ -149,3 +149,8 @@ export const DonateIcon = styled(DonateHeart)`
 export const LoadingCircle = styled(CircularProgress)`
   margin-left: 10px;
 `
+
+export const ConfirmYourAccount = styled.span`
+  text-align: center;
+  font-size: 17px;
+`

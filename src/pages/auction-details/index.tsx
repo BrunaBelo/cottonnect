@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
-import { AlertMessage, AuctionInfos, Container, DonationInfo, DonationPhoto, DonationPhotosDiv, Main } from './styles'
+import { AlertMessage, AuctionInfos, ConfirmYourAccount, Container, DonationInfo, DonationPhoto, DonationPhotosDiv, Main } from './styles'
 import MessageState from '../../interfaces/message-state'
 import LeftNavBar from '../../components/left-nav-bar';
 import { getAutionInformation } from '../../service/auction';
@@ -10,6 +10,8 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import BiddingInput from '../../components/bidding-input';
 import { createBidding } from '../../service/bidding';
+import { UserData } from '../../interfaces/user-data';
+import { getUser } from '../../service/user';
 
 export default function DonationDetails() {
   const auctionId = useParams().id || '';
@@ -20,8 +22,11 @@ export default function DonationDetails() {
   const [bidAmount, setBidAmount] = useState(0);
   const [auction, setAuction] = useState({} as Auction);
   const [donation, setDonation] = useState({} as Donation);
+  const [user, setUser] = useState({} as UserData);
+  const [localUserId, setLocalUserId] = useState(localStorage.getItem("user-id") || "");
 
   useEffect(() => {
+    getCurrentUser();
     setTimeout(() => {
       setShowMessage(false);
     }, 5000)
@@ -37,6 +42,11 @@ export default function DonationDetails() {
     }
 
   }, [message, bidAmount])
+
+  const getCurrentUser = async(): Promise<void> => {
+    const user = await getUser(localUserId);
+    setUser(user);
+  }
 
   const sendBid = async(bidAmount: number): Promise<void> => {
     const bid = await createBidding({bidAmount: bidAmount, auctionId: auctionId});
@@ -97,12 +107,16 @@ export default function DonationDetails() {
 
             <p>{donation.description}</p>
             {
-              auction.userId != localStorage.getItem("user-id") ?
-                <BiddingInput
-                  auctionId={auctionId}
-                  sendBid={sendBid}
-                />
-              : <></>
+              auction.userId != localUserId ?
+                user.isAllowed ?
+                  <BiddingInput
+                    auctionId={auctionId}
+                    sendBid={sendBid}
+                  />
+                :
+                  <ConfirmYourAccount>Confirme sua conta para dar gratificações 😉</ConfirmYourAccount>
+                :
+                  <></>
             }
           </DonationInfo>
         </AuctionInfos>

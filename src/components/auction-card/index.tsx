@@ -1,27 +1,38 @@
-import react from "react";
+import react, { useEffect, useState } from "react";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Auction } from "../../interfaces/auction";
+import { UserData } from "../../interfaces/user-data";
 import { createBidding } from "../../service/bidding";
+import { getUser } from "../../service/user";
 import BiddingInput from "../bidding-input";
-import { CardPhoto, Container, DonationDetails } from "./styles";
+import { CardPhoto, ConfirmYourAccount, Container, DonationDetails } from "./styles";
 
 interface AuctionCardData {
   auction: Auction
 }
 
-export default function AuctionCard({
-  auction: {
-    id: auctionId,
-    closingDate,
-    donationObject: { title, photos },
-    biddings,
-    userId
-  }}: AuctionCardData) {
+export default function AuctionCard({ auction: {
+                                      id: auctionId,
+                                      closingDate,
+                                      donationObject: { title, photos },
+                                      biddings,
+                                      userId }}: AuctionCardData){
 
-  const sendBid = async(bidAmount: number):Promise<void> => {
-    const bid = await createBidding({bidAmount: bidAmount, auctionId: auctionId});
-    const result = Object.keys(bid).length != 0 ? true : false
+  const [user, setUser] = useState({} as UserData);
+  const [localUserId, setLocalUserId] = useState(localStorage.getItem("user-id") || "");
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  const getCurrentUser = async(): Promise<void> => {
+    const user = await getUser(localUserId);
+    setUser(user);
+  }
+
+  const sendBid = async(bidAmount: number): Promise<void> => {
+    await createBidding({ bidAmount: bidAmount, auctionId: auctionId });
   }
 
   const buildTextBiddingCount = (): string => {
@@ -52,13 +63,16 @@ export default function AuctionCard({
           <span>{buildTextBiddingCount()}</span>
         </div>
         {
-          userId != localStorage.getItem("user-id") ?
-            <BiddingInput
-            auctionId={auctionId}
-            sendBid={sendBid}
-            />
-          :
-          <></>
+          userId != localUserId ?
+            user.isAllowed ?
+              <BiddingInput
+              auctionId={auctionId}
+              sendBid={sendBid}
+              />
+            :
+              <ConfirmYourAccount>Confirme sua conta para dar gratificações 😉</ConfirmYourAccount>
+            :
+              <></>
         }
 
       </DonationDetails>

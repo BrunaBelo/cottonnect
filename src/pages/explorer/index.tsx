@@ -26,17 +26,11 @@ export default function Explorer() {
   }, [])
 
   const getCategoriesFromApi = async() => {
-    try{
-      const { data } = await getCategories();
-      const dataAux = data.map((category: any): selectCategory => (
-        {
-          "value": category.id, "label": category.name
-        }
-      ));
-      setCategoryList(dataAux);
-    }catch{
-      console.log('Erro ao buscar categorias');
-    }
+    const categories = await getCategories();
+    const formatCategories = categories.map((category: any): selectCategory => (
+      { "value": category.id, "label": category.name }
+    ));
+    setCategoryList(formatCategories);
   }
 
   const getAll = async(categoryValue: string) => {

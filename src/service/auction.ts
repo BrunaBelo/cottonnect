@@ -16,18 +16,17 @@ export const getAutionInformation = async(auctionId: string): Promise<Auction> =
   return auction;
 }
 
-export const createAuction = async(auction: AuctionFormData): Promise<AxiosResponse> => {
-  const data = buildFormData(auction);
-  let response = {} as AxiosResponse;
+export const createAuction = async(auctionData: AuctionFormData): Promise<Auction> => {
+  let auction = {} as Auction;
 
   try{
-    response = await api.post("/auctions", data);
-  }
-  catch(err){
+    const response = await api.post("/auctions", buildFormData(auctionData));
+    auction = response.data;
+  }catch(err){
     console.log('Erro ao criar leilão', err);
   }
 
-  return response;
+  return auction;
 }
 
 const buildFormData = (auction: AuctionFormData) => {

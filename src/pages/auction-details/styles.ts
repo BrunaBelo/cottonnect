@@ -139,3 +139,6 @@ export const DonationInfo = styled.div`
   }
 `
 
+export const ConfirmYourAccount = styled.span`
+  text-align: center;
+`

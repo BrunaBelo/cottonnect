@@ -82,4 +82,6 @@ export const CardPhoto = styled.img`
     height: 80vw;
   }
 `
-
+export const ConfirmYourAccount = styled.span`
+  font-size: 10px;
+`
