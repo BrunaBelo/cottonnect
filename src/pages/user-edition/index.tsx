@@ -2,7 +2,7 @@ import react, { useEffect, useState } from "react";
 import LeftNavBar from "../../components/left-nav-bar";
 import Loading from "../../components/loading";
 import { UserData } from "../../interfaces/user-data";
-import { confirmationAccount, getUser, resendCodeVerification, sendMailerConfirmAccount, updateUser } from "../../service/user";
+import { confirmationPhone, getUser, resendCodeVerification, sendMailerConfirmAccount, updateUser } from "../../service/user";
 import { getStates } from "../../service/state";
 import { getCities } from "../../service/cities";
 import { defaultErrors } from "./handle-data";
@@ -27,11 +27,12 @@ import { Main,
   MailerIcon,
   SendMailerAgain,
   ConfirmationActions,
-  SendSmsAgain} from "./styles";
+  SendSmsAgain,
+  AlertMessage} from "./styles";
 import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
-import { AlertMessage } from "../auction-details/styles";
 import { City } from "../../interfaces/city";
 import { formatData } from "../create-user/form-personal-information/handle-data";
+import ModalConfirmSMS from "./modal-confirm-sms";
 
 interface selectLocation {
   id: string,
@@ -50,7 +51,12 @@ export default function UserEdition() {
   const [errors, setErrors] = useState(defaultErrors());
   const [loading, setLoading] = useState(false);
   const [loadingSave, setLoadingSave] = useState(false);
+  const [loagindSendSMS, setLoagindSendSMS] = useState(false);
+  const [loagindSendMail, setLoagindSendMail] = useState(false);
   const [notice, setNotice] = useState({ show: false, message: "", type: "" });
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     getCurrentUser();
@@ -135,21 +141,35 @@ export default function UserEdition() {
   }
 
   async function resendMailer(): Promise<void> {
+    setLoagindSendMail(true);
+
     const result = await sendMailerConfirmAccount(user.id as string);
     if (result === true){
       setNotice({ show: true, message: "Sucesso ao enviar email de confirmação de conta", type: "success" });
     }else{
       setNotice({ show: true, message: "Erro ao enviar email de confirmação de conta", type: "error"});
     }
+
+    setLoagindSendMail(false);
   }
 
   async function resendSms(): Promise<void> {
+    setLoagindSendSMS(true);
+
     const result = await resendCodeVerification(user.id as string);
     if (result === true){
       setNotice({ show: true, message: "Sucesso ao enviar sms de confirmação de conta", type: "success" });
+      handleOpen();
     }else{
       setNotice({ show: true, message: "Erro ao enviar sms de confirmação de conta", type: "error"});
     }
+
+    setLoagindSendSMS(false);
+  }
+
+  async function validateUserPhoneCode(code: string): Promise<Boolean>{
+    const verified = await confirmationPhone(user.id as string, code);
+    return verified;
   }
 
   function buildUser(): UserData {
@@ -282,20 +302,40 @@ export default function UserEdition() {
               }
             </UpdateUser>
 
-            {
-              user.isAllowed == true?
-                <ConfirmationActions>
+            <ConfirmationActions>
+              {
+                user.confirmedEmail === false ?
                   <SendMailerAgain onClick={() => resendMailer()}>
-                    Reenviar email de confirmação <MailerIcon />
+                     {
+                      loagindSendMail ?
+                        <LoadingCircle size={20} />
+                      :
+                        <>Reenviar email de confirmação <MailerIcon /></>
+                      }
+
                   </SendMailerAgain>
+                : <></>
+              }
+              {
+                user.phoneVerified === false ?
                   <SendSmsAgain onClick={() => resendSms()}>
-                    Reenviar SMS de confirmação <SMSIcon />
-                  </SendSmsAgain>
-                </ConfirmationActions>
-              :
-                <></>
-            }
+                    {
+                      loagindSendSMS ?
+                        <LoadingCircle size={20} />
+                      :
+                        <>Reenviar SMS de confirmação <SMSIcon /></>
+                    }
+                    </SendSmsAgain>
+                : <></>
+              }
+            </ConfirmationActions>
           </FormUpdateUser>
+
+          <ModalConfirmSMS
+            open={open}
+            handleClose={handleClose}
+            action={validateUserPhoneCode}
+          />
         </Main>
       }
     </Container>

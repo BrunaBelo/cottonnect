@@ -10,6 +10,8 @@ export interface UserData {
   additionalInformation?: string,
   stateId?: string,
   isAllowed?: boolean,
+  confirmedEmail?: boolean,
+  phoneVerified?: boolean,
   cottonFlakes?: number,
   cityId?: string
   city?: City

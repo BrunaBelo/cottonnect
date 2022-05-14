@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { CircularProgress } from '@material-ui/core';
-import { MenuItem, Select, TextField } from '@mui/material';
+import { CircularProgress, DialogActions } from '@material-ui/core';
+import { Alert, MenuItem, Select, TextField } from '@mui/material';
 import { Save } from "@styled-icons/bootstrap/"
 import { User } from '@styled-icons/boxicons-regular';
 import { MailSend } from '@styled-icons/boxicons-regular';
 import { Sms } from '@styled-icons/material';
+import { CheckSquare } from '@styled-icons/feather';
 
 export const Container = styled.div`
   display: flex;
@@ -147,4 +148,38 @@ export const MailerIcon = styled(MailSend)`
 
 export const SMSIcon = styled(Sms)`
   width: 26px;
+`
+
+export const CheckCellphone = styled(CheckSquare)`
+  width: 22px;
+  color: var(--primary);
+`
+
+export const Actions = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0 30px 0;
+  column-gap: 5px;
+`
+
+export const ButtonSMS = styled.button`
+  padding: 20px;
+  border-radius: 5px;
+  background-color: var(--primary);
+  color: white;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 3px;
+`
+
+export const AlertMessage = styled(Alert)`
+  width: 100%;
+  margin-bottom: 1.5em;
+
+  @media (max-width: 900px) {
+    margin-bottom: 60px;
+    width: 90%;
+  }
 `

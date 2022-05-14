@@ -30,7 +30,6 @@ export const AlertMessage = styled(Alert)`
     margin-bottom: 60px;
     width: 90%;
   }
-
 `
 
 export const AuctionInfos = styled.div`

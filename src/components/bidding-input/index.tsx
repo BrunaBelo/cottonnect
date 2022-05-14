@@ -102,7 +102,7 @@ export default function BiddingInput({
         handleOpen={handleOpen}
         handleClose={handleClose}
         action={saveBidding}
-      />
+    />
     </>
   )
 }
