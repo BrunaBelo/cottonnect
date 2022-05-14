@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Select from 'react-select'
 import { OutlinedInput, TextField } from "@material-ui/core";
 import { Search } from "@styled-icons/bootstrap";
+import { List, Pagination } from "@mui/material";
 
 export const Container = styled.div`
   display: flex;
@@ -15,12 +16,12 @@ export const Main = styled.div`
   padding: 20px 50px;
 `
 
-export const AuctionList = styled.div`
+export const AuctionList = styled(List)`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  row-gap: 30px;
+  row-gap: 40px;
   column-gap: 30px;
 
   @media(max-width: 1200px){
@@ -63,14 +64,19 @@ export const NoAuctions = styled.div`
 `
 
 export const Filters = styled.div`
-  width: 100%;
+  width: 60%;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   column-gap: 5px;
   row-gap: 5px;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin: 15px 0 50px 0;
+
+  @media(max-width: 900px){
+    width: 100%;
+  }
 `
 
 export const TitleInput = styled(TextField)`
@@ -100,9 +106,7 @@ export const SearchIcon = styled(Search)`
   color: white;
 `
 
-export const SelectField = styled(OutlinedInput)`
-
-`
+export const SelectField = styled(OutlinedInput)``
 
 export const SearchDiv = styled.div`
   flex-grow: 1;
@@ -112,4 +116,12 @@ export const SearchDiv = styled.div`
   @media(max-width: 900px){
     width: 100%;
   }
+`
+
+export const AuctionPagination = styled(Pagination)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 50px 0;
 `

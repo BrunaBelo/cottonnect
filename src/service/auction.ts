@@ -46,17 +46,20 @@ const buildFormData = (auction: AuctionFormData) => {
   return data;
 }
 
-export const getAllAuctions = async(cityId: string, categoryId: string, title: string): Promise<Auction[]> => {
-  let auctions = [] as Auction[];
+export const getAllAuctions = async(cityId: string,
+                                    categoryId: string,
+                                    title: string,
+                                    page: number,
+                                    limit: number): Promise<AxiosResponse> => {
+  let response = {} as AxiosResponse;
 
   try {
-    const response = await api.get(`auctions?cityId=${cityId}&categoryId=${categoryId}&title=${title}`);
-    auctions = response.data;
+    response = await api.get(`auctions?cityId=${cityId}&categoryId=${categoryId}&title=${title}&page=${page}&limit=${limit}`);
   } catch (error) {
     console.log('Erro ao buscar leilões');
   }
 
-  return auctions;
+  return response;
 }
 
 export const getAuctionsDonated = async(): Promise<Auction[]> => {

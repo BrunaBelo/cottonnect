@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import react, { useState, useEffect, createRef } from "react";
 import { AlreadySendingBid, Bidding, BiddingInputField, BiddingButton, IconSend } from "./styles";
 import { checkExistsBidFromAuction } from '../../service/bidding';
 import { getCottonFlakesFromUser } from "../../service/user";
@@ -88,6 +88,7 @@ export default function BiddingInput({
           }}
           InputProps={{
             style: { color: 'rgb(96, 109, 189)', fontWeight: 'bold', fontSize: '13.5px'},
+            inputProps: { min: 0 }
           }}
         />
         <BiddingButton onClick={() => handleOpen()}>

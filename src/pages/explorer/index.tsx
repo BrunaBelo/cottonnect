@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from 'react';
 import LeftNavBar from '../../components/left-nav-bar';
 import AuctionCard from '../../components/auction-card';
-import { AuctionList, Filters, Container, Main, NoAuctions, SearchButton, SearchDiv, SearchIcon, SelectField, SelectInput, TitleInput } from './styles';
+import { AuctionList, Filters, Container, Main, NoAuctions, SearchButton, SearchDiv, SearchIcon, SelectField, SelectInput, TitleInput, AuctionPagination } from './styles';
 import { getAllAuctions } from "../../service/auction";
 import { Auction } from '../../interfaces/auction';
 import selectCategory from '../../interfaces/select-category';
@@ -14,16 +14,24 @@ export default function Explorer() {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [categoryValue, setCategoryValue] = useState("0");
-  const [categoryList, setCategoryList] = useState([] as selectCategory[])
+  const [categoryList, setCategoryList] = useState([] as selectCategory[]);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+  const [perPage, setPerPage] = useState(12);
 
   useEffect(() => {
-    getAll("0");
+    getAll("0", page);
     getCategoriesFromApi();
 
     setTimeout(() => {
       setLoading(false);
     }, 5000);
-  }, [])
+  }, []);
+
+  const handleChange = async(event: any, value: number) => {
+    setPage(value);
+    await getAll(categoryValue, value);
+  };
 
   const getCategoriesFromApi = async() => {
     const categories = await getCategories();
@@ -33,14 +41,17 @@ export default function Explorer() {
     setCategoryList(formatCategories);
   }
 
-  const getAll = async(categoryValue: string) => {
+  const getAll = async(categoryValue: string, page: number) => {
     setLoading(true);
 
     const categoryId = categoryValue == "0" ? "" : categoryValue;
     const cityId = localStorage.getItem("user-city") as string;
-    const allAuctions = await getAllAuctions(cityId, categoryId, title);
+    const response = await getAllAuctions(cityId, categoryId, title, page, perPage);
+    const allAuctions = response.data.auctions;
+    const countTotalAuctions = response.data.total;
 
     setAuctions(allAuctions);
+    setCount(Math.ceil(countTotalAuctions / perPage));
 
     window.scrollTo({
       top: 0,
@@ -53,11 +64,11 @@ export default function Explorer() {
 
   const filterCategory = async(categoryId: string) => {
     setCategoryValue(categoryId);
-    await getAll(categoryId);
+    await getAll(categoryId, page);
   }
 
   const filterTitle = async() => {
-    await getAll(categoryValue);
+    await getAll(categoryValue, page);
   }
 
   return (
@@ -99,17 +110,20 @@ export default function Explorer() {
            <Loading></Loading>
             :
             auctions.length > 0 ?
-              <AuctionList>
-                {
-                  auctions.map(auction => {
-                    return(
-                      <AuctionCard
-                        auction={auction}
-                      />
-                    )
-                  })
-                }
-              </AuctionList>
+              <>
+                <AuctionList>
+                  {
+                    auctions.map(auction => {
+                      return(
+                        <AuctionCard
+                          auction={auction}
+                        />
+                      )
+                    })
+                  }
+                </AuctionList>
+                <AuctionPagination count={count} page={page} onChange={handleChange} color="primary" size="large"/>
+              </>
             :
               <NoAuctions>
                 <span>Nenhum leilão foi encontrado na sua cidade. Tente novamente mais tarde 😉</span>

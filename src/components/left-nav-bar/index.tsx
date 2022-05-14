@@ -17,7 +17,6 @@ import { Menu,
          AccountCircleOutlined } from '@material-ui/icons';
 import { CoinInformation, Container, Logo, TextItem } from './styles';
 import { getUser } from '../../service/user';
-import { UserData } from '../../interfaces/user-data';
 
 const drawerWidth = 240;
 interface Props {
