@@ -162,6 +162,7 @@ export const Actions = styled.div`
   justify-content: center;
   margin: 5px 0 30px 0;
   column-gap: 5px;
+  padding: 0 5px;
 `
 
 export const ButtonSMS = styled.button`

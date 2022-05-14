@@ -43,6 +43,14 @@ export default function ModalConfirmSMS({ open, handleClose, action }: ModalProp
     }
   };
 
+  const validateInput = ((event: React.KeyboardEvent<HTMLDivElement>) =>{
+    const key = event.key;
+
+    if((/^\d+$/.test(key) == false) || key === "." || key === "," || key === "-" || key === "+"){
+      event.preventDefault();
+    }
+  });
+
   return(
     <Dialog open={open}
             onClose={handleClose}
@@ -60,10 +68,13 @@ export default function ModalConfirmSMS({ open, handleClose, action }: ModalProp
               </DialogContentText>
             </DialogContent>
             <Actions>
-              <TextField type="number"
-                        InputProps={{inputProps: { maxLength: 10 }}}
-                        variant="outlined"
-                        onChange={(e) => setCode(e.target.value.toString())}
+              <TextField type="text"
+                         InputProps={{
+                          style: { fontWeight: 'bold', letterSpacing: '30px' },
+                          inputProps: { maxLength: 4 }}}
+                         variant="outlined"
+                         onKeyPress={(e) => validateInput(e)}
+                         onChange={(e) => setCode(e.target.value.toString())}
               >
               </TextField>
               <ButtonSMS onClick={runActionAndClose}>Validar</ButtonSMS>
