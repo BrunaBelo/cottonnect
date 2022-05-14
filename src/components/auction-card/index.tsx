@@ -1,12 +1,12 @@
 import react, { useEffect, useState } from "react";
 import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Auction } from "../../interfaces/auction";
 import { UserData } from "../../interfaces/user-data";
 import { createBidding } from "../../service/bidding";
 import { getUser } from "../../service/user";
-import BiddingInput from "../bidding-input";
 import { CardPhoto, ConfirmYourAccount, Container, DonationDetails } from "./styles";
+import BiddingInput from "../bidding-input";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface AuctionCardData {
   auction: Auction
@@ -29,6 +29,7 @@ export default function AuctionCard({ auction: {
   const getCurrentUser = async(): Promise<void> => {
     const user = await getUser(localUserId);
     setUser(user);
+    window.scrollTo({top: 0, left: 0, behavior: "auto" });
   }
 
   const sendBid = async(bidAmount: number): Promise<void> => {

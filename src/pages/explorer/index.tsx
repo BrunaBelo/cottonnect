@@ -1,13 +1,13 @@
 import react, { useEffect, useState } from 'react';
 import LeftNavBar from '../../components/left-nav-bar';
 import AuctionCard from '../../components/auction-card';
+import selectCategory from '../../interfaces/select-category';
+import Loading from '../../components/loading';
 import { AuctionList, Filters, Container, Main, NoAuctions, SearchButton, SearchDiv, SearchIcon, SelectField, SelectInput, TitleInput, AuctionPagination } from './styles';
 import { getAllAuctions } from "../../service/auction";
 import { Auction } from '../../interfaces/auction';
-import selectCategory from '../../interfaces/select-category';
 import { getCategories } from '../../service/donation-categories';
 import { MenuItem } from '@mui/material';
-import Loading from '../../components/loading';
 
 export default function Explorer() {
   const [auctions, setAuctions] = useState([] as Auction[]);
@@ -52,13 +52,6 @@ export default function Explorer() {
 
     setAuctions(allAuctions);
     setCount(Math.ceil(countTotalAuctions / perPage));
-
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "auto"
-    });
-
     setLoading(false);
   }
 

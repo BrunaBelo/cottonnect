@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Select from 'react-select'
 import { OutlinedInput, TextField } from "@material-ui/core";
 import { Search } from "@styled-icons/bootstrap";
 import { List, Pagination } from "@mui/material";
@@ -7,7 +6,6 @@ import { List, Pagination } from "@mui/material";
 export const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
   z-index: 10;
 `
 
@@ -113,6 +111,7 @@ export const SearchDiv = styled.div`
   display: flex;
   justify-content: space-between;
   column-gap: 5px;
+
   @media(max-width: 900px){
     width: 100%;
   }
