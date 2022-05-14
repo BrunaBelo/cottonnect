@@ -54,7 +54,8 @@ export const getAllAuctions = async(cityId: string,
   let response = {} as AxiosResponse;
 
   try {
-    response = await api.get(`auctions?cityId=${cityId}&categoryId=${categoryId}&title=${title}&page=${page}&limit=${limit}`);
+    response = await api.get(`auctions?cityId=${cityId}&categoryId=${categoryId}&title=${title}&page=${page}&limit=${limit}`,
+     { params: { token: localStorage.getItem('user-token')}});
   } catch (error) {
     console.log('Erro ao buscar leilões');
   }
