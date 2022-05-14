@@ -27,6 +27,6 @@ export default function GuestRoute({ component: Component }: GuestRouteProps) {
   useEffect(() => {
     checkSession();
   })
-  
+
   return objToRender;
 };

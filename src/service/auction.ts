@@ -114,3 +114,16 @@ export const acceptDonation = async(auctionId: string): Promise<Auction> => {
 
   return auction;
 }
+
+export const reactivateAuctionClosed = async(auctionId: string, closingDate: Date): Promise<Auction> => {
+  let auction = {} as Auction;
+
+  try {
+    const response = await api.get(`auctions/reactivate/${auctionId}?closingDate=${closingDate}`);
+    auction = response.data;
+  } catch (error) {
+    console.log('Erro ao reativar doação');
+  }
+
+  return auction;
+}

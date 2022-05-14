@@ -18,7 +18,6 @@ import {
   LoadingCircle,
   ConfirmYourAccount
 } from "./styles";
-
 import { changeInputValue, showErrors, validateForm } from "../../shared/form-configs/validate";
 import { defaultErrorsAuction } from "./handle-data";
 import { useNavigate } from "react-router-dom";
@@ -29,13 +28,13 @@ import { AlertErrorComponent } from "../../components/alert-error";
 import { schemaAuction } from './yup-schema'
 import { createAuction } from "../../service/auction";
 import { TextField } from "@mui/material";
+import { UserData } from "../../interfaces/user-data";
+import { getUser } from "../../service/user";
 import LeftNavBar from "../../components/left-nav-bar";
 import ErrorObj from "../../interfaces/error-obj";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import selectCategory from "../../interfaces/select-category";
-import { UserData } from "../../interfaces/user-data";
-import { getUser } from "../../service/user";
 
 interface AlertInterface {
   show: boolean,

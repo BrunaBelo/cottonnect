@@ -5,10 +5,12 @@ import { Auction } from '../../interfaces/auction'
 import { Bidding } from '../../interfaces/bidding'
 import { getBidWinner } from '../../service/bidding'
 import { UserData } from '../../interfaces/user-data'
+import { acceptDonation, reactivateAuctionClosed, rejectDonation } from '../../service/auction'
+import { useNavigate } from 'react-router-dom'
 import UserModal from './modal-user'
 import Confetti from 'react-confetti';
-import { acceptDonation, rejectDonation } from '../../service/auction'
 import ModalConfirm from '../modal-confirm/modal-confirm'
+import ModalReactiveAuction from './modal-reative-auction'
 
 interface AuctionStatus {
   waiting: string,
@@ -28,12 +30,13 @@ interface DonationCardProps {
   profile: string,
   auctionParam: Auction,
   setUpdateAuctions: react.Dispatch<react.SetStateAction<boolean>>
-  setNotice?: react.Dispatch<react.SetStateAction<{ show: boolean; message: string; type: string; }>>
+  setNotice: react.Dispatch<react.SetStateAction<{ show: boolean; message: string; type: string; }>>
 }
 
 export default function DonationCard({ profile, auctionParam , setUpdateAuctions, setNotice }: DonationCardProps) {
   const donationSuccessButtonText = "Ao clicar nesse botão, você confirma o recebimento do produto e transfere o valor do lance para o doador"
   const donationFailedButtonText = "Ao clicar nesse botão, você rejeita a doação"
+  const reactivateAuctionButtonText = "Não há lances para gerar um novo ganhador, ao clicar nesse botão o leilão sera reativado para receber novos lances"
 
   const statusColors: AuctionStatus = {
     "waiting": "#fbaf00",
@@ -51,14 +54,20 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
 
   const [buttonsText, setButtonsText] = useState({user: ""});
   const [bidWinner, setBidWinner] = useState({} as Bidding);
-  const [open, setOpen] = useState(false);
-  const [openConfirmModal, setOpenConfim] = useState(false);
   const [auction, setAuction] = useState(auctionParam as Auction);
   const [action, setAction] = useState("");
+
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [openConfirmModal, setOpenConfim] = useState(false);
   const handleOpenConfirmModal = () => setOpenConfim(true);
   const handleCloseConfirmModal = () => setOpenConfim(false);
+
+  const [openReactiveModal, setOpenReactiveModal] = useState(false);
+  const handleOpenReactiveModal = () => setOpenReactiveModal(true);
+  const handleCloseReactiveModal = () => setOpenReactiveModal(false);
 
   useEffect(() => {
     getButtonText();
@@ -84,14 +93,9 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
     if(Object.keys(auctionResponse).length != 0){
       setAuction(auctionResponse);
       setUpdateAuctions(true);
-
-      if(setNotice != undefined){
-        setNotice({ show: true, message: "Doação rejeitada com sucesso", type: "success" });
-      }
+      setNotice({ show: true, message: "Doação rejeitada com sucesso", type: "success" });
     }else{
-      if(setNotice != undefined){
-        setNotice({ show: true, message: "Erro ao rejeitar doação", type: "error" });
-      }
+      setNotice({ show: true, message: "Erro ao rejeitar doação", type: "error" });
     }
   }
 
@@ -102,14 +106,9 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
     if(Object.keys(auctionResponse).length != 0){
       setAuction(auctionResponse);
       setUpdateAuctions(true);
-
-      if(setNotice != undefined){
-        setNotice({ show: true, message: "Doação aceita com sucesso", type: "success" });
-      }
+      setNotice({ show: true, message: "Doação aceita com sucesso", type: "success" });
     }else{
-      if(setNotice != undefined){
-        setNotice({ show: true, message: "Erro ao aceitar doação", type: "error" });
-      }
+      setNotice({ show: true, message: "Erro ao aceitar doação", type: "error" });
     }
     setAuction(auctionResponse);
     setUpdateAuctions(true);
@@ -123,6 +122,18 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
   const getWinner = async () => {
     const winner = await getBidWinner(auction.id);
     setBidWinner(winner);
+  }
+
+  const reactivateAuction = async (closingDate: Date) => {
+    const result = await reactivateAuctionClosed(auction.id, closingDate);
+
+    if(Object.keys(result).length != 0){
+      setAuction(result);
+      setUpdateAuctions(true);
+      setNotice({ show: true, message: "Leilão reaberto com sucesso", type: "success" });
+    }else {
+      setNotice({ show: true, message: "Erro ao reabrir leilão", type: "error" });
+    }
   }
 
   return(
@@ -173,6 +184,13 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
               :
                 <></>
             }
+            { auction.status == "rejected" && profile == "owner"?
+                <Tooltip title={reactivateAuctionButtonText}>
+                  <button id="reactivate-auction" onClick={() => handleOpenReactiveModal()}>Reativar Leilão</button>
+                </Tooltip>
+              :
+                <></>
+            }
           </Actions>
           :
           <></>
@@ -189,6 +207,11 @@ export default function DonationCard({ profile, auctionParam , setUpdateAuctions
         handleOpen={handleOpenConfirmModal}
         handleClose={handleCloseConfirmModal}
         action={action == "accept" ? accept : reject}
+      />
+      <ModalReactiveAuction
+        open={openReactiveModal}
+        handleClose={handleCloseReactiveModal}
+        action={reactivateAuction}
       />
     </Container>
   )

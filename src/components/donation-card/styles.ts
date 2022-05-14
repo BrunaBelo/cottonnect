@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Cloudy } from "@styled-icons/ionicons-sharp/Cloudy";
 import { Whatsapp } from "@styled-icons/bootstrap/Whatsapp";
 import { Email } from "@styled-icons/evaicons-solid/Email";
-import { Box } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { TelephoneFill } from "@styled-icons/bootstrap/TelephoneFill"
 import { User } from "@styled-icons/boxicons-solid/User";
 import { InfoCircleFill } from "@styled-icons/bootstrap/InfoCircleFill";
@@ -170,3 +170,27 @@ export const BoxModal = styled(Box)`
   }
 `
 
+export const ActionReactive = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0 30px 0;
+  column-gap: 5px;
+  padding: 0 5px;
+`
+
+export const ButtonReactive = styled.button`
+  padding: 20px;
+  border-radius: 5px;
+  background-color: var(--primary);
+  color: white;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 3px;
+`
+
+
+export const DateInput = styled(TextField)`
+
+`

@@ -14,6 +14,22 @@ export const Container = styled.div`
   }
 `
 
+export const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  @media (max-width: 920px) {
+    width: 60%;
+  }
+
+  @media (max-width: 599px) {
+    width: 100%;
+  }
+`
+
 export const DonationsCard = styled.div`
   display: flex;
   flex-direction: column;
