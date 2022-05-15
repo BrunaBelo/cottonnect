@@ -8,7 +8,6 @@ type ProtectedRouteProps = {
 
 export default function ProtectedRoute({ component: Component }: ProtectedRouteProps) {
   const navigate = useNavigate();
-
   const checkSession = async() => {
 
     const validToken = await tokenValidation();
@@ -19,7 +18,7 @@ export default function ProtectedRoute({ component: Component }: ProtectedRouteP
 
   useEffect(() => {
     checkSession();
-  })
+  });
 
   return Component;
 };
