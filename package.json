@@ -2,6 +2,15 @@
   "name": "cottonnect",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "serve -s build",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "start-dev": "react-dotenv && react-scripts start",
+    "build-dev": "react-dotenv && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -33,17 +42,12 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
     "react-select": "^5.2.2",
+    "serve": "^13.0.2",
     "styled-components": "^5.3.1",
     "styled-icons": "^10.45.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
-  },
-  "scripts": {
-    "start": "react-dotenv && react-scripts start",
-    "build": "react-dotenv && react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
