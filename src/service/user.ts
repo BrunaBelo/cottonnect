@@ -74,6 +74,7 @@ export const updateUser = async (userData: UserData): Promise<UserData> => {
   try {
     const response = await api.put(`users/${userData.id}`, userData);
     user = response.data;
+    localStorage.setItem("user-city", user.cityId as string);
   } catch (error) {
     console.log("Erro ao atualizar usuário", error);
   }
