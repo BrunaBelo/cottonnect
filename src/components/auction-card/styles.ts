@@ -65,6 +65,7 @@ export const CardPhoto = styled.img`
   width: 22vw;
   height: 22vw;
   border-radius: 20px 20px 0 0;
+  background-color: white;
 
   @media(max-width: 1200px) {
     width: 30vw;
