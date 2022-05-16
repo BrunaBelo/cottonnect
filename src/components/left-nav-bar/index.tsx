@@ -17,6 +17,7 @@ import { Menu,
          AccountCircleOutlined } from '@material-ui/icons';
 import { CoinInformation, Container, Logo, TextItem } from './styles';
 import { getUser } from '../../service/user';
+import { CircularProgress } from '@mui/material';
 
 const drawerWidth = 240;
 interface Props {
@@ -28,6 +29,7 @@ export default function LeftNavBar(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [saldo, setSaldo] = useState(0);
   const [localUserId, setLocalUserId] = useState(localStorage.getItem("user-id") || "");
+  const [loadingUser, setLoadingUser] = useState(false);
 
   useEffect(() => {
     getCurrentUser();
@@ -38,8 +40,10 @@ export default function LeftNavBar(props: Props) {
   };
 
   const getCurrentUser = async(): Promise<void> => {
+    setLoadingUser(true);
     const user = await getUser(localUserId);
     setSaldo(user.cottonFlakes as number);
+    setLoadingUser(false);
   }
 
   const drawer = (
@@ -92,7 +96,7 @@ export default function LeftNavBar(props: Props) {
       </div>
 
       <CoinInformation>
-        <span>Seu Saldo: {saldo}</span>
+        <span>Seu Saldo: { loadingUser ? <CircularProgress size={10} /> : saldo}</span>
       </CoinInformation>
     </Container>
   );

@@ -35,6 +35,7 @@ import ErrorObj from "../../interfaces/error-obj";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import selectCategory from "../../interfaces/select-category";
+import Loading from "../../components/loading";
 
 interface AlertInterface {
   show: boolean,
@@ -54,6 +55,7 @@ export default function NewAuction() {
   const [errors, setErrors] = useState(defaultErrorsAuction());
   const [categoryList, setCategoryList] = useState([] as selectCategory[]);
   const [loading, setLoading] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false);
   const [localUserId, setLocalUserId] = useState(localStorage.getItem("user-id") || "");
 
   useEffect(() => {
@@ -66,8 +68,10 @@ export default function NewAuction() {
   }, [alertError]);
 
   const getCurrentUser = async(): Promise<void> => {
+    setLoadingUser(true);
     const user = await getUser(localUserId);
     setUser(user);
+    setLoadingUser(false);
   }
 
   const getCategoriesFromApi = async () => {
@@ -144,129 +148,135 @@ export default function NewAuction() {
       <Main>
         <h1>Vamos doar? 🥰</h1>
         {
-          user.isAllowed ?
-            <FormAuction>
-              {
-                alertError.show ?
-                  <AlertErrorComponent show={alertError.show} message={alertError.message}/>
-                :
-                  <></>
-              }
-              <AuctionInput
-                  name="title"
-                  error={errors.title.status}
-                  helperText={errors.title.message}
-                  required
-                  value={title}
-                  onChange={(e)=>changeInputValue(errors, e, setTitle)}
-                  label="Título"
-                />
-
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DesktopDatePicker
-                  label="Fechamento do leilão"
-                  inputFormat="dd/MM/yyyy"
-                  minDate={new Date().setDate(new Date().getDate() + 1)}
-                  value={closingDate}
-                  onChange={(e) => changeInputValue(errors, {target: {value: e, name: 'closingDate'}}, setClosingDate)}
-                  renderInput={(params) => <AuctionInput
-                    {...params}
-                    name='closingDate'
-                    error={errors.closingDate.status}
-                    helperText={errors.closingDate.message}
-                    />}
-                />
-              </LocalizationProvider>
-
-              <AuctionInput
-                name="description"
-                error={errors.description.status}
-                helperText={errors.description.message}
-                required
-                value={description}
-                multiline
-                minRows="3"
-                maxRows="6"
-                onChange={(e)=>changeInputValue(errors, e, setDescription)}
-                label="Descrição"
-                fullWidth
-              />
-
-              <AuctionInputSelect
-                isMulti
-                name="categories"
-                value={categories}
-                options={categoryList}
-                onChange={(e) => setCategories(e as selectCategory[])}
-                className="basic-multi-select"
-                placeholder="Selecionar Categorias"
-                styles={{control: (styles) => ({
-                  ...styles, padding: '10px 0'
-                }), option: (styles) => ({
-                  ...styles, color: 'var(--primary)'
-                }),
-                multiValue: (styles) => ({
-                  ...styles,
-                  backgroundColor: 'var(--primary)'
-                }),
-                multiValueLabel: (styles) => ({
-                  ...styles,
-                  color: 'white',
-                  fontWeight: 'bold',
-                  textTransform: 'lowercase'
-                })}}
-              />
-
-              <FilesDiv>
-                <TextField
-                  error={errors.photos.status}
-                  helperText={errors.photos.message}
-                  type='file'
-                  inputProps={{ accept: 'image/png, image/gif, image/jpeg', multiple: 'true' }}
-                  id='uploadImg'
-                  name='uploadImg'
-                  onChange={e => {console.log(e.target.value); addPhotos((e.target as HTMLInputElement).files as File[] | null)}}
-                  InputProps={{
-                    endAdornment: (
-                      <>
-                        <AddFileBtt htmlFor="uploadImg">
-                          <PicIcon/>
-                          Anexar Fotos
-                        </AddFileBtt>
-                      </>
-                    ),
-                  }}
-                />
-                <ListPictures>
-                  {
-                    photos == null ? <></> :
-                    Array.from(photos).map((photo) => {
-                      return(
-                        <FileInfo>
-                          <span>
-                            <FileIcon/>
-                            {photo.name}
-                          </span>
-                          <span>
-                            {(photo.size/1000).toFixed(2)} Kb
-                            <DeleteIcon onClick={() => removeFile(photo)}/>
-                          </span>
-                        </FileInfo>
-                      )
-                    })
-                  }
-                </ListPictures>
-              </FilesDiv>
-
-              <CreateAuctionBtt disabled={loading} onClick={() => saveAuction()}>
-                {
-                  loading ? <>Criando leilão... <LoadingCircle size={20} /></> : <>Doar <DonateIcon/></>
-                }
-              </CreateAuctionBtt>
-            </FormAuction>
+          loadingUser ? <Loading></Loading>
           :
-            <ConfirmYourAccount>Confirme seu email e seu número de telefone para poder doar, é simples e rapidinho.
-              Estou aqui te esperando 😉</ConfirmYourAccount>
+          <>
+            {
+              user.isAllowed ?
+                <FormAuction>
+                  {
+                    alertError.show ?
+                      <AlertErrorComponent show={alertError.show} message={alertError.message}/>
+                    :
+                      <></>
+                  }
+                  <AuctionInput
+                      name="title"
+                      error={errors.title.status}
+                      helperText={errors.title.message}
+                      required
+                      value={title}
+                      onChange={(e)=>changeInputValue(errors, e, setTitle)}
+                      label="Título"
+                    />
+
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DesktopDatePicker
+                      label="Fechamento do leilão"
+                      inputFormat="dd/MM/yyyy"
+                      minDate={new Date().setDate(new Date().getDate() + 1)}
+                      value={closingDate}
+                      onChange={(e) => changeInputValue(errors, {target: {value: e, name: 'closingDate'}}, setClosingDate)}
+                      renderInput={(params) => <AuctionInput
+                        {...params}
+                        name='closingDate'
+                        error={errors.closingDate.status}
+                        helperText={errors.closingDate.message}
+                        />}
+                    />
+                  </LocalizationProvider>
+
+                  <AuctionInput
+                    name="description"
+                    error={errors.description.status}
+                    helperText={errors.description.message}
+                    required
+                    value={description}
+                    multiline
+                    minRows="3"
+                    maxRows="6"
+                    onChange={(e)=>changeInputValue(errors, e, setDescription)}
+                    label="Descrição"
+                    fullWidth
+                  />
+
+                  <AuctionInputSelect
+                    isMulti
+                    name="categories"
+                    value={categories}
+                    options={categoryList}
+                    onChange={(e) => setCategories(e as selectCategory[])}
+                    className="basic-multi-select"
+                    placeholder="Selecionar Categorias"
+                    styles={{control: (styles) => ({
+                      ...styles, padding: '10px 0'
+                    }), option: (styles) => ({
+                      ...styles, color: 'var(--primary)'
+                    }),
+                    multiValue: (styles) => ({
+                      ...styles,
+                      backgroundColor: 'var(--primary)'
+                    }),
+                    multiValueLabel: (styles) => ({
+                      ...styles,
+                      color: 'white',
+                      fontWeight: 'bold',
+                      textTransform: 'lowercase'
+                    })}}
+                  />
+
+                  <FilesDiv>
+                    <TextField
+                      error={errors.photos.status}
+                      helperText={errors.photos.message}
+                      type='file'
+                      inputProps={{ accept: 'image/png, image/gif, image/jpeg', multiple: 'true' }}
+                      id='uploadImg'
+                      name='uploadImg'
+                      onChange={e => {console.log(e.target.value); addPhotos((e.target as HTMLInputElement).files as File[] | null)}}
+                      InputProps={{
+                        endAdornment: (
+                          <>
+                            <AddFileBtt htmlFor="uploadImg">
+                              <PicIcon/>
+                              Anexar Fotos
+                            </AddFileBtt>
+                          </>
+                        ),
+                      }}
+                    />
+                    <ListPictures>
+                      {
+                        photos == null ? <></> :
+                        Array.from(photos).map((photo) => {
+                          return(
+                            <FileInfo>
+                              <span>
+                                <FileIcon/>
+                                {photo.name}
+                              </span>
+                              <span>
+                                {(photo.size/1000).toFixed(2)} Kb
+                                <DeleteIcon onClick={() => removeFile(photo)}/>
+                              </span>
+                            </FileInfo>
+                          )
+                        })
+                      }
+                    </ListPictures>
+                  </FilesDiv>
+
+                  <CreateAuctionBtt disabled={loading} onClick={() => saveAuction()}>
+                    {
+                      loading ? <>Criando leilão... <LoadingCircle size={20} /></> : <>Doar <DonateIcon/></>
+                    }
+                  </CreateAuctionBtt>
+                </FormAuction>
+              :
+                <ConfirmYourAccount>Confirme seu email e seu número de telefone para poder doar, é simples e rapidinho.
+                  Estou aqui te esperando 😉</ConfirmYourAccount>
+            }
+          </>
         }
       </Main>
     </Container>
