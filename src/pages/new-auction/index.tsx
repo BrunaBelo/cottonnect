@@ -61,7 +61,9 @@ export default function NewAuction() {
   useEffect(() => {
     getCategoriesFromApi();
     getCurrentUser();
+  }, []);
 
+  useEffect(() => {
     setTimeout(() => {
       setAlertError({ show: false, message: '' });
     }, 5000);

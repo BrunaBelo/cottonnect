@@ -19,11 +19,13 @@ export default function WonAuctions() {
 
   useEffect(() => {
     getAuctions();
+  }, [updateAuctions]);
 
+  useEffect(() => {
     setTimeout(() => {
       setNotice({ show: false, message: "", type: "" });
     }, 5000);
-  }, [updateAuctions])
+  }, [notice]);
 
   const getAuctions = (async () => {
     try {

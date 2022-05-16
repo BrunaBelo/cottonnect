@@ -19,7 +19,6 @@ export default function DonationDetails() {
 
   const [showMessage, setShowMessage] = useState(state?.showMessage || false);
   const [message, setMessage] = useState(state?.successMessage || '');
-  const [bidAmount, setBidAmount] = useState(0);
   const [auction, setAuction] = useState({} as Auction);
   const [donation, setDonation] = useState({} as Donation);
   const [user, setUser] = useState({} as UserData);
@@ -27,9 +26,6 @@ export default function DonationDetails() {
 
   useEffect(() => {
     getCurrentUser();
-    setTimeout(() => {
-      setShowMessage(false);
-    }, 5000)
 
     const getAuction = async(id: string) => {
       const auction = await getAutionInformation(id);
@@ -40,8 +36,13 @@ export default function DonationDetails() {
     if(Object.keys(auction).length === 0){
       getAuction(auctionId);
     }
+  }, []);
 
-  }, [message, bidAmount])
+  useEffect(() => {
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 5000)
+  }, [message]);
 
   const getCurrentUser = async(): Promise<void> => {
     const user = await getUser(localUserId);

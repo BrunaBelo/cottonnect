@@ -22,11 +22,13 @@ export default function Explorer() {
   useEffect(() => {
     getAll("0", page);
     getCategoriesFromApi();
+  }, []);
 
+  useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 5000);
-  }, []);
+  }, [loading]);
 
   const handleChange = async(event: any, value: number) => {
     setPage(value);
@@ -47,8 +49,8 @@ export default function Explorer() {
     const categoryId = categoryValue == "0" ? "" : categoryValue;
     const cityId = localStorage.getItem("user-city") as string;
     const response = await getAllAuctions(cityId, categoryId, title, page, perPage);
-    const allAuctions = response.data.auctions;
-    const countTotalAuctions = response.data.total;
+    const allAuctions = response.data?.auctions || [];
+    const countTotalAuctions = response.data?.total || 0;
 
     setAuctions(allAuctions);
     setCount(Math.ceil(countTotalAuctions / perPage));

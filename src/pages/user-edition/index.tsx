@@ -61,11 +61,13 @@ export default function UserEdition() {
   useEffect(() => {
     getCurrentUser();
     getStatesFromApi();
+  }, []);
 
+  useEffect(() => {
     setTimeout(() => {
       setNotice({ show: false, message: "", type: "" });
     }, 5000)
-  }, []);
+  }, [notice]);
 
   const getCurrentUser = (async () => {
     setLoading(true);
