@@ -89,6 +89,19 @@ export const getAuctionsWon = async(): Promise<Auction[]> => {
   return auctions;
 }
 
+export const getAuctionnParticipating = async(): Promise<Auction[]> => {
+  let auctions = [] as Auction[];
+
+  try {
+    const response = await api.get(`auctions/participating`);
+    auctions = response.data;
+  } catch (error) {
+    console.log('Erro ao buscar leilões participados');
+  }
+
+  return auctions;
+}
+
 export const rejectDonation = async(auctionId: string): Promise<Auction> => {
   let auction = {} as Auction;
 

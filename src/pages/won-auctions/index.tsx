@@ -2,13 +2,14 @@ import react, { useEffect, useState } from "react";
 import DonationCard from "../../components/donation-card";
 import LeftNavBar from "../../components/left-nav-bar";
 import { Auction } from "../../interfaces/auction";
-import { getAuctionsWon } from "../../service/auction";
+import { getAuctionnParticipating, getAuctionsWon } from "../../service/auction";
 import { AlertMessage, Container, DonationsCard, NoAuctions, Main } from "./styles";
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import Loading from "../../components/loading";
 
 export default function WonAuctions() {
+  const [auctionsParticipating, setAuctionsParticipating] = useState([] as Auction[]);
   const [auctionsInProgress, setAuctionsInProgress] = useState([] as Auction[]);
   const [auctionsCompleted, setAuctionsCompleted] = useState([] as Auction[]);
   const [auctionsRejected, setAuctionsRejected] = useState([] as Auction[]);
@@ -32,6 +33,7 @@ export default function WonAuctions() {
       setLoading(true);
 
       const auctionsDonated = await getAuctionsWon();
+      const auctionsParticipating = await getAuctionnParticipating();
 
       const auctionsInProgress = auctionsDonated.filter(function (auction, index){
         return auction.status === 'waiting';
@@ -45,6 +47,7 @@ export default function WonAuctions() {
         return auction.status === 'rejected';
       });
 
+      setAuctionsParticipating(auctionsParticipating);
       setAuctionsInProgress(auctionsInProgress);
       setAuctionsCompleted(auctionsCompleted);
       setAuctionsRejected(auctionsRejected);
@@ -78,12 +81,33 @@ export default function WonAuctions() {
             <Box sx={{ width: '100%' }}>
               <TabContext value={value}>
                 <TabList onChange={handleChange}>
-                  <Tab label="Em Andamento" value="1" />
-                  <Tab label="Concluídos" value="2" />
-                  <Tab label="Rejeitados" value="3" />
+                  <Tab label="Participando" value="1" />
+                  <Tab label="Em Andamento" value="2" />
+                  <Tab label="Concluídos" value="3" />
+                  <Tab label="Rejeitados" value="4" />
                 </TabList>
                 <DonationsCard>
                   <TabPanel value="1">
+                    {
+                      auctionsParticipating != null && auctionsParticipating.length > 0 ?
+                        auctionsParticipating.map(auction => {
+                          return(
+                            <DonationCard
+                              profile='receiver'
+                              auctionParam={auction}
+                              setUpdateAuctions={setUpdateAuctions}
+                              setNotice={setNotice}
+                            />
+                          )
+                        })
+                      :
+                        <NoAuctions>
+                          <span>Você ainda não está participando de nenhum leilão</span>
+                        </NoAuctions>
+                    }
+                  </TabPanel>
+
+                  <TabPanel value="2">
                     {
                       auctionsInProgress != null && auctionsInProgress.length > 0 ?
                         auctionsInProgress.map(auction => {
@@ -103,7 +127,7 @@ export default function WonAuctions() {
                     }
                   </TabPanel>
 
-                  <TabPanel value="2">
+                  <TabPanel value="3">
                     {
                       auctionsCompleted != null && auctionsCompleted.length > 0 ?
                         auctionsCompleted.map(auction => {
@@ -123,7 +147,7 @@ export default function WonAuctions() {
                     }
                   </TabPanel>
 
-                  <TabPanel value="3">
+                  <TabPanel value="4">
                     {
                       auctionsRejected != null && auctionsRejected.length > 0 ?
                         auctionsRejected.map(auction => {
