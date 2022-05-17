@@ -1,5 +1,6 @@
-import { Alert } from "@mui/material";
 import styled from "styled-components";
+import { Alert } from "@mui/material";
+import { ChatHelp } from "@styled-icons/fluentui-system-regular";
 
 export const Container = styled.div`
   display: flex;
@@ -59,4 +60,23 @@ export const AlertMessage = styled(Alert)`
     width: 90%;
   }
 
+`
+
+export const HelpButton = styled(ChatHelp)`
+  width: 18px;
+  color: #6377db;
+
+  :hover{
+    color: #a9b1d6;
+  }
+`
+
+export const TapTooltip = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  span{
+    margin: 10px 5px 0 0;
+  }
 `

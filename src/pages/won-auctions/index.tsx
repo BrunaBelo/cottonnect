@@ -3,8 +3,8 @@ import DonationCard from "../../components/donation-card";
 import LeftNavBar from "../../components/left-nav-bar";
 import { Auction } from "../../interfaces/auction";
 import { getAuctionnParticipating, getAuctionsWon } from "../../service/auction";
-import { AlertMessage, Container, DonationsCard, NoAuctions, Main } from "./styles";
-import { Box, Tab } from '@mui/material';
+import { AlertMessage, Container, DonationsCard, NoAuctions, Main, HelpButton, TapTooltip } from "./styles";
+import { Box, Button, ClickAwayListener, Tab, Tooltip } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import Loading from "../../components/loading";
 
@@ -17,6 +17,22 @@ export default function WonAuctions() {
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(false);
   const [notice, setNotice] = useState({ show: false, message: "", type: "" });
+
+  const [openTooltip1, setOpenTooltip1] = useState(false);
+  const handleTooltipClose1 = () => { setOpenTooltip1(false) };
+  const handleTooltipOpen1 = () => { setOpenTooltip1(true) };
+
+  const [openTooltip2, setOpenTooltip2] = useState(false);
+  const handleTooltipClose2 = () => { setOpenTooltip2(false) };
+  const handleTooltipOpen2 = () => { setOpenTooltip2(true) };
+
+  const [openTooltip3, setOpenTooltip3] = useState(false);
+  const handleTooltipClose3 = () => { setOpenTooltip3(false) };
+  const handleTooltipOpen3 = () => { setOpenTooltip3(true) };
+
+  const [openTooltip4, setOpenTooltip4] = useState(false);
+  const handleTooltipClose4 = () => { setOpenTooltip4(false) };
+  const handleTooltipOpen4 = () => { setOpenTooltip4(true) };
 
   useEffect(() => {
     getAuctions();
@@ -81,10 +97,78 @@ export default function WonAuctions() {
             <Box sx={{ width: '100%' }}>
               <TabContext value={value}>
                 <TabList onChange={handleChange}>
-                  <Tab label="Participando" value="1" />
-                  <Tab label="Em Andamento" value="2" />
-                  <Tab label="Concluídos" value="3" />
-                  <Tab label="Rejeitados" value="4" />
+                  <Tab value="1" label={
+                    <TapTooltip><span>Participando</span>
+                    <ClickAwayListener onClickAway={handleTooltipClose1}>
+                      <div className="help-tooltip">
+                        <Tooltip
+                          onClose={handleTooltipClose1}
+                          open={openTooltip1}
+                          disableFocusListener
+                          disableHoverListener
+                          disableTouchListener
+                          title="São leilões que você deu um lance e ainda estão abertos"
+                        >
+                          <HelpButton onClick={handleTooltipOpen1}/>
+                        </Tooltip>
+                      </div>
+                    </ClickAwayListener>
+                  </TapTooltip>}
+                  />
+                  <Tab value="2" label={
+                    <TapTooltip><span>Em Andamento</span>
+                    <ClickAwayListener onClickAway={handleTooltipClose2}>
+                      <div className="help-tooltip">
+                        <Tooltip
+                          onClose={handleTooltipClose2}
+                          open={openTooltip2}
+                          disableFocusListener
+                          disableHoverListener
+                          disableTouchListener
+                          title="São leilões que você ganhou e o processo está aguardando sua confirmação ou recusa da doação"
+                        >
+                          <HelpButton onClick={handleTooltipOpen2}/>
+                        </Tooltip>
+                      </div>
+                    </ClickAwayListener>
+                  </TapTooltip>}
+                  />
+                  <Tab value="3" label={
+                    <TapTooltip><span>Concluídos</span>
+                      <ClickAwayListener onClickAway={handleTooltipClose3}>
+                        <div className="help-tooltip">
+                          <Tooltip
+                            onClose={handleTooltipClose3}
+                            open={openTooltip3}
+                            disableFocusListener
+                            disableHoverListener
+                            disableTouchListener
+                            title="São leilões que você ganhou e já recebeu a doação"
+                          >
+                            <HelpButton onClick={handleTooltipOpen3}/>
+                          </Tooltip>
+                        </div>
+                      </ClickAwayListener>
+                    </TapTooltip>}
+                  />
+                  <Tab value="4" label={
+                    <TapTooltip><span>Rejeitados</span>
+                      <ClickAwayListener onClickAway={handleTooltipClose4}>
+                        <div className="help-tooltip">
+                          <Tooltip
+                            onClose={handleTooltipClose4}
+                            open={openTooltip4}
+                            disableFocusListener
+                            disableHoverListener
+                            disableTouchListener
+                            title="São leilões que você ganhou mas rejeitou a doação"
+                          >
+                            <HelpButton onClick={handleTooltipOpen4}/>
+                          </Tooltip>
+                        </div>
+                      </ClickAwayListener>
+                    </TapTooltip>}
+                  />
                 </TabList>
                 <DonationsCard>
                   <TabPanel value="1">
