@@ -6,34 +6,30 @@ export const Main = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+  row-gap: 10px;
 `;
 
-export const MessageHeader = styled.div`
-  margin: 1em 0 2em 0;
+export const Infos = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: 2em 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: start;
+  row-gap: 10px;
+
   h1 {
-    font-size: 22px;
+    font-size: 20px;
+    font-weight: 500;
   }
-`;
 
-export const ImageDone = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 3em 0;
-`;
+  h3 {
+    font-size: 17px;
+    font-weight: 500;
+  }
 
-export const DoneIcon = styled.img`
-  width: 100%;
-`
-
-export const SubTitle = styled.h1`
-  font-size: 20px;
-  font-weight: 500;
+  h5 {
+    font-size: 15px;
+    font-weight: 900;
+  }
 `
 
 export const IconSmile = styled.div`
@@ -43,3 +39,13 @@ export const IconSmile = styled.div`
   }
 `;
 
+export const ImageDone = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DoneIcon = styled.img`
+  width: 100%;
+`

@@ -121,7 +121,7 @@ export default function DonationDetails() {
                         sendBid={sendBid}
                       />
                     :
-                      <ConfirmYourAccount>Confirme sua conta para dar gratificações 😉</ConfirmYourAccount>
+                      <ConfirmYourAccount>Confirme seu email e seu numero de celular para dar gratificações 😉</ConfirmYourAccount>
                     :
                       <></>
                 }
