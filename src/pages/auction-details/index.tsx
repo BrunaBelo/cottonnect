@@ -23,6 +23,7 @@ export default function DonationDetails() {
   const [donation, setDonation] = useState({} as Donation);
   const [user, setUser] = useState({} as UserData);
   const [localUserId, setLocalUserId] = useState(localStorage.getItem("user-id") || "");
+  const [loadingUser, setLoadingUser] = useState(false);
 
   useEffect(() => {
     getCurrentUser();
@@ -45,8 +46,10 @@ export default function DonationDetails() {
   }, [message]);
 
   const getCurrentUser = async(): Promise<void> => {
+    setLoadingUser(true);
     const user = await getUser(localUserId);
     setUser(user);
+    setLoadingUser(false);
   }
 
   const sendBid = async(bidAmount: number): Promise<void> => {
@@ -72,7 +75,7 @@ export default function DonationDetails() {
         case 1:
           return 'Há 1 gratificação para esse leilão.';
         default:
-          return `Há ${auction.biddings.length} gratificações nesse leilão :).`;
+          return `Há ${auction.biddings.length} gratificações nesse leilão.`;
       }
     }
 
@@ -108,16 +111,21 @@ export default function DonationDetails() {
 
             <p>{donation.description}</p>
             {
-              auction.userId != localUserId ?
-                user.isAllowed ?
-                  <BiddingInput
-                    auctionId={auctionId}
-                    sendBid={sendBid}
-                  />
-                :
-                  <ConfirmYourAccount>Confirme sua conta para dar gratificações 😉</ConfirmYourAccount>
-                :
-                  <></>
+              loadingUser ? <></> :
+              <>
+                {
+                  auction.userId != localUserId ?
+                    user.isAllowed ?
+                      <BiddingInput
+                        auctionId={auctionId}
+                        sendBid={sendBid}
+                      />
+                    :
+                      <ConfirmYourAccount>Confirme sua conta para dar gratificações 😉</ConfirmYourAccount>
+                    :
+                      <></>
+                }
+              </>
             }
           </DonationInfo>
         </AuctionInfos>

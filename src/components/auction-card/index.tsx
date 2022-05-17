@@ -43,7 +43,7 @@ export default function AuctionCard({ auction: {
       case 1:
         return 'Há 1 gratificação para esse leilão.';
       default:
-        return `Há ${biddings.length} gratificações nesse leilão :).`;
+        return `Há ${biddings.length} gratificações nesse leilão.`;
     }
   }
 
