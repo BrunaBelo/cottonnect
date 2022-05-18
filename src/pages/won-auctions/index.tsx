@@ -107,7 +107,7 @@ export default function WonAuctions() {
                           disableFocusListener
                           disableHoverListener
                           disableTouchListener
-                          title="São leilões que você deu um lance e ainda estão abertos"
+                          title="São leilões que você deu uma gratificação e ainda estão abertos"
                         >
                           <HelpButton onClick={handleTooltipOpen1}/>
                         </Tooltip>

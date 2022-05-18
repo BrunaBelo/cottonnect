@@ -8,7 +8,7 @@ export const createBidding = async(biddingData: Bidding): Promise<Bidding> => {
     const response = await api.post("/biddings", biddingData)
     bidding = response.data;
   } catch (error) {
-    console.log(`Erro ao criar lance ${error}`)
+    console.log(`Erro ao criar gratificação ${error}`)
   }
 
   return bidding;
@@ -21,7 +21,7 @@ export const checkExistsBidFromAuction = async(auctionId: String): Promise<Biddi
     const response = await api.get("/biddings/find-bidding", { params: { auctionId: auctionId } });
     bidding = response.data;
   } catch (error) {
-    console.log(`Erro ao buscar lance ${error}`);
+    console.log(`Erro ao buscar gratificação ${error}`);
   }
 
   return bidding;

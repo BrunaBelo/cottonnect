@@ -54,13 +54,13 @@ export default function DonationDetails() {
 
   const sendBid = async(bidAmount: number): Promise<void> => {
     const bid = await createBidding({bidAmount: bidAmount, auctionId: auctionId});
-    Object.keys(bid).length != 0 ? setMessage('Seu lance foi cadastrado com sucesso') : setMessage('Erro ao cadastrar lance');
+    Object.keys(bid).length != 0 ? setMessage('Sua gratificação foi cadastrado com sucesso') : setMessage('Erro ao cadastrar gratificação');
 
     setShowMessage(true);
   }
 
   function buldingMessage() {
-    if (message === 'Erro ao cadastrar lance'){
+    if (message === 'Erro ao cadastrar gratificação'){
       return (<AlertMessage severity="error">{message}</AlertMessage>)
     }else {
       return (<AlertMessage severity="success">{message}</AlertMessage>)

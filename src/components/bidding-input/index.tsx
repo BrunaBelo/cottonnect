@@ -45,7 +45,7 @@ export default function BiddingInput({
 
     if(bidAmount <= 0){
       setShowErrorInput(true);
-      setMessageShowErrorInput('Preencha o campo para dar o lance');
+      setMessageShowErrorInput('Preencha o campo para dar a gratificação');
 
       return
     }
@@ -54,7 +54,7 @@ export default function BiddingInput({
       await sendBid(bidAmount)
       setAlreadySendingBid(true)
     }catch{
-      console.log('erro ao dar lance')
+      console.log('erro ao dar gratificação')
     }
   }
 
@@ -71,7 +71,7 @@ export default function BiddingInput({
     {
       alreadySendingBid ?
       <Bidding>
-        <AlreadySendingBid>Você já deu um lance nessa doação.</AlreadySendingBid>
+        <AlreadySendingBid>Você já deu uma gratificação nesse leilão.</AlreadySendingBid>
       </Bidding>
       :
       <Bidding>

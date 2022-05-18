@@ -96,7 +96,7 @@ export default function LeftNavBar(props: Props) {
       </div>
 
       <CoinInformation>
-        <span>Seu Saldo: { loadingUser ? <CircularProgress size={10} /> : saldo}</span>
+        <span>Seus Algodões: { loadingUser ? <CircularProgress size={10} /> : saldo}</span>
       </CoinInformation>
     </Container>
   );
