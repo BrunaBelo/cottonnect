@@ -43,7 +43,7 @@ export default function AppRoutes(){
         <Route path="/alterar-senha/sucesso" element={<ChangePasswordSuccess/>}/>
         <Route path="/confirmar-conta" element={<ConfirmationEmail/>}/>
         <Route path="/confirmar-conta/sucesso" element={<ConfirmationEmailSuccess/>}/>
-        <Route path="/sobre" element={<About/>}/>
+        <Route path="/sobre-nos" element={<About/>}/>
         <Route path="/app">
           <Route path="logout" element={setAsProtected(<Logout/>)}/>
           <Route path="meus-dados" element={setAsProtected(<UserEdition/>)}/>

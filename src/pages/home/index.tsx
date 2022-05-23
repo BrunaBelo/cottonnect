@@ -11,7 +11,7 @@ export default function Home() {
         <TextInfo>
           <h1>Doe e ganhe!</h1>
           <p>Com a gente você doa e em troca ganha flocos de algodão, que poderam ser usados para
-             trocar por outras doações na plataforma!<a href='/sobre'> Saiba mais!</a></p>
+             trocar por outras doações na plataforma!<a href='/sobre-nos'> Saiba mais!</a></p>
           <Link to="/create-account">
             <button>Cadastre-se</button>
           </Link>
