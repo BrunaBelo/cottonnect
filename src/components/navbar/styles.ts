@@ -12,6 +12,10 @@ export const Main = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   padding: 0px 80px;
+
+  @media(max-width: 650px) {
+    padding: 0px 20px;
+  }
 `;
 
 export const UserInfo = styled.div`

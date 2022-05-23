@@ -8,6 +8,10 @@ export const Container = styled.div`
 `
 export const Main = styled.div`
   padding: 20px 150px;
+
+  @media(max-width: 650px) {
+    padding: 10px;
+  }
 `
 
 export const CardInfo = styled.div`
