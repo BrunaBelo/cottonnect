@@ -154,7 +154,7 @@ export default function NewAuction() {
           :
           <>
             {
-              user.isAllowed ?
+              Object.keys(user).length != 0 && user.isAllowed ?
                 <FormAuction>
                   {
                     alertError.show ?

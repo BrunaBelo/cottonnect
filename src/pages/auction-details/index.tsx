@@ -115,7 +115,7 @@ export default function DonationDetails() {
               <>
                 {
                   auction.userId != localUserId ?
-                    user.isAllowed ?
+                  Object.keys(user).length != 0 && user.isAllowed ?
                       <BiddingInput
                         auctionId={auctionId}
                         sendBid={sendBid}
