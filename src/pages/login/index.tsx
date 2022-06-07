@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { IconButton, InputAdornment, InputLabel } from "@material-ui/core";
 import {
@@ -18,6 +18,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { login } from "../../service/user";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 import Navbar from "../../components/navbar";
 
 interface State {
@@ -29,12 +30,13 @@ interface State {
 
 export default function Login() {
   const navigate = useNavigate();
-  const [values, setValues] = React.useState<State>({
+  const [values, setValues] = useState({
     email: '',
     password: '',
     showPassword: false,
     showErrorMessage: false
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +66,7 @@ export default function Login() {
 
   const checkLogin = async () => {
     setValues({...values, showErrorMessage: false})
+    setLoading(true);
     const valid = await validLogin()
 
     if(valid){
@@ -71,6 +74,7 @@ export default function Login() {
     } else{
       setValues({...values, showErrorMessage: true})
     }
+    setLoading(false);
   }
 
   return (
@@ -121,7 +125,11 @@ export default function Login() {
               <></>
           }
 
-          <LoginBtt type="button" onClick={() => { checkLogin() }}>Login</LoginBtt>
+          <LoginBtt type="button" onClick={() => { checkLogin() }}>
+            {
+              loading ? <CircularProgress size={20} color="inherit"/> : <>Login</>
+            }
+          </LoginBtt>
 
           <CredentialActions>
             <Link to="/recuperar-conta">
