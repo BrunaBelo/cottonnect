@@ -11,7 +11,7 @@ function renderMain(){
     <Main>
       <Infos>
         <h1>Sua conta foi registrada, agora é só você fazer login e já pode começar doar!</h1>
-        <h3>Acesse seu email e confirme sua conta através de um email que foi enviado para você!</h3>
+        <h3>Acesse seu email e confirme sua conta através de um link que foi enviado para você!</h3>
         <h5>É muito importante você ter seu email e seu número de celular confirmados, pois apenas assim
           você conseguirá doar e receber doações 🤗
         </h5>
