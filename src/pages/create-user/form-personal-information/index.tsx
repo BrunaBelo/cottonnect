@@ -145,6 +145,8 @@ function FormPersonalInformation({index, componentState: [userInfo, setUserInfo]
             minRows="3"
             maxRows="6"
             label="Informações Adicionais"
+            placeholder="Insira outros meios para facilitar o contato com você, como outros números de celular,
+            horários em que você está mais disponível, etc."
           />
         </InputsCreateUser>
 

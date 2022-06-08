@@ -35,7 +35,7 @@ export default function About() {
         <CardInfo>
           <h2>Como me cadastrar?</h2>
           <p><b>1. </b> Crie sua conta com todas suas informações pessoais. Uma dica é você preencher o campo de informações
-          adicionais, com algumas informações extras. Esse campo ficará disponível quando você ganhar uma doação e assim
+          adicionais com algumas informações extras. Esse campo ficará disponível quando você ganhar uma doação e assim
           o doador poderá entrar em contato mais facilmente.</p>
           <p><b>2. </b> Adicione a cidade em que você está para que o sistema busque doações próximas a você.</p>
           <p>
