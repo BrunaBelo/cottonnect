@@ -6,3 +6,37 @@ As doações são adquiridas por um formato de leilão as cegas, onde os usuári
 O projeto tem como justificativa principal a crescente evidência do impacto causado ao meio ambiente, originados das práticas sociais exercidas, como o ato de consumir. Desta forma, a intenção é estimular nos indivíduos de diferentes comunidades uma relação mais ampla de troca de produtos, fomentando a concepção do consumo consciente a fim de contribuir com a redução da degradção gradual do meio ambiente.
 
 Aplicação esta sendo desenvolvida utilizando a linguagem TypeScript com auxílío do React.js
+
+# Passos
+
+- [Preparando o seu sistema operacional](#preparando-o-seu-sistema-operacional)
+- [Configurando o seu repositório local](#configurando-o-seu-repositório-local)
+- [Usando a aplicação](#usando-a-aplicação)
+
+## Preparando o seu sistema operacional
+### Você precisára instalar as seguintes dependências: 
+#### 1. Instalar o gerenciador de pacotes Yarn (https://classic.yarnpkg.com/en/docs/install#debian-stable)
+
+## Configurando o seu repositório local
+### 1. Clonando o projeto
+```bash
+git clone git@github.com:BrunaBelo/cottonnect.git
+cd api-cottonnect
+```
+
+Crie o arquivo das variáveis:
+
+```bash
+cp .env.exemple .env
+```
+E configure as variaveis de ambiente necessárias
+
+### Instalando as dependências
+```bash
+yarn install
+```
+
+### 4. Usando a aplicação
+```bash
+  localhost:3000
+```
