@@ -8,11 +8,12 @@ O projeto tem como justificativa principal a crescente evidência do impacto cau
 # Passos
 - [Preparando o seu sistema operacional](#preparando-o-seu-sistema-operacional)
 - [Configurando o seu repositório local](#configurando-o-seu-repositório-local)
+- [Iniciar a aplicação](#iniciar-a-aplicação)
 - [Usando a aplicação](#usando-a-aplicação)
 
 ## Preparando o seu sistema operacional
 ### Você precisára instalar as seguintes dependências: 
-#### 1. Instalar o gerenciador de pacotes Yarn (https://classic.yarnpkg.com/en/docs/install#debian-stable)
+#### Instalar o gerenciador de pacotes Yarn (https://classic.yarnpkg.com/en/docs/install#debian-stable)
 
 ## Configurando o seu repositório local
 ### 1. Clonando o projeto
@@ -28,9 +29,14 @@ cp .env.exemple .env
 ```
 E configure as variaveis de ambiente necessárias
 
-### Instalando as dependências
+### 2. Instalando as dependências
 ```bash
 yarn install
+```
+
+### 3. Iniciando a aplicação
+```bash
+yarn start-dev
 ```
 
 ### 4. Usando a aplicação
